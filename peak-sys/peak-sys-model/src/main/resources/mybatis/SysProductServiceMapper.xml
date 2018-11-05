@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysProductServiceMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysProductService">
+        <result column="id" property="id"/>
+        <result column="product_id" property="productId"/>
+        <result column="spel" property="spel"/>
+        <result column="type" property="type"/>
+        <result column="rate" property="rate"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `product_id`,
+        `spel`,
+        `type`,
+        `rate`,
+        `create_date`,
+        `update_date`,
+        `seq`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_product_service (
+            `id`,
+            `product_id`,
+            `spel`,
+            `type`,
+            `rate`,
+            `create_date`,
+            `update_date`,
+            `seq`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.productId},
+            #{pojo.spel},
+            #{pojo.type},
+            #{pojo.rate},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.seq}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_product_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.productId!=null"> `product_id`,</if>
+            <if test="pojo.spel!=null"> `spel`,</if>
+            <if test="pojo.type!=null"> `type`,</if>
+            <if test="pojo.rate!=null"> `rate`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+            <if test="pojo.seq!=null"> `seq`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.productId!=null">#{pojo.productId},</if>
+            <if test="pojo.spel!=null">#{pojo.spel},</if>
+            <if test="pojo.type!=null">#{pojo.type},</if>
+            <if test="pojo.rate!=null">#{pojo.rate},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+            <if test="pojo.seq!=null">#{pojo.seq},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_product_service (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.productId},
+            #{pojo.spel},
+            #{pojo.type},
+            #{pojo.rate},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.seq}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_product_service
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.productId != null"> `product_id` = #{pojo.productId}, </if>
+            <if test="pojo.spel != null"> `spel` = #{pojo.spel}, </if>
+            <if test="pojo.type != null"> `type` = #{pojo.type}, </if>
+            <if test="pojo.rate != null"> `rate` = #{pojo.rate}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByProductId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM
+        sys_product_service
+        WHERE product_id = #{productId}
+        ORDER BY seq
+    </select>
+
+    <delete id="deleteByProductId">
+        DELETE
+        FROM
+        sys_product_service
+        WHERE product_id = #{productId}
+    </delete>
+</mapper>
+

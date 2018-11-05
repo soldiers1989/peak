@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.FlowProcessMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.FlowProcess">
+        <result column="flow_id" property="flowId"/>
+        <result column="loan_id" property="loanId"/>
+        <result column="user_id" property="userId"/>
+        <result column="etp_name" property="etpName"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        flow_id,
+        loan_id,
+        user_id,
+        etp_name,
+        status,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.flowId">
+        INSERT INTO flow_process (
+            flow_id,
+            loan_id,
+            user_id,
+            etp_name,
+            status,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.flowId},
+            #{pojo.loanId},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.flowId">
+        INSERT INTO flow_process
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.flowId!=null"> flow_id,</if>
+            <if test="pojo.loanId!=null"> loan_id,</if>
+            <if test="pojo.userId!=null"> user_id,</if>
+            <if test="pojo.etpName!=null"> etp_name,</if>
+            <if test="pojo.status!=null"> status,</if>
+            <if test="pojo.createDate!=null"> create_date,</if>
+            <if test="pojo.updateDate!=null"> update_date,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.flowId!=null">#{pojo.flowId},</if>
+            <if test="pojo.loanId!=null">#{pojo.loanId},</if>
+            <if test="pojo.userId!=null">#{pojo.userId},</if>
+            <if test="pojo.etpName!=null">#{pojo.etpName},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO flow_process (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.flowId},
+            #{pojo.loanId},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE flow_process
+        <set>
+            <if test="pojo.flowId != null"> flow_id = #{pojo.flowId}, </if>
+            <if test="pojo.loanId != null"> loan_id = #{pojo.loanId}, </if>
+            <if test="pojo.userId != null"> user_id = #{pojo.userId}, </if>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE flow_id = #{pojo.flowId}
+    </update>
+
+    <select id="findByFlowId" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM flow_process
+        WHERE flow_id = #{flowId}
+    </select>
+
+    <select id="findByLoanId" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM flow_process
+        WHERE loan_id = #{loanId}
+    </select>
+
+    <select id="findByUserId" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM flow_process
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="findFinishByUserId" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM flow_process
+        WHERE status = '2' and user_id = #{userId}
+    </select>
+</mapper>
+

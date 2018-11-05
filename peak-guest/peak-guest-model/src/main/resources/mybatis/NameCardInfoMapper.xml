@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.NameCardInfoMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.NameCardInfo">
+        <result column="etp_name" property="etpName"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="loan_limit" property="loanLimit"/>
+        <result column="name_url" property="nameUrl"/>
+        <result column="position" property="position"/>
+        <result column="address" property="address"/>
+        <result column="email" property="email"/>
+        <result column="website" property="website"/>
+        <result column="phone" property="phone"/>
+        <result column="open_id" property="openId"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="score" property="score"/>
+        <result column="qq" property="qq"/>
+        <result column="credit_level" property="creditLevel"/>
+        <result column="id" property="id"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        etp_name,
+        legal_name,
+        mobile,
+        loan_limit,
+        name_url,
+        position,
+        address,
+        email,
+        website,
+        phone,
+        open_id,
+        del_flag,
+        score,
+        qq,
+        credit_level,
+        id,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO name_card_info (
+            etp_name,
+            legal_name,
+            mobile,
+            loan_limit,
+            name_url,
+            position,
+            address,
+            email,
+            website,
+            phone,
+            open_id,
+            del_flag,
+            score,
+            qq,
+            credit_level,
+            id,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.etpName},
+            #{pojo.legalName},
+            #{pojo.mobile},
+            #{pojo.loanLimit},
+            #{pojo.nameUrl},
+            #{pojo.position},
+            #{pojo.address},
+            #{pojo.email},
+            #{pojo.website},
+            #{pojo.phone},
+            #{pojo.openId},
+            #{pojo.delFlag},
+            #{pojo.score},
+            #{pojo.qq},
+            #{pojo.creditLevel},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO name_card_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.etpName!=null"> etp_name,</if>
+            <if test="pojo.legalName!=null"> legal_name,</if>
+            <if test="pojo.mobile!=null"> mobile,</if>
+            <if test="pojo.loanLimit!=null"> loan_limit,</if>
+            <if test="pojo.nameUrl!=null"> name_url,</if>
+            <if test="pojo.position!=null"> position,</if>
+            <if test="pojo.address!=null"> address,</if>
+            <if test="pojo.email!=null"> email,</if>
+            <if test="pojo.website!=null"> website,</if>
+            <if test="pojo.phone!=null"> phone,</if>
+            <if test="pojo.openId!=null"> open_id,</if>
+            <if test="pojo.delFlag!=null"> del_flag,</if>
+            <if test="pojo.score!=null"> score,</if>
+            <if test="pojo.qq!=null"> qq,</if>
+            <if test="pojo.creditLevel!=null"> credit_level,</if>
+            <if test="pojo.id!=null"> id,</if>
+            <if test="pojo.createDate!=null"> create_date,</if>
+            <if test="pojo.updateDate!=null"> update_date,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.etpName!=null">#{pojo.etpName},</if>
+            <if test="pojo.legalName!=null">#{pojo.legalName},</if>
+            <if test="pojo.mobile!=null">#{pojo.mobile},</if>
+            <if test="pojo.loanLimit!=null">#{pojo.loanLimit},</if>
+            <if test="pojo.nameUrl!=null">#{pojo.nameUrl},</if>
+            <if test="pojo.position!=null">#{pojo.position},</if>
+            <if test="pojo.address!=null">#{pojo.address},</if>
+            <if test="pojo.email!=null">#{pojo.email},</if>
+            <if test="pojo.website!=null">#{pojo.website},</if>
+            <if test="pojo.phone!=null">#{pojo.phone},</if>
+            <if test="pojo.openId!=null">#{pojo.openId},</if>
+            <if test="pojo.delFlag!=null">#{pojo.delFlag},</if>
+            <if test="pojo.score!=null">#{pojo.score},</if>
+            <if test="pojo.qq!=null">#{pojo.qq},</if>
+            <if test="pojo.creditLevel!=null">#{pojo.creditLevel},</if>
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO name_card_info (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.etpName},
+            #{pojo.legalName},
+            #{pojo.mobile},
+            #{pojo.loanLimit},
+            #{pojo.nameUrl},
+            #{pojo.position},
+            #{pojo.address},
+            #{pojo.email},
+            #{pojo.website},
+            #{pojo.phone},
+            #{pojo.openId},
+            #{pojo.delFlag},
+            #{pojo.score},
+            #{pojo.qq},
+            #{pojo.creditLevel},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE name_card_info
+        <set>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.legalName != null"> legal_name = #{pojo.legalName}, </if>
+            <if test="pojo.mobile != null"> mobile = #{pojo.mobile}, </if>
+            <if test="pojo.loanLimit != null"> loan_limit = #{pojo.loanLimit}, </if>
+            <if test="pojo.nameUrl != null"> name_url = #{pojo.nameUrl}, </if>
+            <if test="pojo.position != null"> position = #{pojo.position}, </if>
+            <if test="pojo.address != null"> address = #{pojo.address}, </if>
+            <if test="pojo.email != null"> email = #{pojo.email}, </if>
+            <if test="pojo.website != null"> website = #{pojo.website}, </if>
+            <if test="pojo.phone != null"> phone = #{pojo.phone}, </if>
+            <if test="pojo.openId != null"> open_id = #{pojo.openId}, </if>
+            <if test="pojo.delFlag != null"> del_flag = #{pojo.delFlag}, </if>
+            <if test="pojo.score != null"> score = #{pojo.score}, </if>
+            <if test="pojo.qq != null"> qq = #{pojo.qq}, </if>
+            <if test="pojo.creditLevel != null"> credit_level = #{pojo.creditLevel}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByEtpNameAndOpenId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  name_card_info
+        WHERE etp_name = #{etpName} AND open_id = #{openId}
+    </select>
+
+    <select id="findByOpenId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  name_card_info
+        WHERE open_id = #{openId}
+        ORDER BY update_date DESC
+    </select>
+
+    <sql id="selectColumnsList">
+        SELECT DISTINCT
+        a.id,
+        a.etp_name,
+        a.legal_name,
+        a.mobile,
+        a.loan_limit,
+        a.name_url,
+        a.create_date,
+        a.update_date,
+        a.position,
+        a.address,
+        a.email,
+        a.website,
+        a.phone,
+        a.open_id,
+        a.del_flag,
+        a.score,
+        a.qq,
+        a.credit_level,
+        b.nick_name
+        FROM name_card_info a
+    </sql>
+
+    <resultMap id="ListColumnMap" type="com.masspick.peak.guest.vo.manage.NameCardInfoVo">
+        <result column="etp_name" property="etpName"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="loan_limit" property="loanLimit"/>
+        <result column="name_url" property="nameUrl"/>
+        <result column="position" property="position"/>
+        <result column="address" property="address"/>
+        <result column="email" property="email"/>
+        <result column="website" property="website"/>
+        <result column="phone" property="phone"/>
+        <result column="open_id" property="openId"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="score" property="score"/>
+        <result column="qq" property="qq"/>
+        <result column="credit_level" property="creditLevel"/>
+        <result column="id" property="id"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="nick_name" property="nickName"/>
+    </resultMap>
+
+
+
+    <select id="findList" resultMap="ListColumnMap">
+        <include refid="selectColumnsList"/> left JOIN user_weixin b on a.open_id = b.open_id
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.nickName != null and pojo.nickName != ''">
+                    AND b.nick_name like CONCAT('%', #{pojo.nickName}, '%')
+                </if>
+
+                <if test="pojo.mobile != null and pojo.mobile != ''">
+                    AND a.mobile like CONCAT('%', #{pojo.mobile}, '%')
+                </if>
+
+                <if test="pojo.etpName != null and pojo.etpName != ''">
+                    AND a.etp_name like CONCAT('%', #{pojo.etpName}, '%')
+                </if>
+
+                <if test="pojo.legalName != null and pojo.legalName != ''">
+                    AND a.legal_name like CONCAT('%', #{pojo.legalName}, '%')
+                </if>
+
+                <if test="pojo.createStartDate != null">
+                    AND date_format(str_to_date(a.create_date, '%Y-%m-%d '), '%Y-%m-%d ') >= date_format(#{pojo.createStartDate}, '%Y-%m-%d')
+                </if>
+
+                <if test="pojo.createEndDate != null">
+                    AND date_format(str_to_date(a.create_date, '%Y-%m-%d '), '%Y-%m-%d ') &lt;= date_format(#{pojo.createEndDate}, '%Y-%m-%d')
+                </if>
+                AND a.del_flag = '0'
+            </trim>
+        </where>
+        ORDER BY a.update_date DESC
+    </select>
+
+
+    <delete id="deleteById">
+        UPDATE name_card_info
+        SET del_flag = '1'
+        WHERE id = #{id}
+    </delete>
+
+
+    <select id="findById" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  name_card_info
+        WHERE id = #{id}
+    </select>
+
+</mapper>
+

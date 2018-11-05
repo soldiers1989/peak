@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <div th:replace="header"></div>
+    <title>尽调管理</title>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+    <div class="menu_box">
+        <div class="con">
+            <ul class="accordion" id="accordion">
+                <shiro:hasPermission name="index">
+                    <li>
+                        <a class="link" href="/index">
+                            <img class="icon" th:src="@{/static/images/menu_icon_03.png}" alt=""/>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="template">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_06.png}" alt=""/>模板管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+
+                        <ul class="submenu">
+                            <shiro:hasPermission name="fieldIndex">
+                                <li>
+                                    <a class="active" href="/field/index">字段管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="templateIndex">
+                                <li>
+                                    <a href="/template/index">模板管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="ddManage">
+                    <li class="open">
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_09.png}" alt=""/>尽调管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+                        <shiro:hasPermission name="ddTask">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/task/index">尽调任务</a>
+                                </li>
+                            </ul>
+                        </shiro:hasPermission>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </div>
+    </div>
+    <div class='main_box'>
+        <p class="crumb">我的位置：
+            <span>尽调管理
+					<i>—</i>尽调任务</span>
+        </p>
+        <div class="white_bg position">
+            <shiro:hasPermission name="taskSearch">
+                <div class="search_box">
+                    <div class="input_row clearfix row">
+                        <div class="g_input">
+                            <div class="label">
+                                <span>任务编号：</span>
+                                <input id="taskNum" type="text" placeholder="请输入字段名称">
+                            </div>
+                        </div>
+                        <div class="g_input">
+                            <div class="label">
+                                <span>状态：</span>
+                                <select id="state">
+                                    <option value="">全部</option>
+                                    <option value="0">完成</option>
+                                    <option value="1">进行中</option>
+                                    <option value="2">终止</option>
+                                    <option value="3">待开始</option>
+                                    <option value="4">异常</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search_btn">
+                            <button onclick="search()" class="btn pri_btn">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </shiro:hasPermission>
+        </div>
+        <div class="white_bg list_box position">
+            <div class="g_tit mb20">
+                <h5>查询结果</h5>
+            </div>
+            <table class="theadBg" id="table" data-toggle="table" data-show-jumpto="true">
+                <thead>
+                <tr>
+                    <th data-field="number">序号</th>
+                    <th data-field="taskNum">任务编号</th>
+                    <th data-field="companyName">企业名称</th>
+                    <th data-field="companytype">企业类型</th>
+                    <th data-field="city">所在地区</th>
+                    <th data-field="productName">产品类型</th>
+                    <th data-field="receiveDateStr">接收时间</th>
+                    <th data-field="finishDateStr">完成时间</th>
+                    <th data-field="state">状态</th>
+                    <th data-field="manager">区域经理</th>
+                    <th data-field="executor">尽调员</th>
+                    <th data-field="templateName">尽调模板</th>
+                    <th data-field="operate">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mask2" id="alert">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span id="confirmData"></span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="alertConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+
+</body>
+<script th:inline="javascript">
+    var permission = [[${session.permission}]];
+</script>
+<script>
+
+    function alertConfirm() {
+        $("#alert").hide();
+    }
+
+    function AddOperateBtns(value, row, index) {
+        var html = "";
+        for (var i = 0; i < permission.length; i++) {
+            if (permission[i] == "taskInfo") {
+                html += '<button id="info" type="button" class="blue operateA">任务详情</button>';
+            }
+        }
+        for (var i = 0; i < permission.length; i++) {
+            if (permission[i] == "resultTask") {
+                html += '<button id="result" type="button" class="red operateA" >尽调结果</button>';
+            }
+        }
+        return html;
+    };
+
+    window.operateEvents = {
+        "click #info": function (e, value, row, index) {
+            window.location.href = "/task/info?id=" + row.id;
+        },
+        "click #result": function (e, value, row, index) {
+            console.log(row);
+            if (row.state == 0 || row.state == 2) {
+                window.location.href = "/task/result?processId=" + row.processInstanceId;
+            } else {
+                $("#confirmData").html("尽调暂未完成,暂不能查看")
+                $("#alert").toggle();
+            }
+        }
+    }
+</script>
+<script>
+
+    $('#table').bootstrapTable({
+        url: '/task/dataGrid',   // 获取表格数据的url
+        // cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+        // striped: true,  //表格显示条纹，默认为false
+        pagination: true, // 在表格底部显示分页组件，默认false
+        pageList: [0, 10], // 设置页面可以显示的数据条数
+        pageSize: 10, // 页面数据条数
+        pageNumber: 1, // 首页页码
+        paginationPreText: '上一页',    //指定分页条中上一页按钮的图标或文字
+        paginationNextText: '下一页',   //指定分页条中下一页按钮的图标或文字
+        paginationHAlign: '',
+        columns: [
+            {
+                field: 'number',
+                title: '序号',
+                align: "center",
+                width: '5%',
+                formatter: function (value, row, index) {
+                    return index + 1;
+                }
+            },
+            {
+                field: 'taskNum', // 返回json数据中的name
+                title: '任务编号', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '8%'
+            },
+            {
+                field: 'companyName', // 返回json数据中的name
+                title: '企业名称', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '8%'
+            },
+            {
+                field: 'companyType', // 返回json数据中的name
+                title: '企业类型', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '5%'
+            },
+            {
+                field: 'area', // 返回json数据中的name
+                title: '所在地区', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '8%',
+                formatter: function (value, row, index) {
+                    return row.address;
+                }
+            },
+            {
+                field: 'productName', // 返回json数据中的name
+                title: '产品类型', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '8%'
+            },
+            {
+                field: 'receiveDate', // 返回json数据中的name
+                title: '接收时间', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle',// 上下居中
+                width: '12%'
+            },
+            {
+                field: 'finishDate', // 返回json数据中的name
+                title: '完成时间', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle',// 上下居中
+                width: '12%' // 上下居中
+            },
+            {
+                field: 'state', // 返回json数据中的name
+                title: '状态', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle',// 上下居中
+                width: '4%', // 上下居中
+                formatter: function (value, row, index) {
+                    var map = {"0": "完成", "1": "进行中", "2": "终止", "3": "待开始", "4": "异常"};
+                    var state = row.state;
+                    return map[state];
+                }
+            },
+            {
+                field: 'manager', // 返回json数据中的name
+                title: '区域经理', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle',// 上下居中
+                width: '6%' // 上下居中
+            },
+            {
+                field: 'executor', // 返回json数据中的name
+                title: '尽调员', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle',// 上下居中
+                width: '6%' // 上下居中
+            },
+            {
+                field: 'templateName', // 返回json数据中的name
+                title: '尽调模板', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle',// 上下居中
+                width: '8%' // 上下居中
+            },
+            {
+                field: 'operate', // 返回json数据中的name
+                title: '操作', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '12%',
+                events: operateEvents,
+                formatter: AddOperateBtns  //表格中增加按钮
+            }
+        ],
+        queryParams: queryParams,
+        onLoadSuccess: function () {  //加载成功时执行
+            console.info("加载成功");
+        },
+        onLoadError: function () {  //加载失败时执行
+            console.info("加载数据失败");
+        }
+    });
+
+    function queryParams(params) {
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            // limit: params.limit,   //页面大小
+            rows: this.pageSize,
+            page: this.pageNumber,
+            state: $('#state').val(),
+            taskNum: $('#taskNum').val()
+        };
+        return temp;
+    };
+
+    function search() {
+        $('#table').bootstrapTable('refresh');
+    }
+</script>
+
+</html>

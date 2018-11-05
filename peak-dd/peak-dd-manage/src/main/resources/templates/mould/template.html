@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <div th:replace="header"></div>
+    <title>模板管理</title>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+    <div class="menu_box">
+        <div class="con">
+
+            <ul class="accordion" id="accordion">
+                <shiro:hasPermission name="index">
+                    <li>
+                        <a class="link" href="/index">
+                            <img class="icon" th:src="@{/static/images/menu_icon_03.png}" alt=""/>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="template">
+                    <li  class="open">
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_06.png}" alt=""/>模板管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+
+                        <ul class="submenu">
+                            <shiro:hasPermission name="fieldIndex">
+                                <li>
+                                    <a class="active" href="/field/index">字段管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="templateIndex">
+                                <li>
+                                    <a href="/template/index">模板管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="ddManage">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_09.png}" alt=""/>尽调管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+                        <shiro:hasPermission name="ddTask">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/task/index">尽调任务</a>
+                                </li>
+                            </ul>
+                        </shiro:hasPermission>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </div>
+    </div>
+    <div class='main_box'>
+        <p class="crumb">我的位置：
+            <span>模板管理
+					<i>—</i>模板管理</span>
+        </p>
+        <div class="white_bg position" style="margin-bottom:30px;">
+            <shiro:hasPermission name="templateSearch">
+                <div class="search_box">
+                    <div class="input_row clearfix row">
+                        <div class="g_input">
+                            <div class="label">
+                                <span>模板名称：</span>
+                                <input id="label" type="text" placeholder="请输入字段名称">
+                            </div>
+                        </div>
+                        <div class="search_btn">
+                            <button onclick="search()" class="btn pri_btn">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="templateAdd">
+                <div class="add_btn">
+                    <a href="/template/add" class="btn pri_btn">新增模板</a>
+                </div>
+            </shiro:hasPermission>
+        </div>
+        <div class="white_bg list_box">
+            <div class="g_tit mb20">
+                <h5>查询结果</h5>
+            </div>
+            <div class="rowsNull" style="display: none;">暂无数据！</div>
+            <table id="table" class="theadBg" data-toggle="table" data-show-jumpto="true">
+                <thead>
+                <tr>
+                    <th data-field="number">序号</th>
+                    <th data-field="name">模板名称</th>
+                    <th data-field="roleName">适用角色</th>
+                    <th data-field="createDate">创建时间</th>
+                    <th data-field="updateDate">更新时间</th>
+                    <!--<th data-field="dataType">类型</th>-->
+                    <th data-field="operate">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="mask2" id="confirmMask">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span>确认删除吗！！！</span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="deleteCancel()" class="btn pri_btn">取消</button>
+            <button onclick="deleteConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+
+<div class="mask2" id="alert">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span id="confirmData"></span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="alertConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    var permission = [[${session.permission}]];
+</script>
+<script>
+
+    var rowId;
+
+    function deleteCancel() {
+        $("#confirmMask").hide();
+    }
+
+    function deleteConfirm() {
+        $.ajax({
+            url: '/template/delete?id=' + rowId,
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    $("#confirmMask").hide();
+                    $('#table').bootstrapTable('refresh');
+                } else {
+                    $("#confirmData").html(data.msg);
+                    $("#alert").toggle();
+                }
+            }
+        })
+    }
+
+    function alertConfirm() {
+        $("#alert").hide();
+    }
+
+    function AddOperateBtns(value, row, index) {
+        var html = "";
+        for (var i = 0; i < permission.length; i++) {
+            if (permission[i] == "templateEdit") {
+                html += '<button id="tableEditor" type="button" class="btn_edit blue">编辑</button>';
+            }
+        }
+        for (var i = 0; i < permission.length; i++) {
+            if (permission[i] == "templateDelete") {
+                html += '<button id="tableDelete" type="button" class="btn_del red" >删除</button>';
+            }
+        }
+        return html;
+    };
+
+    window.operateEvents = {
+        "click #tableEditor": function (e, value, row, index) {
+            window.location.href = "/template/edit?id=" + row.id;
+        },
+        "click #tableDelete": function (e, value, row, index) {
+            rowId = row.id;
+            $("#confirmMask").toggle();
+        }
+    }
+
+    $('#table').bootstrapTable({
+        url: '/template/dataGrid',   // 获取表格数据的url
+        // cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+        // striped: true,  //表格显示条纹，默认为false
+        pagination: true, // 在表格底部显示分页组件，默认false
+        pageList: [5, 10], // 设置页面可以显示的数据条数
+        pageSize: 10, // 页面数据条数
+        pageNumber: 1, // 首页页码
+        paginationPreText: '上一页',    //指定分页条中上一页按钮的图标或文字
+        paginationNextText: '下一页',   //指定分页条中下一页按钮的图标或文字
+        paginationHAlign: '',
+        queryParams: queryParams,
+
+        columns: [
+            {
+                field: 'number', // 返回json数据中的name
+                title: '序号', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '5%',
+                formatter: function (value, row, index) {
+                    return index + 1;
+                }
+            },
+            {
+                field: 'name', // 返回json数据中的name
+                title: '模板名称', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '35%', // 上下居中
+            },
+            {
+                field: 'roleName', // 返回json数据中的name
+                title: '适用角色', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%', // 上下居中
+            },
+            {
+                field: 'createDate', // 返回json数据中的name
+                title: '创建时间', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%', // 上下居中
+            },
+            {
+                field: 'updateDate', // 返回json数据中的name
+                title: '更新时间', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%', // 上下居中
+            },
+            {
+                field: 'operate', // 返回json数据中的name
+                title: '操作', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%',
+                events: operateEvents, //给按钮注册事件
+                formatter: AddOperateBtns  //表格中增加按钮
+            }
+        ],
+        onLoadSuccess: function () {  //加载成功时执行
+            console.info("加载成功");
+        },
+        onLoadError: function () {  //加载失败时执行
+            console.info("加载数据失败");
+        }
+    });
+
+    function queryParams(params) {
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            // limit: params.limit,   //页面大小
+            rows: this.pageSize,
+            page: this.pageNumber,
+            name: $('#label').val(),
+        };
+        return temp;
+    }
+    function search() {
+        $('#table').bootstrapTable('refresh');
+    }
+</script>
+
+</html>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysProductMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysProduct">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="number" property="number"/>
+        <result column="min_term" property="minTerm"/>
+        <result column="max_term" property="maxTerm"/>
+        <result column="min_amount" property="minAmount"/>
+        <result column="max_amount" property="maxAmount"/>
+        <result column="min_rate" property="minRate"/>
+        <result column="max_rate" property="maxRate"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="remark" property="remark"/>
+        <result column="apply_condition" property="applyCondition"/>
+        <result column="product_introduction" property="productIntroduction"/>
+        <result column="contract_model" property="contractModel"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `number`,
+        `min_term`,
+        `max_term`,
+        `min_amount`,
+        `max_amount`,
+        `min_rate`,
+        `max_rate`,
+        `status`,
+        `create_date`,
+        `update_date`,
+        `remark`,
+        `apply_condition`,
+        `product_introduction`,
+        `contract_model`
+</sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_product (
+            `id`,
+            `name`,
+            `number`,
+            `min_term`,
+            `max_term`,
+            `min_amount`,
+            `max_amount`,
+            `min_rate`,
+            `max_rate`,
+            `status`,
+            `create_date`,
+            `update_date`,
+            `remark`,
+            `apply_condition`,
+            `product_introduction`,
+            `contract_model`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.number},
+            #{pojo.minTerm},
+            #{pojo.maxTerm},
+            #{pojo.minAmount},
+            #{pojo.maxAmount},
+            #{pojo.minRate},
+            #{pojo.maxRate},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.remark},
+            #{pojo.applyCondition},
+            #{pojo.productIntroduction},
+            #{pojo.contractModel}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.number!=null">`number`,</if>
+            <if test="pojo.minTerm!=null">`min_term`,</if>
+            <if test="pojo.maxTerm!=null">`max_term`,</if>
+            <if test="pojo.minAmount!=null">`min_amount`,</if>
+            <if test="pojo.maxAmount!=null">`max_amount`,</if>
+            <if test="pojo.minRate!=null">`min_rate`,</if>
+            <if test="pojo.maxRate!=null">`max_rate`,</if>
+            <if test="pojo.status!=null">`status`,</if>
+            <if test="pojo.createDate!=null">`create_date`,</if>
+            <if test="pojo.updateDate!=null">`update_date`,</if>
+            <if test="pojo.remark!=null">`remark`,</if>
+            <if test="pojo.applyCondition!=null">`apply_condition`,</if>
+            <if test="pojo.productIntroduction!=null">`product_introduction`,</if>
+            <if test="pojo.contractModel!=null">`contract_model`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.number!=null">#{pojo.number},</if>
+            <if test="pojo.minTerm!=null">#{pojo.minTerm},</if>
+            <if test="pojo.maxTerm!=null">#{pojo.maxTerm},</if>
+            <if test="pojo.minAmount!=null">#{pojo.minAmount},</if>
+            <if test="pojo.maxAmount!=null">#{pojo.maxAmount},</if>
+            <if test="pojo.minRate!=null">#{pojo.minRate},</if>
+            <if test="pojo.maxRate!=null">#{pojo.maxRate},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+            <if test="pojo.remark!=null">#{pojo.remark},</if>
+            <if test="pojo.applyCondition!=null">#{pojo.applyCondition},</if>
+            <if test="pojo.productIntroduction!=null">#{pojo.productIntroduction},</if>
+            <if test="pojo.contractModel!=null">#{pojo.contractModel}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_product(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.number},
+            #{pojo.minTerm},
+            #{pojo.maxTerm},
+            #{pojo.minAmount},
+            #{pojo.maxAmount},
+            #{pojo.minRate},
+            #{pojo.maxRate},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.remark},
+            #{pojo.applyCondition},
+            #{pojo.productIntroduction},
+            #{pojo.contractModel}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+
+        UPDATE sys_product
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name},</if>
+            <if test="pojo.number != null">`number` = #{pojo.number},</if>
+            <if test="pojo.minTerm != null">`min_term` = #{pojo.minTerm},</if>
+            <if test="pojo.maxTerm != null">`max_term` = #{pojo.maxTerm},</if>
+            <if test="pojo.minAmount != null">`min_amount` = #{pojo.minAmount},</if>
+            <if test="pojo.maxAmount != null">`max_amount` = #{pojo.maxAmount},</if>
+            <if test="pojo.minRate != null">`min_rate` = #{pojo.minRate},</if>
+            <if test="pojo.maxRate != null">`max_rate` = #{pojo.maxRate},</if>
+            <if test="pojo.status != null">`status` = #{pojo.status},</if>
+            <if test="pojo.createDate != null">`create_date` = #{pojo.createDate},</if>
+            <if test="pojo.updateDate != null">`update_date` = #{pojo.updateDate},</if>
+            <if test="pojo.remark != null">`remark` = #{pojo.remark},</if>
+            <if test="pojo.applyCondition != null">`apply_condition` = #{pojo.applyCondition},</if>
+            <if test="pojo.productIntroduction != null">`product_introduction` = #{pojo.productIntroduction},</if>
+            <if test="pojo.contractModel != null">`contract_model` = #{pojo.contractModel}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByPage" resultType="com.masspick.peak.resource.vo.ProductDataGridResultVo">
+        SELECT
+        id,
+        name,
+        number,
+        CONCAT(min_term, '-', max_term) AS term,
+        CONCAT(min_amount, '-', max_amount) AS amount,
+        CONCAT(
+        CONCAT(min_rate, '%'),
+        '-',
+        CONCAT(max_rate, '%')
+        ) AS rate,
+        status,
+        update_date as updateDate
+        FROM sys_product
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.name != null and pojo.name != ''">
+                    AND INSTR(name, #{pojo.name}) > 0
+                </if>
+
+                <if test="pojo.number != null and pojo.number != ''">
+                    AND number = BINARY (#{pojo.number})
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="findSingleById" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM
+        sys_product
+        where id = #{id}
+    </select>
+
+
+    <select id="findSingleByNum" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM
+        sys_product
+        where number = #{number}
+    </select>
+
+    <!--auto generated by codehelper on 2018-09-11 09:37:37-->
+    <select id="find" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_product
+    </select>
+
+    <!--auto generated by codehelper on 2018-09-11 09:37:37-->
+    <select id="findByIds" resultMap="AllColumnMap" >
+        select
+        <include refid="all_column"/>
+        from sys_product
+        WHERE id IN
+        <foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="serialNum" parameterType="java.lang.String" resultType="java.lang.String">
+        <!--
+          WARNING - @mbg.generated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri May 12 12:29:19 CST 2017.
+        -->
+        select
+        getSequenceByDay(#{applicationDate}) as num
+        from
+        dual
+    </select>
+
+</mapper>
+

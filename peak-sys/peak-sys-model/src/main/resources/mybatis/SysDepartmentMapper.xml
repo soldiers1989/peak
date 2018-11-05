@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysDepartmentMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysDepartment">
+        <result column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="full_name" property="fullName"/>
+        <result column="short_name" property="shortName"/>
+        <result column="code" property="code"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="level" property="level"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `parent_id`,
+        `full_name`,
+        `short_name`,
+        `code`,
+        `sort`,
+        `status`,
+        `level`,
+        `create_date`,
+        `update_date`,
+        `remark`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_department (
+            `id`,
+            `parent_id`,
+            `full_name`,
+            `short_name`,
+            `code`,
+            `sort`,
+            `status`,
+            `level`,
+            `create_date`,
+            `update_date`,
+            `remark`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.parentId},
+            #{pojo.fullName},
+            #{pojo.shortName},
+            #{pojo.code},
+            #{pojo.sort},
+            #{pojo.status},
+            #{pojo.level},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.remark}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.parentId!=null"> `parent_id`,</if>
+            <if test="pojo.fullName!=null"> `full_name`,</if>
+            <if test="pojo.shortName!=null"> `short_name`,</if>
+            <if test="pojo.code!=null"> `code`,</if>
+            <if test="pojo.sort!=null"> `sort`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.level!=null"> `level`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.parentId!=null">#{pojo.parentId},</if>
+            <if test="pojo.fullName!=null">#{pojo.fullName},</if>
+            <if test="pojo.shortName!=null">#{pojo.shortName},</if>
+            <if test="pojo.code!=null">#{pojo.code},</if>
+            <if test="pojo.sort!=null">#{pojo.sort},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.level!=null">#{pojo.level},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+            <if test="pojo.remark!=null">#{pojo.remark},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_department (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.parentId},
+            #{pojo.fullName},
+            #{pojo.shortName},
+            #{pojo.code},
+            #{pojo.sort},
+            #{pojo.status},
+            #{pojo.level},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.remark}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_department
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.fullName != null"> `full_name` = #{pojo.fullName}, </if>
+            <if test="pojo.shortName != null"> `short_name` = #{pojo.shortName}, </if>
+            <if test="pojo.code != null"> `code` = #{pojo.code}, </if>
+            <if test="pojo.sort != null"> `sort` = #{pojo.sort}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.level != null"> `level` = #{pojo.level}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate}, </if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark}, </if>
+            `parent_id` = #{pojo.parentId}
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <update id="updateParentId">
+        UPDATE sys_department
+        set parent_id = #{parentId}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findList" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_department
+        ORDER BY code
+    </select>
+
+
+    <select id="findOne" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_department
+        where id =#{id}
+    </select>
+
+    <update id="modifyDepartStatus" >
+      UPDATE
+        sys_department
+      SET
+        status = #{status}
+      WHERE code like #{code}
+    </update>
+
+
+    <select id="findShowList" resultType="com.masspick.peak.resource.vo.DepartmentShowVo">
+        SELECT
+        `id`,
+        `parent_id` as parentId,
+        `full_name` as fullName,
+        `status` as status,
+        `code` as code,
+        level as level
+        FROM  sys_department
+        ORDER BY code
+    </select>
+
+    <select id="editDep" resultType="com.masspick.peak.resource.vo.DepartmentShowVo">
+        SELECT
+        `id`,
+        `parent_id` as parentId,
+        `full_name` as fullName,
+        `status` as status,
+        `code` as code,
+        level as level
+        FROM  sys_department
+        WHERE
+        not FIND_IN_SET (id, getPartmentChildren(#{id}))
+        ORDER BY code
+    </select>
+
+    <select id="findChildrenById" resultType="com.masspick.peak.resource.vo.DepartmentShowVo">
+      SELECT
+        `id`,
+        `parent_id` as parentId,
+        `full_name` as fullName,
+        `status` as status,
+        `code` as code,
+        level as level
+        FROM
+            sys_department
+        WHERE
+            FIND_IN_SET(id,getPartmentChildren(#{id}))
+    </select>
+
+
+    <update id="updateChildrenCode" >
+        UPDATE sys_department a
+        SET a.code = REPLACE (a.code, #{pojo.oldCode}, #{pojo.newCode})
+        WHERE
+            id IN (select id from(
+                SELECT
+                    *
+                FROM
+                    sys_department
+                WHERE
+                    FIND_IN_SET(id,getPartmentChildren(#{pojo.id}))
+                    ) b
+                )
+    </update>
+
+
+
+    <update id="updateChildrenLevel" >
+        UPDATE
+        sys_department
+        SET
+        level = length(code)/2
+    </update>
+
+    <update id="updateChildren" >
+        UPDATE sys_department a
+          SET a. CODE = CONCAT(#{parentCode},substring(a.CODE, ((#{formerLevel})*2)+1)),
+              a.`level` = LENGTH(a.CODE) / 2
+          WHERE
+	          FIND_IN_SET(a.id,getPartmentChildren (#{id}))
+    </update>
+
+    <select id="findByCode" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_department
+        where code =#{code}
+    </select>
+
+    <select id="findUnableParentCount" resultType="java.lang.Integer">
+        SELECT
+        count(0)
+        FROM  sys_department
+        where FIND_IN_SET(id,getPartmentParent(#{id})) and status = 0;
+    </select>
+</mapper>
+

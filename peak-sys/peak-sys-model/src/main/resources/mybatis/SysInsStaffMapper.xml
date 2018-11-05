@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysInsStaffMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysInsStaff">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="number" property="number"/>
+        <result column="mobile" property="mobile"/>
+        <result column="institution_id" property="institutionId"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="url" property="url"/>
+        <result column="download_url" property="downloadUrl"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `number`,
+        `mobile`,
+        `institution_id`,
+        `status`,
+        `create_date`,
+        `update_date`,
+        `url`,
+`download_url`
+</sql>
+
+    <sql id="page_show_column">
+        a.id,
+        a.name,
+        a.number,
+        a.mobile,
+        a.institution_id as institutionId,
+        a.status,
+        a.url,
+        a.download_url as downloadUrl,
+        a.create_date as createDate,
+        a.update_date as updateDate,
+        IFNULL(b.name,'无机构') as institutionName
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_institution_staff (
+            `id`,
+            `name`,
+            `number`,
+            `mobile`,
+            `institution_id`,
+            `status`,
+            `create_date`,
+            `update_date`,
+            `url`,
+            `download_url`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.number},
+            #{pojo.mobile},
+            #{pojo.institutionId},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.url},
+            #{pojo.downloadUrl}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_institution_staff
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.number!=null"> `number`,</if>
+            <if test="pojo.mobile!=null"> `mobile`,</if>
+            <if test="pojo.institutionId!=null"> `institution_id`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+            <if test="pojo.url!=null"> `url`,</if>
+            <if test="pojo.downloadUrl!=null"> `download_url`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> #{pojo.id},</if>
+            <if test="pojo.name!=null"> #{pojo.name},</if>
+            <if test="pojo.number!=null"> #{pojo.number},</if>
+            <if test="pojo.mobile!=null"> #{pojo.mobile},</if>
+            <if test="pojo.institutionId!=null"> #{pojo.institutionId},</if>
+            <if test="pojo.status!=null"> #{pojo.status},</if>
+            <if test="pojo.createDate!=null"> #{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null"> #{pojo.updateDate},</if>
+            <if test="pojo.url!=null"> #{pojo.url},</if>
+            <if test="pojo.downloadUrl!=null"> #{pojo.downloadUrl}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_institution_staff(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.number},
+            #{pojo.mobile},
+            #{pojo.institutionId},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.url},
+            #{pojo.downloadUrl}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+
+
+        UPDATE sys_institution_staff
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id},</if>
+            <if test="pojo.name != null"> `name` = #{pojo.name},</if>
+            <if test="pojo.number != null"> `number` = #{pojo.number},</if>
+            <if test="pojo.mobile != null"> `mobile` = #{pojo.mobile},</if>
+            <if test="pojo.institutionId != null"> `institution_id` = #{pojo.institutionId},</if>
+            <if test="pojo.status != null"> `status` = #{pojo.status},</if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate},</if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate},</if>
+            <if test="pojo.url != null"> `url` = #{pojo.url},</if>
+            <if test="pojo.downloadUrl != null"> `download_url` = #{pojo.downloadUrl}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByPage" resultType="com.masspick.peak.resource.vo.StaffPageShowVo">
+        SELECT
+        <include refid="page_show_column"/>
+        FROM sys_institution_staff a LEFT JOIN sys_institution b on a.institution_id = b.id
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.name != null and pojo.name != ''">
+                    AND INSTR(a.name, #{pojo.name}) > 0
+                </if>
+
+                <if test="pojo.mobile != null and pojo.mobile != ''">
+                    AND a.mobile =BINARY (#{pojo.mobile})
+                </if>
+
+                <if test="pojo.status != null">
+                    AND a.status = #{pojo.status}
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY a.update_date DESC
+    </select>
+
+    <select id="findById" resultType="com.masspick.peak.resource.vo.StaffPageShowVo">
+        SELECT
+        <include refid="page_show_column"/>
+        FROM sys_institution_staff a LEFT JOIN sys_institution b on a.institution_id = b.id
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findByMobile" resultType="com.masspick.peak.resource.vo.StaffPageShowVo">
+        SELECT
+        <include refid="page_show_column"/>
+        FROM sys_institution_staff a LEFT JOIN sys_institution b on a.institution_id = b.id
+        WHERE a.mobile = #{mobile} and a.status = '1'
+    </select>
+
+
+    <select id="findByIds" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM sys_institution_staff WHERE
+        id IN
+        <foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+
+<!--auto generated by codehelper on 2018-09-20 09:11:38-->
+    <select id="findByNumber" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_institution_staff
+        where `number`=#{number}
+    </select>
+
+    <select id="findByInsMobile" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_institution_staff
+        where `mobile`=#{mobile}
+    </select>
+</mapper>
+

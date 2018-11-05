@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysRegionMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysRegion">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="short_name" property="shortName"/>
+        <result column="zoing_code" property="zoingCode"/>
+        <result column="parent_zoing_code" property="parentZoingCode"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="postal_code" property="postalCode"/>
+        <result column="pinyin_full_name" property="pinyinFullName"/>
+        <result column="pinyin_short_name" property="pinyinShortName"/>
+        <result column="first_character" property="firstCharacter"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `short_name`,
+        `zoing_code`,
+        `parent_zoing_code`,
+        `area_code`,
+        `postal_code`,
+        `pinyin_full_name`,
+        `pinyin_short_name`,
+        `first_character`,
+        `create_date`,
+        `update_date`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_region (
+            `id`,
+            `name`,
+            `short_name`,
+            `zoing_code`,
+            `parent_zoing_code`,
+            `area_code`,
+            `postal_code`,
+            `pinyin_full_name`,
+            `pinyin_short_name`,
+            `first_character`,
+            `create_date`,
+            `update_date`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.shortName},
+            #{pojo.zoingCode},
+            #{pojo.parentZoingCode},
+            #{pojo.areaCode},
+            #{pojo.postalCode},
+            #{pojo.pinyinFullName},
+            #{pojo.pinyinShortName},
+            #{pojo.firstCharacter},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_region
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.shortName!=null"> `short_name`,</if>
+            <if test="pojo.zoingCode!=null"> `zoing_code`,</if>
+            <if test="pojo.parentZoingCode!=null"> `parent_zoing_code`,</if>
+            <if test="pojo.areaCode!=null"> `area_code`,</if>
+            <if test="pojo.postalCode!=null"> `postal_code`,</if>
+            <if test="pojo.pinyinFullName!=null"> `pinyin_full_name`,</if>
+            <if test="pojo.pinyinShortName!=null"> `pinyin_short_name`,</if>
+            <if test="pojo.firstCharacter!=null"> `first_character`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.shortName!=null">#{pojo.shortName},</if>
+            <if test="pojo.zoingCode!=null">#{pojo.zoingCode},</if>
+            <if test="pojo.parentZoingCode!=null">#{pojo.parentZoingCode},</if>
+            <if test="pojo.areaCode!=null">#{pojo.areaCode},</if>
+            <if test="pojo.postalCode!=null">#{pojo.postalCode},</if>
+            <if test="pojo.pinyinFullName!=null">#{pojo.pinyinFullName},</if>
+            <if test="pojo.pinyinShortName!=null">#{pojo.pinyinShortName},</if>
+            <if test="pojo.firstCharacter!=null">#{pojo.firstCharacter},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_region (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.shortName},
+            #{pojo.zoingCode},
+            #{pojo.parentZoingCode},
+            #{pojo.areaCode},
+            #{pojo.postalCode},
+            #{pojo.pinyinFullName},
+            #{pojo.pinyinShortName},
+            #{pojo.firstCharacter},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_region
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.shortName != null"> `short_name` = #{pojo.shortName}, </if>
+            <if test="pojo.zoingCode != null"> `zoing_code` = #{pojo.zoingCode}, </if>
+            <if test="pojo.parentZoingCode != null"> `parent_zoing_code` = #{pojo.parentZoingCode}, </if>
+            <if test="pojo.areaCode != null"> `area_code` = #{pojo.areaCode}, </if>
+            <if test="pojo.postalCode != null"> `postal_code` = #{pojo.postalCode}, </if>
+            <if test="pojo.pinyinFullName != null"> `pinyin_full_name` = #{pojo.pinyinFullName}, </if>
+            <if test="pojo.pinyinShortName != null"> `pinyin_short_name` = #{pojo.pinyinShortName}, </if>
+            <if test="pojo.firstCharacter != null"> `first_character` = #{pojo.firstCharacter}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+</mapper>
+

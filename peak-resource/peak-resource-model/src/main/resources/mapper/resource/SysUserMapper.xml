@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysUserMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.model.SysUser">
+        <result column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="birth" property="birth"/>
+        <result column="sex" property="sex"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="department_id" property="departmentId"/>
+    </resultMap>
+
+<!--    <resultMap id="AllColumnMapBO"  extends="AllColumnMap" type="com.masspick.peak.resource.model.bo.SysUserBO" >
+        <association column="department_id" property="sysDepartment" select="findDepartmentById"/>
+    </resultMap>
+
+    <select id="findDepartmentById" parameterType="String" resultMap="com.masspick.peak.resource.model.SysDepartment.AllColumnMap">
+        select
+        <include refid="com.masspick.peak.resource.model.SysDepartment.all_column"/>
+         from sys_department where id=#{id}
+    </select>-->
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `user_name`,
+        `password`,
+        `nick_name`,
+        `birth`,
+        `sex`,
+        `phone`,
+        `email`,
+        `status`,
+        `create_time`,
+        `update_time`,
+        `department_id`
+</sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_user (
+            `id`,
+            `user_name`,
+            `password`,
+            `nick_name`,
+            `birth`,
+            `sex`,
+            `phone`,
+            `email`,
+            `status`,
+            `create_time`,
+            `update_time`,
+            `department_id`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.userName},
+            #{pojo.password},
+            #{pojo.nickName},
+            #{pojo.birth},
+            #{pojo.sex},
+            #{pojo.phone},
+            #{pojo.email},
+            #{pojo.status},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.departmentId}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.userName!=null"> `user_name`,</if>
+            <if test="pojo.password!=null"> `password`,</if>
+            <if test="pojo.nickName!=null"> `nick_name`,</if>
+            <if test="pojo.birth!=null"> `birth`,</if>
+            <if test="pojo.sex!=null"> `sex`,</if>
+            <if test="pojo.phone!=null"> `phone`,</if>
+            <if test="pojo.email!=null"> `email`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.createTime!=null"> `create_time`,</if>
+            <if test="pojo.updateTime!=null"> `update_time`,</if>
+            <if test="pojo.departmentId!=null"> `department_id`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> #{pojo.id},</if>
+            <if test="pojo.userName!=null"> #{pojo.userName},</if>
+            <if test="pojo.password!=null"> #{pojo.password},</if>
+            <if test="pojo.nickName!=null"> #{pojo.nickName},</if>
+            <if test="pojo.birth!=null"> #{pojo.birth},</if>
+            <if test="pojo.sex!=null"> #{pojo.sex},</if>
+            <if test="pojo.phone!=null"> #{pojo.phone},</if>
+            <if test="pojo.email!=null"> #{pojo.email},</if>
+            <if test="pojo.status!=null"> #{pojo.status},</if>
+            <if test="pojo.createTime!=null"> #{pojo.createTime},</if>
+            <if test="pojo.updateTime!=null"> #{pojo.updateTime},</if>
+            <if test="pojo.departmentId!=null"> #{pojo.departmentId}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_user(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.userName},
+            #{pojo.password},
+            #{pojo.nickName},
+            #{pojo.birth},
+            #{pojo.sex},
+            #{pojo.phone},
+            #{pojo.email},
+            #{pojo.status},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.departmentId}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+
+        UPDATE sys_user
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id},</if>
+            <if test="pojo.userName != null"> `user_name` = #{pojo.userName},</if>
+            <if test="pojo.password != null"> `password` = #{pojo.password},</if>
+            <if test="pojo.nickName != null"> `nick_name` = #{pojo.nickName},</if>
+            <if test="pojo.birth != null"> `birth` = #{pojo.birth},</if>
+            <if test="pojo.sex != null"> `sex` = #{pojo.sex},</if>
+            <if test="pojo.phone != null"> `phone` = #{pojo.phone},</if>
+            <if test="pojo.email != null"> `email` = #{pojo.email},</if>
+            <if test="pojo.status != null"> `status` = #{pojo.status},</if>
+            <if test="pojo.createTime != null"> `create_time` = #{pojo.createTime},</if>
+            <if test="pojo.updateTime != null"> `update_time` = #{pojo.updateTime},</if>
+            <if test="pojo.departmentId != null"> `department_id` = #{pojo.departmentId}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+<!--auto generated by codehelper on 2018-05-01 00:56:35-->
+    <delete id="deleteById">
+        delete from sys_user
+        where `id`=#{id}
+    </delete>
+
+<!--auto generated by codehelper on 2018-05-01 01:04:22-->
+    <select id="findByUserName" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_user
+        where `user_name`=#{userName}
+    </select>
+
+<!--auto generated by codehelper on 2018-05-01 11:08:45-->
+    <select id="findById" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_user
+        where `id`=#{id}
+    </select>
+
+    <select id="selectSysUserBoByQueryParams" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_user
+        where 1 = 1
+        <if test="searchLike != null"> and user_name LIKE #{searchLike}</if>
+    </select>
+
+<!--auto generated by codehelper on 2018-05-01 14:30:01-->
+    <select id="findByIdIn" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_user
+        where `id` in
+        <foreach item="item" index="index" collection="idList"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>
+

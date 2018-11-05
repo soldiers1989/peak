@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <div th:replace="header"></div>
+    <title>尽调报告</title>
+</head>
+<body>
+<div class="box" style="height: 100%;">
+    <div class='main_box' style="margin: 0;">
+        <div class="white_bg result_box" th:if="${group.size() !=0 }">
+            <div class="g_tit mb30">
+                <h5>尽调结果</h5>
+            </div>
+            <div th:each="key,iterStat : ${group}" class="tableBase tableBox ddResultTable">
+                <div class="thead">
+                    <div class="tr">
+                        <div class="th" th:text="${key.group_name}"></div>
+                        <div class="th"></div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    <div class="tr" th:each="control,iterStat : ${data}" th:if="${control.groupKey == key.group_key}">
+                        <div class="td" th:text="${control.label}"></div>
+                        <div class="td">
+                            <img th:if="${control.type == 'image'}" th:src="${control.value}" alt=""/>
+                            <div th:if="${control.type != 'image'}" th:text="${control.value}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="white_bg result_box" th:if="${task.reason ==0 }">
+            <div class="g_tit mb30">
+                <h5>终止原因</h5>
+            </div>
+            <div class="tableBase tableBox ddResultTable">
+                <div class="tbody">
+                    <div class="tr">
+                        <div class="td">终止原因</div>
+                        <div class="td" th:text="${task.reason}"></div>
+                    </div>
+                    <div th:if="!${task.desc}" class="tr">
+                        <div class="td">原因描述</div>
+                        <div class="td" th:text="${task.desc}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

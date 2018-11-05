@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: common-log
+
+logging:
+  level:
+    root: INFO
+  file: logs/${spring.application.name}.log
+

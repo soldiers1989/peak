@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysUserRoleMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysUserRole">
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `user_id`,
+        `role_id`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_user_role (
+            `id`,
+            `user_id`,
+            `role_id`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.userId},
+            #{pojo.roleId}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.userId!=null"> `user_id`,</if>
+            <if test="pojo.roleId!=null"> `role_id`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.userId!=null">#{pojo.userId},</if>
+            <if test="pojo.roleId!=null">#{pojo.roleId},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_user_role (
+        `user_id`,
+        `role_id`
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.userId},
+            #{pojo.roleId}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_user_role
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.userId != null"> `user_id` = #{pojo.userId}, </if>
+            <if test="pojo.roleId != null"> `role_id` = #{pojo.roleId} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByUserId" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_user_role
+        WHERE  user_id = #{userId}
+    </select>
+
+    <delete id="deleteByUserId">
+        DELETE
+        FROM
+        sys_user_role
+        WHERE
+        user_id = #{userId}
+    </delete>
+</mapper>
+

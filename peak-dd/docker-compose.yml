@@ -1,0 +1,49 @@
+version: '3'
+services:
+  client:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-dd:${VERSION}
+    environment:
+      - EUREKA_MEMBERS=http://eureka1:8761/eureka/,http://eureka2:8761/eureka/,http://eureka3:8761/eureka/
+      - SPRING_PREFER_NETWORK=10.0.0
+      - ENV=prod
+      - JDBC_URL=192.168.0.55
+      - JDBC_PORT=3306
+      - JDBC_USERNAME=root
+      - JDBC_PASSWORD=${JDBC_PASSWORD}
+    networks:
+      springcloud-overlay:
+        aliases:
+          - peakDdClient
+    entrypoint:
+      - java
+      - -Djava.security.egd=file:/dev/./urandom
+      - -jar
+      - /client.jar
+  manage:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-dd:${VERSION}
+    ports:
+      - "9310:8080"
+    environment:
+      - ENV=prod
+      - SPRING_PREFER_NETWORK=10.0.0
+      - SHIRO_CAS=http://auth.e-masspick.com/cas
+      - SHIRO_SERVICE=http://dd.e-masspick.com
+      - ZUUL_URL=http://zuul:8040
+      - JDBC_URL=192.168.0.55
+      - JDBC_PORT=3306
+      - JDBC_USERNAME=root
+      - JDBC_PASSWORD=${JDBC_PASSWORD}
+      - RESOURCE_APPID=aa13b6d4-ef67-4fc5-8530-1ca60809094a
+    networks:
+      springcloud-overlay:
+        aliases:
+          - peakDdManage
+    entrypoint:
+      - java
+      - -Djava.security.egd=file:/dev/./urandom
+      - -jar
+      - /manage.jar
+networks:
+  springcloud-overlay:
+    external:
+      name: springcloud-overlay

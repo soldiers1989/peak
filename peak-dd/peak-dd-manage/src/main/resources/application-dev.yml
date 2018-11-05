@@ -1,0 +1,40 @@
+server:
+  port: 7902
+
+logging:
+  level:
+    com.masspick.peak.dd.mapper: debug
+    root: INFO
+  file: logs/${spring.application.name}.log
+
+spring:
+  application:
+      name: peak-dd-manage
+  datasource:
+    url: jdbc:mysql://192.168.111.210:3306/peak_dd?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    max-active: 20
+    initial-size: 1
+    min-idle: 3
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 'x'
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+
+shiro:
+  cas: ${SHIRO_CAS}
+  server: http://localhost:${server.port}
+
+zuul:
+  url: ${ZUUL_URL}
+
+resource:
+  appId: ${RESOURCE_APPID}
+
+
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.ProductMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.Product">
+        <result column="product_id" property="productId"/>
+        <result column="product_name" property="productName"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `product_id`,
+        `product_name`,
+        `status`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.productId">
+        INSERT INTO product (
+            `product_id`,
+            `product_name`,
+            `status`
+        ) VALUES (
+            #{pojo.productId},
+            #{pojo.productName},
+            #{pojo.status}
+        )
+    </insert>
+
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO product (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.productId},
+            #{pojo.productName},
+            #{pojo.status}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE product
+        <set>
+            <if test="pojo.productId != null"> `product_id` = #{pojo.productId}, </if>
+            <if test="pojo.productName != null"> `product_name` = #{pojo.productName}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status} </if>
+        </set>
+        WHERE product_id = #{pojo.productId}
+    </update>
+
+    <select id="findAllAbleProducts" resultType="java.lang.String">
+        SELECT
+        product_id
+        FROM
+         product
+        where
+        status = '0'
+    </select>
+
+    <select id="findByProductId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column" />
+        FROM
+         product
+        where
+        product_id = #{productId}
+    </select>
+</mapper>
+

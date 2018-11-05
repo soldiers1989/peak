@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysPermissionMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysPermission">
+        <result column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="app_id" property="appId"/>
+        <result column="app_name" property="appName"/>
+        <result column="code" property="code"/>
+        <result column="sort" property="sort"/>
+        <result column="deep" property="deep"/>
+        <result column="menu_url" property="menuUrl"/>
+        <result column="resource_name" property="resourceName"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="icon" property="icon"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `parent_id`,
+        `name`,
+        `type`,
+        `app_id`,
+        `app_name`,
+        `code`,
+        `sort`,
+        `deep`,
+        `menu_url`,
+        `resource_name`,
+        `status`,
+        `create_date`,
+        `update_date`,
+`icon`
+</sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_permission (
+            `id`,
+            `parent_id`,
+            `name`,
+            `type`,
+            `app_id`,
+            `app_name`,
+            `code`,
+            `sort`,
+            `deep`,
+            `menu_url`,
+            `resource_name`,
+            `status`,
+            `create_date`,
+            `update_date`,
+            `icon`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.parentId},
+            #{pojo.name},
+            #{pojo.type},
+            #{pojo.appId},
+            #{pojo.appName},
+            #{pojo.code},
+            #{pojo.sort},
+            #{pojo.deep},
+            #{pojo.menuUrl},
+            #{pojo.resourceName},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.icon}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.parentId!=null">`parent_id`,</if>
+            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.type!=null">`type`,</if>
+            <if test="pojo.appId!=null">`app_id`,</if>
+            <if test="pojo.appName!=null">`app_name`,</if>
+            <if test="pojo.code!=null">`code`,</if>
+            <if test="pojo.sort!=null">`sort`,</if>
+            <if test="pojo.deep!=null">`deep`,</if>
+            <if test="pojo.menuUrl!=null">`menu_url`,</if>
+            <if test="pojo.resourceName!=null">`resource_name`,</if>
+            <if test="pojo.status!=null">`status`,</if>
+            <if test="pojo.createDate!=null">`create_date`,</if>
+            <if test="pojo.updateDate!=null">`update_date`,</if>
+            <if test="pojo.icon!=null">`icon`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.parentId!=null">#{pojo.parentId},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.type!=null">#{pojo.type},</if>
+            <if test="pojo.appId!=null">#{pojo.appId},</if>
+            <if test="pojo.appName!=null">#{pojo.appName},</if>
+            <if test="pojo.code!=null">#{pojo.code},</if>
+            <if test="pojo.sort!=null">#{pojo.sort},</if>
+            <if test="pojo.deep!=null">#{pojo.deep},</if>
+            <if test="pojo.menuUrl!=null">#{pojo.menuUrl},</if>
+            <if test="pojo.resourceName!=null">#{pojo.resourceName},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+            <if test="pojo.icon!=null">#{pojo.icon}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_permission(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.parentId},
+            #{pojo.name},
+            #{pojo.type},
+            #{pojo.appId},
+            #{pojo.appName},
+            #{pojo.code},
+            #{pojo.sort},
+            #{pojo.deep},
+            #{pojo.menuUrl},
+            #{pojo.resourceName},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.icon}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_permission
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name},</if>
+            <if test="pojo.type != null">`type` = #{pojo.type},</if>
+            <if test="pojo.appId != null">`app_id` = #{pojo.appId},</if>
+            <if test="pojo.appName != null">`app_name` = #{pojo.appName},</if>
+            <if test="pojo.code != null">`code` = #{pojo.code},</if>
+            <if test="pojo.sort != null">`sort` = #{pojo.sort},</if>
+            <if test="pojo.deep != null">`deep` = #{pojo.deep},</if>
+            <if test="pojo.menuUrl != null">`menu_url` = #{pojo.menuUrl},</if>
+            <if test="pojo.resourceName != null">`resource_name` = #{pojo.resourceName},</if>
+            <if test="pojo.status != null">`status` = #{pojo.status},</if>
+            <if test="pojo.createDate != null">`create_date` = #{pojo.createDate},</if>
+            <if test="pojo.updateDate != null">`update_date` = #{pojo.updateDate},</if>
+            <if test="pojo.icon != null">`icon` = #{pojo.icon},</if>
+            `parent_id` = #{pojo.parentId}
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <!--auto generated Code-->
+    <update id="updateStatus">
+        UPDATE sys_permission
+        SET
+       `status` = #{pojo.status},
+       `update_date` = now()
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByCodeAndAppId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM sys_permission
+        WHERE code = #{code} AND app_id = #{appId}
+    </select>
+
+    <select id="findListByAppId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM sys_permission
+        WHERE app_id = #{appId}
+        ORDER BY code
+    </select>
+
+    <select id="editPermission" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM sys_permission
+        WHERE
+        not FIND_IN_SET(id,getPermissionChildren(#{id})) AND
+        app_id = #{appId}
+        ORDER BY code
+    </select>
+
+    <select id="findOne" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM sys_permission
+        WHERE id = #{id}
+    </select>
+
+    <select id="findChildrenById" resultMap="AllColumnMap">
+        SELECT
+        *
+        FROM
+        sys_permission
+        WHERE
+        FIND_IN_SET(id,getPermissionChildren(#{id}))
+    </select>
+
+
+    <update id="updateChildrenCode">
+        UPDATE sys_permission a
+        SET a.code = CONCAT(#{pojo.newCode}, SUBSTRING(a.code,LENGTH({pojo.oldCode})+1))
+        WHERE
+        id IN (select id from(
+        SELECT
+        *
+        FROM
+        sys_permission
+        WHERE
+        FIND_IN_SET(id,getPermissionChildren(#{pojo.id}))
+        ) b
+        )
+    </update>
+
+
+    <update id="updateChildrenPermission">
+        UPDATE sys_permission a
+        SET a. CODE = CONCAT(#{parentCode},substring(a.CODE, ((#{formerLevel})*2)+1)),
+        a.`deep` = LENGTH(a.CODE) / 2
+        WHERE
+        FIND_IN_SET(a.id,getPermissionChildren(#{id})) and a.app_id = #{appId}
+    </update>
+
+
+    <update id="updateChildrenDeep">
+        UPDATE
+        sys_permission
+        SET
+        deep = length(code)/2
+    </update>
+
+    <select id="findByAccountNameAndAppId" resultType="com.masspick.peak.resource.entity.bo.SysPermissionBO">
+        SELECT
+            p.id AS Id,
+            (
+                CASE
+                WHEN p.parent_id IS NULL THEN
+                    p.app_id
+                WHEN p.parent_id IS NOT NULL THEN
+                    p.parent_id
+                END
+            ) AS parentId,
+            p. NAME AS NAME,
+            (
+                CASE
+                WHEN p.type = 1 THEN
+                    'sub'
+                WHEN p.type = 2 THEN
+                    'link'
+                WHEN p.type = 3 THEN
+                    'button'
+                END
+            ) AS `type`,
+            p.app_id AS appId,
+            p.app_name AS appName,
+            p. CODE AS CODE,
+            p.sort AS sort,
+            p.deep AS deep,
+            p.menu_url AS menuUrl,
+            p.resource_name AS resourceName,
+            p. STATUS AS STATUS,
+            p.icon AS icon
+        FROM
+            sys_permission p
+        LEFT JOIN (
+            SELECT
+                *
+            FROM
+                sys_role_permission
+            WHERE
+                role_id IN (
+                    SELECT
+                        r.id
+                    FROM
+                        sys_role r
+                    LEFT JOIN sys_user_role u ON r.id = u.role_id
+                    WHERE
+                        r.STATUS = 1
+                    AND u.user_id = #{userId}
+                )
+        ) rp ON p.id = rp.permission_id
+        WHERE
+            rp.role_id IS NOT NULL
+        and
+            p.app_id = #{appId}
+        GROUP BY
+            p.id
+        ORDER BY
+            CODE
+    </select>
+
+
+    <!--<select id="findByRoleIdAndAppId" resultType="com.masspick.peak.resource.entity.bo.PermissionNode">
+        SELECT
+            p.id AS id,
+            (CASE WHEN p.parent_id IS NULL THEN p.app_id WHEN p.parent_id IS NOT NULL THEN p.parent_id END ) parentId,
+            p.name AS name,
+            p.type AS type,
+            p.status AS status,
+            (CASE WHEN r.role_id IS NULL THEN 0 WHEN r.role_id IS NOT NULL THEN 1 END ) disable
+        FROM
+            sys_permission P
+        LEFT JOIN (
+            SELECT
+                *
+            FROM
+                sys_role_permission
+            WHERE
+                role_id = #{roleId}
+        ) r ON p.id = r.permission_id
+        WHERE
+            app_id = #{appId}
+        ORDER BY
+            CODE
+    </select>-->
+
+    <select id="findByRoleIdAndAppId" resultType="com.masspick.peak.resource.entity.bo.PermissionNode">
+        SELECT
+        p.id AS id,
+        (CASE WHEN p.parent_id IS NULL THEN p.app_id WHEN p.parent_id IS NOT NULL THEN p.parent_id END ) as pId,
+        concat (p.name,' ',(CASE WHEN p.type = 1 THEN '目录' WHEN p.type = 2 THEN '菜单' WHEN p.type = 3 THEN '功能' END )) as name,
+        (CASE WHEN r.role_id IS NULL THEN false WHEN r.role_id IS NOT NULL THEN true END ) checked,
+        (CASE WHEN p.status = 1 THEN FALSE WHEN  p.status = 0 THEN TRUE end) as chkDisabled
+        FROM
+        sys_permission P
+        LEFT JOIN (
+        SELECT
+        *
+        FROM
+        sys_role_permission
+        WHERE
+        role_id = #{roleId}
+        ) r ON p.id = r.permission_id
+        WHERE
+        p.app_id = #{appId}
+        ORDER BY
+        CODE
+    </select>
+
+    <select id="findUnableParentCount" resultType="java.lang.Integer">
+        SELECT
+        count(0)
+        FROM  sys_permission
+        where FIND_IN_SET(id,getPermissionParent(#{id})) and status = 0;
+    </select>
+
+    <select id="findPermCountByAccoutAndAppId" resultType="java.lang.Integer">
+        SELECT
+            count(0)
+        FROM
+            sys_user a
+        LEFT JOIN sys_user_role b ON a.id = b.user_id
+        LEFT JOIN sys_role_permission c ON b.role_id = c.role_id
+        WHERE
+            a.account = #{account}
+        AND c.app_id = #{appId};
+    </select>
+
+</mapper>
+

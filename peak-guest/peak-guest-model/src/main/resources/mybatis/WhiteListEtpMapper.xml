@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.WhiteListEtpMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.WhiteListEtp">
+        <result column="etp_name" property="etpName"/>
+        <result column="customer_type" property="customerType"/>
+        <result column="total_loans" property="totalLoans"/>
+        <result column="business_license_no" property="businessLicenseNo"/>
+        <result column="business_life" property="businessLife"/>
+        <result column="registered_paid_capital" property="registeredPaidCapital"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="business_economy_type" property="businessEconomyType"/>
+        <result column="largest_shareholder_proportion" property="largestShareholderProportion"/>
+        <result column="business_license_address" property="businessLicenseAddress"/>
+        <result column="major_equity_changes" property="majorEquityChanges"/>
+        <result column="changes_or_replacement" property="changesOrReplacement"/>
+        <result column="cross_industry_investment" property="crossIndustryInvestment"/>
+        <result column="interprovincial_investment_times" property="interprovincialInvestmentTimes"/>
+        <result column="large_amount_investment" property="largeAmountInvestment"/>
+        <result column="complaints_number" property="complaintsNumber"/>
+        <result column="plaintiff_case_amount" property="plaintiffCaseAmount"/>
+        <result column="defendant_case_amount" property="defendantCaseAmount"/>
+        <result column="defendant_case_percent_amount" property="defendantCasePercentAmount"/>
+        <result column="financial_case_amount" property="financialCaseAmount"/>
+        <result column="administrative_penalty_records" property="administrativePenaltyRecords"/>
+        <result column="administrative_punishment_agency" property="administrativePunishmentAgency"/>
+        <result column="related_companies_number" property="relatedCompaniesNumber"/>
+        <result column="related_companies" property="relatedCompanies"/>
+        <result column="related_case_companies" property="relatedCaseCompanies"/>
+        <result column="industry_category" property="industryCategory"/>
+        <result column="lowest_tax_rate" property="lowestTaxRate"/>
+        <result column="regional_credit_environment" property="regionalCreditEnvironment"/>
+        <result column="local_estate_boom" property="localEstateBoom"/>
+        <result column="government_financial_strength" property="governmentFinancialStrength"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="area" property="area"/>
+        <result column="total_etp_score" property="totalEtpScore"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        etp_name,
+        customer_type,
+        total_loans,
+        business_license_no,
+        business_life,
+        registered_paid_capital,
+        legal_name,
+        business_economy_type,
+        largest_shareholder_proportion,
+        business_license_address,
+        major_equity_changes,
+        changes_or_replacement,
+        cross_industry_investment,
+        interprovincial_investment_times,
+        large_amount_investment,
+        complaints_number,
+        plaintiff_case_amount,
+        defendant_case_amount,
+        defendant_case_percent_amount,
+        financial_case_amount,
+        administrative_penalty_records,
+        administrative_punishment_agency,
+        related_companies_number,
+        related_companies,
+        related_case_companies,
+        industry_category,
+        lowest_tax_rate,
+        regional_credit_environment,
+        local_estate_boom,
+        government_financial_strength,
+        province,
+        city,
+        area,
+        total_etp_score
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.etpName">
+        INSERT INTO white_list_etp (
+            etp_name,
+            customer_type,
+            total_loans,
+            business_license_no,
+            business_life,
+            registered_paid_capital,
+            legal_name,
+            business_economy_type,
+            largest_shareholder_proportion,
+            business_license_address,
+            major_equity_changes,
+            changes_or_replacement,
+            cross_industry_investment,
+            interprovincial_investment_times,
+            large_amount_investment,
+            complaints_number,
+            plaintiff_case_amount,
+            defendant_case_amount,
+            defendant_case_percent_amount,
+            financial_case_amount,
+            administrative_penalty_records,
+            administrative_punishment_agency,
+            related_companies_number,
+            related_companies,
+            related_case_companies,
+            industry_category,
+            lowest_tax_rate,
+            regional_credit_environment,
+            local_estate_boom,
+            government_financial_strength,
+            province,
+            city,
+            area,
+            total_etp_score
+        ) VALUES (
+            #{pojo.etpName},
+            #{pojo.customerType},
+            #{pojo.totalLoans},
+            #{pojo.businessLicenseNo},
+            #{pojo.businessLife},
+            #{pojo.registeredPaidCapital},
+            #{pojo.legalName},
+            #{pojo.businessEconomyType},
+            #{pojo.largestShareholderProportion},
+            #{pojo.businessLicenseAddress},
+            #{pojo.majorEquityChanges},
+            #{pojo.changesOrReplacement},
+            #{pojo.crossIndustryInvestment},
+            #{pojo.interprovincialInvestmentTimes},
+            #{pojo.largeAmountInvestment},
+            #{pojo.complaintsNumber},
+            #{pojo.plaintiffCaseAmount},
+            #{pojo.defendantCaseAmount},
+            #{pojo.defendantCasePercentAmount},
+            #{pojo.financialCaseAmount},
+            #{pojo.administrativePenaltyRecords},
+            #{pojo.administrativePunishmentAgency},
+            #{pojo.relatedCompaniesNumber},
+            #{pojo.relatedCompanies},
+            #{pojo.relatedCaseCompanies},
+            #{pojo.industryCategory},
+            #{pojo.lowestTaxRate},
+            #{pojo.regionalCreditEnvironment},
+            #{pojo.localEstateBoom},
+            #{pojo.governmentFinancialStrength},
+            #{pojo.province},
+            #{pojo.city},
+            #{pojo.area},
+            #{pojo.totalEtpScore}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.etpName">
+        INSERT INTO white_list_etp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.etpName!=null"> etp_name,</if>
+            <if test="pojo.customerType!=null"> customer_type,</if>
+            <if test="pojo.totalLoans!=null"> total_loans,</if>
+            <if test="pojo.businessLicenseNo!=null"> business_license_no,</if>
+            <if test="pojo.businessLife!=null"> business_life,</if>
+            <if test="pojo.registeredPaidCapital!=null"> registered_paid_capital,</if>
+            <if test="pojo.legalName!=null"> legal_name,</if>
+            <if test="pojo.businessEconomyType!=null"> business_economy_type,</if>
+            <if test="pojo.largestShareholderProportion!=null"> largest_shareholder_proportion,</if>
+            <if test="pojo.businessLicenseAddress!=null"> business_license_address,</if>
+            <if test="pojo.majorEquityChanges!=null"> major_equity_changes,</if>
+            <if test="pojo.changesOrReplacement!=null"> changes_or_replacement,</if>
+            <if test="pojo.crossIndustryInvestment!=null"> cross_industry_investment,</if>
+            <if test="pojo.interprovincialInvestmentTimes!=null"> interprovincial_investment_times,</if>
+            <if test="pojo.largeAmountInvestment!=null"> large_amount_investment,</if>
+            <if test="pojo.complaintsNumber!=null"> complaints_number,</if>
+            <if test="pojo.plaintiffCaseAmount!=null"> plaintiff_case_amount,</if>
+            <if test="pojo.defendantCaseAmount!=null"> defendant_case_amount,</if>
+            <if test="pojo.defendantCasePercentAmount!=null"> defendant_case_percent_amount,</if>
+            <if test="pojo.financialCaseAmount!=null"> financial_case_amount,</if>
+            <if test="pojo.administrativePenaltyRecords!=null"> administrative_penalty_records,</if>
+            <if test="pojo.administrativePunishmentAgency!=null"> administrative_punishment_agency,</if>
+            <if test="pojo.relatedCompaniesNumber!=null"> related_companies_number,</if>
+            <if test="pojo.relatedCompanies!=null"> related_companies,</if>
+            <if test="pojo.relatedCaseCompanies!=null"> related_case_companies,</if>
+            <if test="pojo.industryCategory!=null"> industry_category,</if>
+            <if test="pojo.lowestTaxRate!=null"> lowest_tax_rate,</if>
+            <if test="pojo.regionalCreditEnvironment!=null"> regional_credit_environment,</if>
+            <if test="pojo.localEstateBoom!=null"> local_estate_boom,</if>
+            <if test="pojo.governmentFinancialStrength!=null"> government_financial_strength,</if>
+            <if test="pojo.province!=null"> province,</if>
+            <if test="pojo.city!=null"> city,</if>
+            <if test="pojo.area!=null"> area,</if>
+            <if test="pojo.totalEtpScore!=null"> total_etp_score,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.etpName!=null">#{pojo.etpName},</if>
+            <if test="pojo.customerType!=null">#{pojo.customerType},</if>
+            <if test="pojo.totalLoans!=null">#{pojo.totalLoans},</if>
+            <if test="pojo.businessLicenseNo!=null">#{pojo.businessLicenseNo},</if>
+            <if test="pojo.businessLife!=null">#{pojo.businessLife},</if>
+            <if test="pojo.registeredPaidCapital!=null">#{pojo.registeredPaidCapital},</if>
+            <if test="pojo.legalName!=null">#{pojo.legalName},</if>
+            <if test="pojo.businessEconomyType!=null">#{pojo.businessEconomyType},</if>
+            <if test="pojo.largestShareholderProportion!=null">#{pojo.largestShareholderProportion},</if>
+            <if test="pojo.businessLicenseAddress!=null">#{pojo.businessLicenseAddress},</if>
+            <if test="pojo.majorEquityChanges!=null">#{pojo.majorEquityChanges},</if>
+            <if test="pojo.changesOrReplacement!=null">#{pojo.changesOrReplacement},</if>
+            <if test="pojo.crossIndustryInvestment!=null">#{pojo.crossIndustryInvestment},</if>
+            <if test="pojo.interprovincialInvestmentTimes!=null">#{pojo.interprovincialInvestmentTimes},</if>
+            <if test="pojo.largeAmountInvestment!=null">#{pojo.largeAmountInvestment},</if>
+            <if test="pojo.complaintsNumber!=null">#{pojo.complaintsNumber},</if>
+            <if test="pojo.plaintiffCaseAmount!=null">#{pojo.plaintiffCaseAmount},</if>
+            <if test="pojo.defendantCaseAmount!=null">#{pojo.defendantCaseAmount},</if>
+            <if test="pojo.defendantCasePercentAmount!=null">#{pojo.defendantCasePercentAmount},</if>
+            <if test="pojo.financialCaseAmount!=null">#{pojo.financialCaseAmount},</if>
+            <if test="pojo.administrativePenaltyRecords!=null">#{pojo.administrativePenaltyRecords},</if>
+            <if test="pojo.administrativePunishmentAgency!=null">#{pojo.administrativePunishmentAgency},</if>
+            <if test="pojo.relatedCompaniesNumber!=null">#{pojo.relatedCompaniesNumber},</if>
+            <if test="pojo.relatedCompanies!=null">#{pojo.relatedCompanies},</if>
+            <if test="pojo.relatedCaseCompanies!=null">#{pojo.relatedCaseCompanies},</if>
+            <if test="pojo.industryCategory!=null">#{pojo.industryCategory},</if>
+            <if test="pojo.lowestTaxRate!=null">#{pojo.lowestTaxRate},</if>
+            <if test="pojo.regionalCreditEnvironment!=null">#{pojo.regionalCreditEnvironment},</if>
+            <if test="pojo.localEstateBoom!=null">#{pojo.localEstateBoom},</if>
+            <if test="pojo.governmentFinancialStrength!=null">#{pojo.governmentFinancialStrength},</if>
+            <if test="pojo.province!=null">#{pojo.province},</if>
+            <if test="pojo.city!=null">#{pojo.city},</if>
+            <if test="pojo.area!=null">#{pojo.area},</if>
+            <if test="pojo.totalEtpScore!=null">#{pojo.totalEtpScore},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO white_list_etp (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.etpName},
+            #{pojo.customerType},
+            #{pojo.totalLoans},
+            #{pojo.businessLicenseNo},
+            #{pojo.businessLife},
+            #{pojo.registeredPaidCapital},
+            #{pojo.legalName},
+            #{pojo.businessEconomyType},
+            #{pojo.largestShareholderProportion},
+            #{pojo.businessLicenseAddress},
+            #{pojo.majorEquityChanges},
+            #{pojo.changesOrReplacement},
+            #{pojo.crossIndustryInvestment},
+            #{pojo.interprovincialInvestmentTimes},
+            #{pojo.largeAmountInvestment},
+            #{pojo.complaintsNumber},
+            #{pojo.plaintiffCaseAmount},
+            #{pojo.defendantCaseAmount},
+            #{pojo.defendantCasePercentAmount},
+            #{pojo.financialCaseAmount},
+            #{pojo.administrativePenaltyRecords},
+            #{pojo.administrativePunishmentAgency},
+            #{pojo.relatedCompaniesNumber},
+            #{pojo.relatedCompanies},
+            #{pojo.relatedCaseCompanies},
+            #{pojo.industryCategory},
+            #{pojo.lowestTaxRate},
+            #{pojo.regionalCreditEnvironment},
+            #{pojo.localEstateBoom},
+            #{pojo.governmentFinancialStrength},
+            #{pojo.province},
+            #{pojo.city},
+            #{pojo.area},
+            #{pojo.totalEtpScore}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE white_list_etp
+        <set>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.customerType != null"> customer_type = #{pojo.customerType}, </if>
+            <if test="pojo.totalLoans != null"> total_loans = #{pojo.totalLoans}, </if>
+            <if test="pojo.businessLicenseNo != null"> business_license_no = #{pojo.businessLicenseNo}, </if>
+            <if test="pojo.businessLife != null"> business_life = #{pojo.businessLife}, </if>
+            <if test="pojo.registeredPaidCapital != null"> registered_paid_capital = #{pojo.registeredPaidCapital}, </if>
+            <if test="pojo.legalName != null"> legal_name = #{pojo.legalName}, </if>
+            <if test="pojo.businessEconomyType != null"> business_economy_type = #{pojo.businessEconomyType}, </if>
+            <if test="pojo.largestShareholderProportion != null"> largest_shareholder_proportion = #{pojo.largestShareholderProportion}, </if>
+            <if test="pojo.businessLicenseAddress != null"> business_license_address = #{pojo.businessLicenseAddress}, </if>
+            <if test="pojo.majorEquityChanges != null"> major_equity_changes = #{pojo.majorEquityChanges}, </if>
+            <if test="pojo.changesOrReplacement != null"> changes_or_replacement = #{pojo.changesOrReplacement}, </if>
+            <if test="pojo.crossIndustryInvestment != null"> cross_industry_investment = #{pojo.crossIndustryInvestment}, </if>
+            <if test="pojo.interprovincialInvestmentTimes != null"> interprovincial_investment_times = #{pojo.interprovincialInvestmentTimes}, </if>
+            <if test="pojo.largeAmountInvestment != null"> large_amount_investment = #{pojo.largeAmountInvestment}, </if>
+            <if test="pojo.complaintsNumber != null"> complaints_number = #{pojo.complaintsNumber}, </if>
+            <if test="pojo.plaintiffCaseAmount != null"> plaintiff_case_amount = #{pojo.plaintiffCaseAmount}, </if>
+            <if test="pojo.defendantCaseAmount != null"> defendant_case_amount = #{pojo.defendantCaseAmount}, </if>
+            <if test="pojo.defendantCasePercentAmount != null"> defendant_case_percent_amount = #{pojo.defendantCasePercentAmount}, </if>
+            <if test="pojo.financialCaseAmount != null"> financial_case_amount = #{pojo.financialCaseAmount}, </if>
+            <if test="pojo.administrativePenaltyRecords != null"> administrative_penalty_records = #{pojo.administrativePenaltyRecords}, </if>
+            <if test="pojo.administrativePunishmentAgency != null"> administrative_punishment_agency = #{pojo.administrativePunishmentAgency}, </if>
+            <if test="pojo.relatedCompaniesNumber != null"> related_companies_number = #{pojo.relatedCompaniesNumber}, </if>
+            <if test="pojo.relatedCompanies != null"> related_companies = #{pojo.relatedCompanies}, </if>
+            <if test="pojo.relatedCaseCompanies != null"> related_case_companies = #{pojo.relatedCaseCompanies}, </if>
+            <if test="pojo.industryCategory != null"> industry_category = #{pojo.industryCategory}, </if>
+            <if test="pojo.lowestTaxRate != null"> lowest_tax_rate = #{pojo.lowestTaxRate}, </if>
+            <if test="pojo.regionalCreditEnvironment != null"> regional_credit_environment = #{pojo.regionalCreditEnvironment}, </if>
+            <if test="pojo.localEstateBoom != null"> local_estate_boom = #{pojo.localEstateBoom}, </if>
+            <if test="pojo.governmentFinancialStrength != null"> government_financial_strength = #{pojo.governmentFinancialStrength}, </if>
+            <if test="pojo.province != null"> province = #{pojo.province}, </if>
+            <if test="pojo.city != null"> city = #{pojo.city}, </if>
+            <if test="pojo.area != null"> area = #{pojo.area}, </if>
+            <if test="pojo.totalEtpScore != null"> total_etp_score = #{pojo.totalEtpScore} </if>
+        </set>
+        WHERE etp_name = #{pojo.etpName}
+    </update>
+
+    <select id="findByEtpName" resultMap="AllColumnMap" parameterType="java.lang.String" >
+        SELECT
+        <include refid="all_column" />
+        from white_list_etp
+        where etp_name = #{etpName,jdbcType=VARCHAR}
+    </select>
+</mapper>
+

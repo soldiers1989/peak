@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysRegionMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.model.SysRegion">
+
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="short_name" property="shortName"/>
+        <result column="parent" property="parent"/>
+        <result column="level" property="level"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="post_code" property="postCode"/>
+        <result column="pinyin" property="pinyin"/>
+        <result column="jian_pin" property="jianPin"/>
+        <result column="first_char" property="firstChar"/>
+        <result column="lng" property="lng"/>
+        <result column="lat" property="lat"/>
+        <result column="remark" property="remark"/>
+
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `code`,
+        `short_name`,
+        `parent`,
+        `level`,
+        `area_code`,
+        `post_code`,
+        `pinyin`,
+        `jian_pin`,
+        `first_char`,
+        `lng`,
+        `lat`,
+        `remark`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_region (
+        `id`,
+        `name`,
+        `code`,
+        `short_name`,
+        `parent`,
+        `level`,
+        `area_code`,
+        `post_code`,
+        `pinyin`,
+        `jian_pin`,
+        `first_char`,
+        `lng`,
+        `lat`,
+        `remark`
+        ) VALUES (
+        #{pojo.id},
+        #{pojo.name},
+        #{pojo.code},
+        #{pojo.shortName},
+        #{pojo.parent},
+        #{pojo.level},
+        #{pojo.areaCode},
+        #{pojo.postCode},
+        #{pojo.pinyin},
+        #{pojo.jianPin},
+        #{pojo.firstChar},
+        #{pojo.lng},
+        #{pojo.lat},
+        #{pojo.remark}
+    </insert>
+
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_region
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.code!=null"> `code`,</if>
+            <if test="pojo.shortName!=null"> `short_name`,</if>
+            <if test="pojo.parent!=null"> `parent`,</if>
+            <if test="pojo.level!=null"> `level`,</if>
+            <if test="pojo.areaCode!=null"> `area_code`,</if>
+            <if test="pojo.postCode!=null"> `post_code`,</if>
+            <if test="pojo.pinyin!=null"> `pinyin`,</if>
+            <if test="pojo.jianPin!=null"> `jian_pin`,</if>
+            <if test="pojo.firstChar!=null"> `first_char`,</if>
+            <if test="pojo.lng!=null"> `lng`,</if>
+            <if test="pojo.lat!=null"> `lat`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.code!=null">#{pojo.code},</if>
+            <if test="pojo.shortName!=null">#{pojo.shortName},</if>
+            <if test="pojo.parent!=null">#{pojo.parent},</if>
+            <if test="pojo.level!=null">#{pojo.level},</if>
+            <if test="pojo.areaCode!=null">#{pojo.areaCode},</if>
+            <if test="pojo.postCode!=null">#{pojo.postCode},</if>
+            <if test="pojo.pinyin!=null">#{pojo.pinyin},</if>
+            <if test="pojo.jianPin!=null">#{pojo.jianPin},</if>
+            <if test="pojo.firstChar!=null">#{pojo.firstChar},</if>
+            <if test="pojo.lng!=null">#{pojo.lng},</if>
+            <if test="pojo.lat!=null">#{pojo.lat},</if>
+            <if test="pojo.remark!=null">#{pojo.remark}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_region (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.code},
+            #{pojo.shortName},
+            #{pojo.parent},
+            #{pojo.level},
+            #{pojo.areaCode},
+            #{pojo.postCode},
+            #{pojo.pinyin},
+            #{pojo.jianPin},
+            #{pojo.firstChar},
+            #{pojo.lng},
+            #{pojo.lat},
+            #{pojo.remark}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_region
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.code != null"> `code` = #{pojo.code}, </if>
+            <if test="pojo.shortName != null"> `short_name` = #{pojo.shortName}, </if>
+            <if test="pojo.parent != null"> `parent` = #{pojo.parent}, </if>
+            <if test="pojo.level != null"> `level` = #{pojo.level}, </if>
+            <if test="pojo.areaCode != null"> `area_code` = #{pojo.areaCode} ,</if>
+            <if test="pojo.postCode != null"> `post_code` = #{pojo.postCode}, </if>
+            <if test="pojo.pinyin != null"> `pinyin` = #{pojo.name}, </if>
+            <if test="pojo.jianPin != null"> `jian_pin` = #{pojo.jianPin}, </if>
+            <if test="pojo.firstChar != null"> `first_char` = #{pojo.firstChar}, </if>
+            <if test="pojo.lng != null"> `lng` = #{pojo.lng}, </if>
+            <if test="pojo.lat != null"> `lat` = #{pojo.lat}, </if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark} </if>
+
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="selectByQueryParams" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_region
+
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="dictNameLike != null">
+                and `name` like  #{dictNameLike}
+            </if>
+
+            </trim>
+        </where>
+    </select>
+
+
+    <select id="select" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_region
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="name != null and name != ''">
+                    and `name` =  #{name}
+                </if>
+                <if test="code != null and code != '' ">
+                    and `code` =  #{code}
+                </if>
+            </trim>
+        </where>
+    </select>
+
+
+
+    <select id="findById" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_region
+        where `id`=#{id}
+    </select>
+
+</mapper>

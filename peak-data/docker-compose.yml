@@ -1,0 +1,20 @@
+version: '3'
+services:
+  etp:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-data:${VERSION}
+    environment:
+      - EUREKA_MEMBERS=http://eureka1:8761/eureka/,http://eureka2:8761/eureka/,http://eureka3:8761/eureka/
+      - SPRING_PREFER_NETWORK=10.0.0
+      - ENV=prod
+      - JDBC_URL=192.168.0.4
+      - JDBC_PORT=5432
+      - JDBC_USERNAME=bigdata
+      - JDBC_PASSWORD=${JDBC_PASSWORD}
+    networks:
+      springcloud-overlay:
+        aliases:
+          - peakDataEtp
+networks:
+  springcloud-overlay:
+    external:
+      name: springcloud-overlay

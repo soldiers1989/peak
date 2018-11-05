@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysUserMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysUser">
+        <result column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="mobile" property="mobile"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="department_name" property="departmentName"/>
+        <result column="job_name" property="jobName"/>
+        <result column="occupation_class" property="occupationClass"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `account`,
+        `password`,
+        `name`,
+        `mobile`,
+        `department_id`,
+        `department_name`,
+        `job_name`,
+        `occupation_class`,
+        `status`,
+        `create_date`,
+        `update_date`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_user (
+            `id`,
+            `account`,
+            `password`,
+            `name`,
+            `mobile`,
+            `department_id`,
+            `department_name`,
+            `job_name`,
+            `occupation_class`,
+            `status`,
+            `create_date`,
+            `update_date`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.account},
+            #{pojo.password},
+            #{pojo.name},
+            #{pojo.mobile},
+            #{pojo.departmentId},
+            #{pojo.departmentName},
+            #{pojo.jobName},
+            #{pojo.occupationClass},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.account!=null"> `account`,</if>
+            <if test="pojo.password!=null"> `password`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.mobile!=null"> `mobile`,</if>
+            <if test="pojo.departmentId!=null"> `department_id`,</if>
+            <if test="pojo.departmentName!=null"> `department_name`,</if>
+            <if test="pojo.jobName!=null"> `job_name`,</if>
+            <if test="pojo.occupationClass!=null"> `occupation_class`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.account!=null">#{pojo.account},</if>
+            <if test="pojo.password!=null">#{pojo.password},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.mobile!=null">#{pojo.mobile},</if>
+            <if test="pojo.departmentId!=null">#{pojo.departmentId},</if>
+            <if test="pojo.departmentName!=null">#{pojo.departmentName},</if>
+            <if test="pojo.jobName!=null">#{pojo.jobName},</if>
+            <if test="pojo.occupationClass!=null">#{pojo.occupationClass},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_user (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.account},
+            #{pojo.password},
+            #{pojo.name},
+            #{pojo.mobile},
+            #{pojo.departmentId},
+            #{pojo.departmentName},
+            #{pojo.jobName},
+            #{pojo.occupationClass},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_user
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.account != null"> `account` = #{pojo.account}, </if>
+            <if test="pojo.password != null"> `password` = #{pojo.password}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.mobile != null"> `mobile` = #{pojo.mobile}, </if>
+            <if test="pojo.departmentId != null"> `department_id` = #{pojo.departmentId}, </if>
+            <if test="pojo.departmentName != null"> `department_name` = #{pojo.departmentName}, </if>
+            <if test="pojo.jobName != null"> `job_name` = #{pojo.jobName}, </if>
+            <if test="pojo.occupationClass != null"> `occupation_class` = #{pojo.occupationClass}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+
+    <select id="findList" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_user
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.account != null and pojo.account != ''">
+                    AND account like CONCAT('%', #{pojo.account}, '%')
+                </if>
+
+                <if test="pojo.name != null and pojo.name != ''">
+                    AND name like CONCAT('%', #{pojo.name}, '%')
+                </if>
+
+                <if test="pojo.mobile != null and pojo.mobile != ''">
+                    AND mobile = binary #{pojo.mobile}
+                </if>
+
+                <if test="pojo.status != null">
+                    AND status = #{pojo.status}
+                </if>
+
+                <if test="pojo.departmentId != null and pojo.departmentId != ''">
+                    AND department_id = #{pojo.departmentId}
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="findOneById" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_user
+        where id = #{id}
+    </select>
+
+    <select id="findOneByAccount" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_user
+        where account = #{account}
+    </select>
+
+
+    <select id="findRoleListById" resultType="java.lang.String">
+        SELECT
+            NAME
+        FROM
+            sys_role
+        WHERE
+            id IN (
+                SELECT
+                    role_id AS id
+                FROM
+                    sys_user_role
+                WHERE
+                    user_id = #{userId}
+            )
+    </select>
+
+<!--auto generated by codehelper on 2018-09-05 18:08:36-->
+    <select id="findByAccountAndPassword" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_user
+        where `account`=#{account} and `password`=#{password}
+    </select>
+
+
+    <select id="findUserByRoleAndAreaName" parameterType="Map" resultMap="AllColumnMap">
+        SELECT a.* from sys_user as a
+		LEFT JOIN sys_user_role as b on a.id = b.user_id
+		LEFT JOIN sys_user_area as c on a.id = c.user_id
+        WHERE b.role_id in (SELECT id FROM sys_role as d where d.name=#{roleName})
+		AND c.area_id in (SELECT id FROM sys_area as e where e.name = #{areaName})
+        GROUP BY a.id
+    </select>
+
+</mapper>
+

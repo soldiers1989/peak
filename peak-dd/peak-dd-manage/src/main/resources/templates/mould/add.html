@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <div th:replace="header"></div>
+    <title>添加模板</title>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+    <div class="menu_box">
+        <div class="con">
+            <ul class="accordion" id="accordion">
+                <shiro:hasPermission name="index">
+                    <li>
+                        <a class="link" href="/index">
+                            <img class="icon" th:src="@{/static/images/menu_icon_03.png}" alt=""/>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="template">
+                    <li  class="open">
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_06.png}" alt=""/>模板管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+
+                        <ul class="submenu">
+                            <shiro:hasPermission name="fieldIndex">
+                                <li>
+                                    <a class="active" href="/field/index">字段管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="templateIndex">
+                                <li>
+                                    <a href="/template/index">模板管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="ddManage">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_09.png}" alt=""/>尽调管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+                        <shiro:hasPermission name="ddTask">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/task/index">尽调任务</a>
+                                </li>
+                            </ul>
+                        </shiro:hasPermission>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </div>
+    </div>
+    <div class='main_box' style="overflow: hidden;">
+        <p class="crumb">我的位置：
+            <span th:if="${template == null}">模板管理
+          <i>—</i>添加模板</span>
+            <span th:if="${template != null}">模板管理
+          <i>—</i>编辑模板</span>
+        </p>
+        <div class="white_bg position">
+            <div class="search_box">
+                <div class="input_row clearfix row">
+                    <div class="g_input">
+                        <div class="label">
+                            <span>模板名称：</span>
+                            <input id="templateName" th:value="${template == null?'':template.name}" type="text"
+                                   placeholder="请输入模板名称">
+                            <input id="templateId" th:value="${template == null?'':template.id}" type="hidden">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="add_btn">
+                <button class="btn pri_btn" onclick="addParagraph()">添加段落</button>
+            </div>
+        </div>
+        <div id="group" style="height: calc(100% - 284px);overflow-y: scroll;">
+            <div th:each="key,iterStat : ${group}" class="white_bg position parent">
+                <div class="list_box">
+                    <div class="search_box">
+                        <div class="input_row clearfix row">
+                            <div class="g_input">
+                                <div class="label">
+                                    <span>段落名称：</span>
+                                    <input type="text" th:name="${key.group_key}" th:value="${key.group_name}"
+                                           placeholder="请输入段落名称"
+                                           class="groupName">
+                                </div>
+                            </div>
+                            <div class="search_btn">
+                                <button type="button" class="btn pri_btn" onclick="addControl(this)">添加字段</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="operate_btns">
+                        <button class="btn pri_btn fr" style="background: #e64340;" onclick="deleteGroup(this)">删除
+                        </button>
+                        <button class="btn pri_btn fr" onclick="moveDown(this)">下移</button>
+                        <button class="btn pri_btn fr" onclick="moveUp(this)">上移</button>
+                    </div>
+                    <div class="rowsNull" style="display: none;">暂无数据！</div>
+                    <div class="tableBase theadBg">
+                        <div class="thead">
+                            <div class="tr">
+                                <div class="th" style="width: 80px;">排序</div>
+                                <div class="th">字段名称</div>
+                                <div class="th">数据源</div>
+                                <div class="th" style="width: 220px;">展示名称</div>
+                                <div class="th" style="width: 220px;">提示信息</div>
+                                <div class="th" style="width: 150px;">是否必填</div>
+                                <div class="th" style="width: 180px;">操作</div>
+                            </div>
+                        </div>
+                        <div class="tbody">
+                            <div th:each="control,iter : ${controlList}" th:if="${control.groupKey == key.group_key}"
+                                 class="tr">
+                                <input type="hidden" th:value="${control.controlId}" class="controlId">
+                                <div class="td" th:text="${control.controlSeq}"></div>
+                                <div class="td" th:text="${control.label}"></div>
+                                <div class="td"
+                                     th:text='${control.dataSourceName == null ? "_" :control.dataSourceName }'></div>
+                                <div class="td">
+                                    <input class="ipttext showName" type="text" th:value="${control.controlShowName}"
+                                           readonly>
+                                </div>
+                                <div class="td">
+                                    <input class="ipttext placeholder" type="text"
+                                           th:value='${control.placeInfo == null ? "_" :control.placeInfo}'
+                                           readonly>
+                                </div>
+                                <div class="td">
+                                    <label th:if="${control.require == '1'}"><input type="checkbox" checked
+                                                                                    onclick="checkedData(this)">必填</label>
+                                    <label th:if="${control.require == '0'}"><input type="checkbox"
+                                                                                    onclick="checkedData(this)">必填</label>
+                                </div>
+                                <div class="td">
+                                    <input type="button" class="blue btn_edit" value="编辑">
+                                    <input type="hidden" class="blue btn_sure" value="保存">
+                                    <input type="button" class="red btn_del" onclick="deleteField(this)" value="删除">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inline_btns clearfix">
+            <button class="btn pri_btn" onclick="saveTemplate()">保存</button>
+            <button class="btn pri_btn" onclick="javascript:history.back(-1);">返回</button>
+        </div>
+    </div>
+</div>
+
+<!-- 添加字段 弹出层 -->
+<div class="mask2" id="mask2">
+    <div class="add_field maskWidth980">
+        <div class="g_tit">
+            <h5>添加字段</h5>
+        </div>
+        <div class="close" onclick="cancel()"></div>
+        <div id="toolbar" style="padding: 20px;">
+            <div class="form-inline" role="form">
+                <div class="form-group">
+                    <input name="search" id="searchLabel" class="form-control" type="text" placeholder="请输入关键字搜索">
+                </div>
+                <button id="ok" type="submit" onclick="search()" class="btn pri_btn" style="margin-left: 20px;">搜索
+                </button>
+            </div>
+        </div>
+        <div style="min-height: 480px; padding: 0 20px;">
+            <div class="fl" style="width: 450px;">
+                <table id="tableField" clickToSelect="true" data-toggle="table">
+                    <thead>
+                    <tr>
+                        <th data-field="number">序号</th>
+                        <th data-field="label">字段名称</th>
+                        <th data-field="controlKey">key值</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="fr" style="width: 450px; margin-top: -30px;">
+                <div class="selectFieldTitle" style="font-size: 14px; line-height: 30px;">已选</div>
+                <table id="tableSelectField" data-toggle="table" data-height="404"></table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn pri_btn" data-dismiss="modal" onclick="cancel()">取消</button>
+            <button type="button" class="btn pri_btn" data-dismiss="modal" onclick="addField()">确认</button>
+        </div>
+    </div>
+</div>
+<div class="mask2" id="confirmMask">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span>确认删除吗！！！</span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="deleteCancel()" class="btn pri_btn">取消</button>
+            <button onclick="deleteConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+
+<div class="mask2" id="alert">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span id="confirmData"></span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="alertConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    var template = [[${template}]];
+    var controlList = [[${controlList}]];
+    var group = [[${group}]];
+    var data = {};
+    data.templateData = {};
+    var dueData;
+</script>
+<script>
+    /**
+     *初始化数据
+     */
+    $(function () {
+        if (template) {
+            for (var i = 0; i < group.length; i++) {
+                var groupData = new Array();
+                for (var j = 0; j < controlList.length; j++) {
+                    if (group[i].group_key == controlList[j].groupKey) {
+                        groupData.push(controlList[j])
+                    }
+                }
+                data.templateData[group[i].group_key] = groupData;
+            }
+        }
+
+
+        $(document).on('click', '.btn_edit', function () {
+            $(this).parent().parent().addClass('trEdit');
+            $(this).parent().parent().find('.ipttext').removeAttr('readonly');
+            $(this).attr("type", "hidden");
+            $(this).next().attr("type", "button");
+        });
+
+        $(document).on('click', '.btn_sure', function () {
+
+            var showName = $(this).parents('.tr').find('.showName').val();
+            var placeholder = $(this).parents('.tr').find('.placeholder').val();
+            if (showName.length == 0) {
+                $("#confirmData").html("展示名称不能为空!!!");
+                $("#alert").toggle();
+                return;
+            }
+            if (showName.length >= 50) {
+                $("#confirmData").html("展示名称超过50个字符");
+                $("#alert").toggle();
+                return;
+            }
+            if (placeholder.length >= 50) {
+                $("#confirmData").html("展示名称超过50个字符");
+                $("#alert").toggle();
+                return;
+            }
+            $(this).parent().parent().removeClass('trEdit');
+            $(this).parent().parent().find('.ipttext').attr('readonly', 'false');
+            $(this).attr("type", "hidden");
+            $(this).prev().attr("type", "button");
+            var controlId = $(this).parents('.tr').find('.controlId').val();
+            data.groupKey = $(this).parents('.parent').find(".groupName").attr('name');
+            var tempGroupData = data.templateData[data.groupKey];
+            for (var i = 0; i < tempGroupData.length; i++) {
+                if (controlId == tempGroupData[i].controlId) {
+                    tempGroupData[i].controlShowName = $(this).parents('.tr').find('.showName').val();
+                    tempGroupData[i].placeInfo = $(this).parents('.tr').find('.placeholder').val();
+                    tempGroupData[i].placeholder = $(this).parents('.tr').find('.placeholder').val();
+                    var checked = $(this).parents('.tr').find("input[type='checkbox']").is(':checked');
+                    if (checked) {
+                        tempGroupData[i].require = 1;
+                    } else {
+                        tempGroupData[i].require = 0;
+                    }
+                }
+            }
+            data.templateData[data.groupKey] = tempGroupData;
+        })
+    })
+
+    function alertConfirm() {
+        $("#alert").hide();
+    }
+
+    function checkedData(_this) {
+        var controlId = $(_this).parents('.tr').find('.controlId').val();
+        data.groupKey = $(_this).parents('.parent').find(".groupName").attr('name');
+        var tempGroupData = data.templateData[data.groupKey];
+        var checked = $(_this).is(':checked')
+        for (var i = 0; i < tempGroupData.length; i++) {
+            if (controlId == tempGroupData[i].controlId) {
+                if (checked) {
+                    tempGroupData[i].require = 1;
+                } else {
+                    tempGroupData[i].require = 0;
+                }
+            }
+        }
+        data.templateData[data.groupKey] = tempGroupData;
+    }
+
+    function deleteField(_this) {
+        var controlId = $(_this).parents('.tr').find('.controlId').val();
+        data.groupKey = $(_this).parents('.parent').find(".groupName").attr('name');
+        data.groupObject = $(_this).parents('.parent');
+        var tempGroupData = data.templateData[data.groupKey];
+        data.templateData[data.groupKey] = new Array();
+        for (var i = 0; i < tempGroupData.length; i++) {
+            if (controlId != tempGroupData[i].controlId) {
+                data.templateData[data.groupKey].push(tempGroupData[i]);
+            }
+        }
+        addField();
+    }
+    /**
+     * 添加段落
+     */
+    function addParagraph() {
+        var conKey = "static" + new Date().getTime();
+        data.templateData[conKey] = new Array();
+        var html = groupHtml(conKey, false, '', new Array());
+        $("#group").append(html);
+        var hg=0;
+        $("#group .white_bg").each(function (a) {
+            hg+=$(this).height();
+        })
+        $('#group').animate({ scrollTop: hg }, 1000);return false;
+    }
+
+
+    function groupHtml(key, flag, name, controlList) {
+        var groupHtml =
+            '<div class="white_bg position parent">' +
+            '            <div class="list_box">' +
+            '                <div class="search_box">' +
+            '                    <div class="input_row clearfix row">' +
+            '                        <div class="g_input">' +
+            '                            <div class="label">' +
+            '                                <span>段落名称：</span>' +
+            '                                <input type="text" name="' + key + '" value="' + name + '"  placeholder="请输入段落名称" class="groupName">' +
+            '                            </div>' +
+            '                        </div>' +
+            '                        <div class="search_btn">' +
+            '                            <button type="button" class="btn pri_btn" onclick="addControl(this)">添加字段</button>' +
+            '                        </div>' +
+            '                    </div>' +
+            '                </div>' +
+            '                <div class="operate_btns">' +
+            '                    <button class="btn pri_btn fr" style="background: #e64340;" onclick="deleteGroup(this)">删除</button>' +
+            '                    <button class="btn pri_btn fr" onclick="moveDown(this)">下移</button>' +
+            '                    <button class="btn pri_btn fr" onclick="moveUp(this)">上移</button>' +
+            '                </div>' +
+            '                <div class="rowsNull" style="display: none;">暂无数据！</div>' +
+            '                <div class="tableBase theadBg">' +
+            '                    <div class="thead">' +
+            '                        <div class="tr">' +
+            '                            <div class="th" style="width: 80px;">排序</div>' +
+            '                            <div class="th">字段名称</div>' +
+            '                            <div class="th">数据源</div>' +
+            '                            <div class="th" style="width: 220px;">展示名称</div>' +
+            '                            <div class="th" style="width: 220px;">提示信息</div>' +
+            '                            <div class="th" style="width: 150px;">是否必填</div>' +
+            '                            <div class="th" style="width: 180px;">操作</div>' +
+            '                        </div>' +
+            '                    </div>' +
+            '                    <div class="tbody">';
+
+        if (flag) {
+            for (var i = 0; i < controlList.length; i++) {
+                groupHtml += controlHtml(i, controlList[i]);
+            }
+        }
+        groupHtml += '</div></div></div></div>';
+        return groupHtml;
+    }
+
+    function controlHtml(i, control) {
+        var sourceName = control.dataSourceName;
+        if (!control.dataSourceName) {
+            sourceName = '_';
+        }
+        var require;
+        if (control.require) {
+
+            if (control.require == 1) {
+                require = '<label><input type="checkbox" checked onclick="checkedData(this)">必填</label>';
+            } else {
+                require = '<label><input type="checkbox" onclick="checkedData(this)">必填</label>';
+            }
+        } else {
+            if (control.require == 0) {
+                require = '<label><input type="checkbox" onclick="checkedData(this)">必填</label>';
+            } else {
+                control.require = 1;
+                require = '<label><input type="checkbox" checked onclick="checkedData(this)">必填</label>';
+            }
+
+        }
+        if (!control.controlShowName) {
+            control.controlShowName = control.label;
+        }
+
+        if (!control.placeInfo) {
+            if (!control.placeInfo) {
+                if (!control.placeholder) {
+                    control.placeInfo = "-";
+                } else {
+                    control.placeInfo = control.placeholder;
+                }
+            }
+        }
+        var html = '<div class="tr">';
+        html += '<div class="td">' + (i + 1) + '</div>';
+        html += '<input type="hidden" value=' + control.controlId + ' class="controlId">';
+        html += '<input type="hidden" class="controlId" value="' + control.id + '">';
+        html += '<div class="td">' + control.label + '</div>';
+        html += '<div class="td">' + sourceName + '</div>';
+        html += '<div class="td"><input class="ipttext showName" type="text" name="" value="' + control.controlShowName + '" readonly></div>';
+        html += '<div class="td"><input class="ipttext placeholder" type="text" name="" value="' + control.placeInfo + '" readonly></div>';
+        html += '<div class="td">' + require + '</div>';
+        html += '<div class="td"><input type="button" class="blue btn_edit" value="编辑"><input type="hidden" class="blue btn_sure" value="保存"><input type="button" class="red btn_del"  onclick="deleteField(this)" value="删除"></div></div>';
+        return html;
+    }
+
+    /**
+     * 添加控件
+     * @param _this
+     */
+    function addControl(_this) {
+        $("#tableField").bootstrapTable('destroy');
+        $('#tableField').bootstrapTable({
+            url: '/field/tempControl',
+            pagination: true, // 在表格底部显示分页组件，默认false
+            pageSize: 10, // 页面数据条数
+            pageNumber: 1, // 首页页码
+            paginationPreText: '上一页',   //指定分页条中上一页按钮的图标或文字
+            paginationNextText: '下一页',   //指定分页条中下一页按钮的图标或文字
+            paginationHAlign: '',
+            queryParams: function () {
+                console.log(this.pageNumber)
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    // limit: params.limit,   //页面大小
+                    rows: this.pageSize,
+                    page: this.pageNumber,
+                    label: $('#searchLabel').val()
+                };
+                return temp;
+            },
+            columns: [
+                {
+                    field: 'number',
+                    title: '序号',
+                    align: "center",
+                    width: 80,
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
+                }, {
+                    field: 'label',
+                    title: '字段名称', // 表格表头显示文字
+                    align: 'center', // 左右居中
+                    valign: 'middle' // 上下居中
+                }, {
+                    field: 'controlKey',
+                    title: 'key值', // 表格表头显示文字
+                    align: 'center', // 左右居中
+                    valign: 'middle' // 上下居中
+                }
+            ],
+            onLoadSuccess: function () {  //加载成功时执行
+                console.info("加载成功");
+            },
+            onLoadError: function () {  //加载失败时执行
+                console.info("加载数据失败");
+            }
+        });
+        data.groupObject = $(_this).parents(".parent");
+        data.groupKey = data.groupObject.find(".groupName").attr('name');
+        $('#mask2').toggle();
+        dueData = new Array();
+        for (var i = 0; i < data.templateData[data.groupKey].length; i++) {
+            dueData.push(data.templateData[data.groupKey][i]);
+        }
+        $('#tableSelectField').bootstrapTable('load', data.templateData[data.groupKey]);
+    }
+
+    /**
+     * 删除组
+     * @param _this
+     */
+    function deleteGroup(_this) {
+        var conKey = $(_this).parents(".parent").find(".groupName").attr('name');
+        data.groupObject = $(_this).parents(".parent");
+        data.groupKey = conKey;
+        $("#confirmMask").toggle();
+    }
+
+
+    /**
+     * 添加字段
+     */
+    function addField() {
+        $("#searchLabel").val("");
+        $('#tableSelectField').bootstrapTable('load', []);
+        var select = data.templateData[data.groupKey];
+
+        var html = '';
+        for (var i = 0; i < select.length; i++) {
+            html += controlHtml(i, select[i]);
+        }
+        data.groupObject.find('.tbody').html(html);
+        data.templateData[data.groupKey] = select;
+        $('#mask2').hide();
+    }
+
+    /**
+     * 上移
+     */
+    function moveUp(_this) {
+        if ($(".parent").length == 1) {
+            $("#confirmData").html("无法上移！！！");
+            $("#alert").toggle();
+            return;
+        }
+        var groupKeyList = new Array();
+        var groupKey = $(_this).parents('.parent').find(".groupName").attr('name');
+        var flag = true;
+        var temp = 0;
+        var groupMap = {};
+        $(".parent").each(function (i) {
+            var key = $(this).find(".groupName").attr('name');
+            var value = $(this).find(".groupName").val();
+            if (key == groupKey) {
+                if (i == 0) {
+                    flag = false;
+                    return;
+                }
+                temp = i;
+            }
+            groupMap[key] = value;
+            groupKeyList.push(key);
+        });
+        if (flag) {
+            $("#group").html('');
+            groupKeyList[temp - 1] = groupKeyList.splice(temp, 1, groupKeyList[temp - 1])[0];
+            for (var i = 0; i < groupKeyList.length; i++) {
+                var htmls = groupHtml(groupKeyList[i], true, groupMap[groupKeyList[i]], data.templateData[groupKeyList[i]]);
+                $("#group").append(htmls)
+            }
+        } else {
+            $("#confirmData").html("第一个段落无法上移！！！");
+            $("#alert").toggle();
+        }
+    }
+
+    /**
+     *下移
+     */
+    function moveDown(_this) {
+        if ($(".parent").length == 1) {
+            $("#confirmData").html("无法下移！！！");
+            $("#alert").toggle();
+            return;
+        }
+        var groupKeyList = new Array();
+        var groupKey = $(_this).parents('.parent').find(".groupName").attr('name');
+        var flag = true;
+        var temp = 0;
+        var groupMap = {};
+        $(".parent").each(function (i) {
+            var key = $(this).find(".groupName").attr('name');
+            var value = $(this).find(".groupName").val();
+            if (key == groupKey) {
+                if (i == $(".parent").length - 1) {
+                    flag = false;
+                    return;
+                }
+                temp = i;
+            }
+            groupMap[key] = value;
+            groupKeyList.push(key);
+        });
+        if (flag) {
+            $("#group").html('');
+            groupKeyList[temp + 1] = groupKeyList.splice(temp, 1, groupKeyList[temp + 1])[0];
+            for (var i = 0; i < groupKeyList.length; i++) {
+                var htmls = groupHtml(groupKeyList[i], true, groupMap[groupKeyList[i]], data.templateData[groupKeyList[i]]);
+                $("#group").append(htmls)
+            }
+        } else {
+            $("#confirmData").html("最后一个段落无法下移！！！");
+            $("#alert").toggle();
+        }
+    }
+
+    /**
+     * 添加字段取消
+     */
+    function cancel() {
+        data.templateData[data.groupKey] = dueData
+        $('#searchLabel').val('');
+        $('#mask2').hide();
+    }
+
+    /**
+     *添加字段弹出层  选择某个字段
+     */
+    $('#tableField').on('click-row.bs.table', function (e, row, ele, field) {
+        var flag = true;
+        var selectRow = data.templateData[data.groupKey];
+        for (var i = 0; i < selectRow.length; i++) {
+            if (selectRow[i].controlId == row.controlId) {
+                flag = false;
+            }
+        }
+        if (flag) {
+            selectRow[selectRow.length] = row;
+        }
+        $('#tableSelectField').bootstrapTable('load', selectRow);
+        scrollToEnd();
+        function scrollToEnd() {
+            var h = $('#tableSelectField').height();
+            $('#tableSelectField').parent().scrollTop(h);
+        }
+    });
+
+
+    window.operateEvents = {
+        "click #tableEditor": function (e, value, row, index) {
+            $('#mask2').toggle();
+            $('#mask2 .close').click(function () {
+                $('#mask2').hide();
+            })
+        },
+        /**
+         * 删除字段
+         * @param e
+         * @param value
+         * @param row
+         * @param index
+         */
+//        "click #tableDelete": function (e, value, row, index) {
+//            var tempRow = data.templateData[data.groupKey];
+//            var tempData = new Array();
+//            for (var i = 0; i < tempRow.length; i++) {
+//                if (tempRow[i].controlId != row.controlId) {
+//                    tempData.push(tempRow[i]);
+//                }
+//            }
+//            data.templateData[data.groupKey] = tempData;
+//            $('#tableSelectField').bootstrapTable('load', tempData);
+//        },
+        "click .valid": function (e, value, row, index) {
+        },
+    }
+    $('#tableSelectField').on('click','#tableDelete',function(e){
+        var $index=$(this).parent().parent().index();
+        var tempRow = data.templateData[data.groupKey];
+        tempRow.splice($index,1);
+        $('#tableSelectField').bootstrapTable('load', tempRow);
+    });
+    /**
+     * 保存模板
+     */
+    function saveTemplate() {
+        if ($.trim($("#templateName").val()) == '') {
+            $("#confirmData").html("请输入模板名称！！！");
+            $("#alert").toggle();
+            return;
+        }
+        if ($.trim($("#templateName").val()).length > 50) {
+            $("#confirmData").html("输入的模板名称超过50个字符！！！");
+            $("#alert").toggle();
+            return;
+        }
+        var flag = false;
+        var message = "";
+        var templateControl = new Array();
+        $(".parent").find('.groupName').each(function (j) {
+            var key = $(this).attr('name');
+            if ($(this).val().length > 50) {
+                message = "输入第" + (j + 1) + "个段落名称超过50个字符！！！";
+                flag = true;
+                return;
+            }
+            if ($.trim($(this).val()) == '') {
+                message = "请输入第" + (j + 1) + "个段落名称";
+                flag = true;
+                return;
+            }
+            var group = data.templateData[key];
+
+            if (group.length == 0) {
+                message = "第" + (j + 1) + "个段落至少有一个字段";
+                flag = true;
+                return;
+            } else {
+
+                for (var i = 0; i < group.length; i++) {
+                    /*if (group[i].controlShowName.length >= 50) {
+                     message = "第" + (j + 1) + "个段落第" + (i + 1) + "个字段展示名称超过50个字！！！";
+                     flag = true;
+                     return;
+                     }
+                     if (group[i].placeInfo.length >= 50) {
+                     message = "第" + (j + 1) + "个段落第" + (i + 1) + "个字段提示信息超过50个字！！！";
+                     flag = true;
+                     return;
+                     }*/
+                    templateControl.push({
+                        "id": group[i].id,
+                        "templateId": group[i].templateId,
+                        "groupSeq": j + 1,
+                        "groupName": $(this).val(),
+                        "groupKey": key,
+                        "placeInfo": group[i].placeInfo,
+                        "controlId": group[i].controlId,
+                        "controlKey": group[i].controlKey,
+                        "controlSeq": i + 1,
+                        "controlShowName": group[i].controlShowName,
+                        "require": group[i].require
+                    });
+                }
+            }
+        });
+
+        if (flag) {
+            $("#confirmData").html(message);
+            $("#alert").toggle();
+            return;
+        } else {
+            if (templateControl.length == 0 || $(".parent").length < 1) {
+                $("#confirmData").html("至少有一个段落，段落中至少一个字段!!!");
+                $("#alert").toggle();
+            } else {
+                var templateControlVO = {
+                    "id": $("#templateId").val(),
+                    "name": $("#templateName").val(),
+                    "templateControlList": templateControl
+                };
+                $.ajax({
+                    url: '/template/save',
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(templateControlVO),
+                    success: function (data) {
+                        if (data.success) {
+                            window.location.href = "/template/index"
+                        } else {
+                            $("#confirmData").html(data.msg);
+                            $("#alert").toggle();
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    /**
+     * 搜索字段
+     */
+    function search() {
+        console.log(111)
+        $('#tableField').bootstrapTable('refresh',{
+            pageNumber:1
+        });
+    }
+
+    /**
+     *  添加字段的table
+     */
+    /*$('#tableField').bootstrapTable({
+     url: '/field/tempControl',
+     pagination: true, // 在表格底部显示分页组件，默认false
+     pageSize: 10, // 页面数据条数
+     pageNumber: 1, // 首页页码
+     paginationPreText: '上一页',   //指定分页条中上一页按钮的图标或文字
+     paginationNextText: '下一页',   //指定分页条中下一页按钮的图标或文字
+     paginationHAlign: '',
+     queryParams: function () {
+     var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+     // limit: params.limit,   //页面大小
+     rows: this.pageSize,
+     page: this.pageNumber,
+     label: $('#searchLabel').val()
+     };
+     return temp;
+     },
+     columns: [
+     {
+     field: 'number',
+     title: '序号',
+     align: "center",
+     width: 80,
+     formatter: function (value, row, index) {
+     return index + 1;
+     }
+     }, {
+     field: 'label',
+     title: '字段名称', // 表格表头显示文字
+     align: 'center', // 左右居中
+     valign: 'middle' // 上下居中
+     }
+     ],
+     onLoadSuccess: function () {  //加载成功时执行
+     console.info("加载成功");
+     },
+     onLoadError: function () {  //加载失败时执行
+     console.info("加载数据失败");
+     }
+     });*/
+
+    /**
+     * 已选字段的table
+     */
+    $('#tableSelectField').bootstrapTable({
+        data: data.templateData[data.groupKey],
+        showHeader: false,
+        //pagination: true, // 在表格底部显示分页组件，默认false
+        //pageList: [6, 10], // 设置页面可以显示的数据条数
+        pageSize: 10, // 页面数据条数
+        //pageNumber: 1, // 首页页码
+        //paginationPreText: '上一页',    //指定分页条中上一页按钮的图标或文字
+        //paginationNextText: '下一页',   //指定分页条中下一页按钮的图标或文字
+        //paginationHAlign: '',
+        columns: [
+            {
+                field: 'label',
+                title: '字段',
+                valign: 'middle',
+            },
+            {
+                field: 'controlKey',
+                title: 'key值',
+                valign: 'middle',
+            },
+            {
+                field: 'operate',
+                title: '操作',
+                align: 'center',
+                valign: 'middle',
+                width: 90,
+                events: operateEvents, //给按钮注册事件
+                formatter: function (value, row, index) {
+                    return '<button id="tableDelete" type="button" class="btn_del red">删除</button>';
+                }
+            }
+        ],
+        formatNoMatches: function () {
+            return "没有数据";
+        },
+    });
+    function deleteCancel() {
+        $("#confirmMask").hide();
+    }
+    function deleteConfirm() {
+        data.templateData[data.groupKey] = [];
+        data.groupObject.html('');
+        $("#confirmMask").hide();
+    }
+
+    $(document).ready(function(){
+
+        var start=0;
+        var end=0;
+        var fixHelperModified = function(e, tr) {
+                start=$(tr).index();
+                console.log(start)
+                var $originals = tr.children();
+                var $helper = tr.clone();
+                $helper.children().each(function(index) {
+                    $(this).width($originals.eq(index).width())
+                });
+                return $helper;
+            },
+            updateIndex = function(e, ui) {
+                end=$(ui.item).index();
+                console.log(end)
+                var temp=data.templateData[data.groupKey][start];
+                data.templateData[data.groupKey].splice(start, 1);
+                data.templateData[data.groupKey].splice(end, 0,temp);
+                console.log(data.templateData[data.groupKey][start].label);
+                console.log(data.templateData[data.groupKey][end].label);
+                console.log(data.templateData[data.groupKey])
+            };
+        $("#tableSelectField tbody").sortable({
+            helper: fixHelperModified,
+            stop: updateIndex
+        }).disableSelection();
+    })
+
+</script>
+</html>

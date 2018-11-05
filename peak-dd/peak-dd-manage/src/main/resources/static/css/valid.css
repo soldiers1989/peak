@@ -1,0 +1,10 @@
+.demoValid label.error {
+  display: block;
+  color: red;
+  font-style: italic;
+  width: 240px;
+  margin-left: 80px;
+  clear: both;
+  font-size: 12px;
+  line-height: 20px;
+}

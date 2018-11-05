@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.LoanApplyMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.LoanApply">
+        <result column="id" property="id"/>
+        <result column="product_id" property="productId"/>
+        <result column="etp_cer_id" property="etpCerId"/>
+        <result column="info_auth_id" property="infoAuthId"/>
+        <result column="user_id" property="userId"/>
+        <result column="etp_name" property="etpName"/>
+        <result column="no" property="no"/>
+        <result column="amount" property="amount"/>
+        <result column="term" property="term"/>
+        <result column="financial_contact" property="financialContact"/>
+        <result column="contact_mobile" property="contactMobile"/>
+        <result column="info_auth_num" property="infoAuthNum"/>
+        <result column="auth_url" property="authUrl"/>
+        <result column="body_url" property="bodyUrl"/>
+        <result column="controller_url" property="controllerUrl"/>
+        <result column="appoint_time" property="appointTime"/>
+        <result column="appoint_confirm_time" property="appointConfirmTime"/>
+        <result column="reason" property="reason"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <resultMap id="LoanEtpVoMap" type="com.masspick.peak.guest.bo.LoanEtpVo">
+        <result column="status_name" property="statusName"/>
+        <result column="status" property="status"/>
+        <result column="etp_name" property="etpName"/>
+        <result column="amount" property="amount"/>
+        <result column="term" property="term"/>
+        <result column="flow_id" property="flowId"/>
+        <result column="appoint_time" property="appointTime"/>
+        <result column="create_month" property="createMonth"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+
+
+    <resultMap id="CountMonthMap" type="com.masspick.peak.guest.vo.manage.CountMapVo">
+        <result column="value" property="value"/>
+        <result column="create_month" property="createMonth"/>
+
+    </resultMap>
+
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        product_id,
+        etp_cer_id,
+        info_auth_id,
+        user_id,
+        etp_name,
+        no,
+        amount,
+        term,
+        financial_contact,
+        contact_mobile,
+        info_auth_num,
+        auth_url,
+        body_url,
+        controller_url,
+        appoint_time,
+        appoint_confirm_time,
+        reason,
+        status,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO loan_apply (
+            id,
+            product_id,
+            etp_cer_id,
+            info_auth_id,
+            user_id,
+            etp_name,
+            no,
+            amount,
+            term,
+            financial_contact,
+            contact_mobile,
+            info_auth_num,
+            auth_url,
+            body_url,
+            controller_url,
+            appoint_time,
+            appoint_confirm_time,
+            reason,
+            status,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.productId},
+            #{pojo.etpCerId},
+            #{pojo.infoAuthId},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.no},
+            #{pojo.amount},
+            #{pojo.term},
+            #{pojo.financialContact},
+            #{pojo.contactMobile},
+            #{pojo.infoAuthNum},
+            #{pojo.authUrl},
+            #{pojo.bodyUrl},
+            #{pojo.controllerUrl},
+            #{pojo.appointTime},
+            #{pojo.appointConfirmTime},
+            #{pojo.reason},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO loan_apply (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.productId},
+            #{pojo.etpCerId},
+            #{pojo.infoAuthId},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.no},
+            #{pojo.amount},
+            #{pojo.term},
+            #{pojo.financialContact},
+            #{pojo.contactMobile},
+            #{pojo.infoAuthNum},
+            #{pojo.authUrl},
+            #{pojo.bodyUrl},
+            #{pojo.controllerUrl},
+            #{pojo.appointTime},
+            #{pojo.appointConfirmTime},
+            #{pojo.reason},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE loan_apply
+        <set>
+            <if test="pojo.productId != null"> product_id = #{pojo.productId}, </if>
+            <if test="pojo.etpCerId != null"> etp_cer_id = #{pojo.etpCerId}, </if>
+            <if test="pojo.infoAuthId != null"> info_auth_id = #{pojo.infoAuthId}, </if>
+            <if test="pojo.userId != null"> user_id = #{pojo.userId}, </if>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.no != null"> no = #{pojo.no}, </if>
+            <if test="pojo.amount != null"> amount = #{pojo.amount}, </if>
+            <if test="pojo.term != null"> term = #{pojo.term}, </if>
+            <if test="pojo.financialContact != null"> financial_contact = #{pojo.financialContact}, </if>
+            <if test="pojo.contactMobile != null"> contact_mobile = #{pojo.contactMobile}, </if>
+            <if test="pojo.infoAuthNum != null"> info_auth_num = #{pojo.infoAuthNum}, </if>
+            <if test="pojo.authUrl != null"> auth_url = #{pojo.authUrl}, </if>
+            <if test="pojo.bodyUrl != null"> body_url = #{pojo.bodyUrl}, </if>
+            <if test="pojo.controllerUrl != null"> controller_url = #{pojo.controllerUrl}, </if>
+            <if test="pojo.appointTime != null"> appoint_time = #{pojo.appointTime}, </if>
+            <if test="pojo.appointConfirmTime != null"> appoint_confirm_time = #{pojo.appointConfirmTime}, </if>
+            <if test="pojo.reason != null"> reason = #{pojo.reason}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.loanDate != null"> loan_date = #{pojo.loanDate} ,</if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate} ,</if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} ,</if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} ,</if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findLoanByEtpName" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM loan_apply
+        WHERE etp_name = #{etpName}
+        order by update_date desc
+    </select>
+
+    <select id="findLoanById" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM loan_apply
+        WHERE id = #{id}
+    </select>
+
+
+    <select id="findDetailById" resultType="com.masspick.peak.guest.bo.LoanApplyShowVo">
+        SELECT
+            a.id,
+            a.product_id as productId,
+            a.etp_cer_id as etpCerId,
+            a.info_auth_id as infoAuthId,
+            a.user_id as userId,
+            a.etp_name as etpName,
+            a.no,
+            a.amount,
+            a.term,
+            a.financial_contact as financialContact,
+            a.contact_mobile as contactMobile,
+            a.info_auth_num as infoAuthNum,
+            a.auth_url as authUrl,
+            a.body_url as bodyUrl,
+            a.controller_url as controllerUrl,
+            a.appoint_time as appointTime,
+            a.appoint_confirm_time as appointConfirmTime,
+            a.reason,
+            a.status,
+            a.create_date as createDate,
+            a.update_date as updateDate,
+			b.product_name as productName,
+			c.name as controllerName
+        FROM loan_apply a LEFT JOIN product b on a.product_id = b.product_id LEFT JOIN  controller_cer c on a.etp_cer_id = c.cer_id
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findLoanByUserId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM loan_apply
+        WHERE user_id = #{userId} and status = '0'
+    </select>
+
+    <sql id="selectColumnsByUserId">
+        a.id,
+        a.status,
+        a.no,
+        a.etp_name as etpName,
+        a.amount,
+        a.term,
+        a.create_date as createDate,
+        b.product_name as productName
+    </sql>
+
+    <select id="findRepayInfoById" resultType="com.masspick.peak.guest.vo.client.RepayDetail">
+        SELECT
+        a.id,
+        a.no,
+        b.product_name as productName,
+        a.etp_name as etpName,
+        c.approval_amount as loanAmount,
+        c.approval_term as loanTerm,
+        a.create_date as applyDate,
+        a.loan_date as loanDate
+        FROM loan_apply a LEFT JOIN product b on a.product_id = b.product_id LEFT JOIN loan_contract_info c on a.id = c.loan_id
+        WHERE  a.id =  #{id} and a.status = '2'
+    </select>
+
+    <select id="findByUserId" resultType="com.masspick.peak.guest.bo.LoanListShowVo">
+        SELECT
+        <include refid="selectColumnsByUserId"/>
+        FROM loan_apply a LEFT JOIN product b on a.product_id = b.product_id
+        <if test="userId != null and userId != ''">
+            WHERE  a.user_id =  #{userId}
+        </if>
+        order by create_date desc
+    </select>
+
+    <sql id="findByPageColumns">
+        SELECT
+        a.id,
+        a.no,
+        a.etp_name as etpName,
+        a.amount,
+        a.term,
+        a.create_date as createDate,
+        a.status,
+        b.mobile as regMobile,
+        c.product_name as productName
+        FROM loan_apply a
+    </sql>
+
+
+    <select id="findByPage" resultType="com.masspick.peak.guest.vo.manage.LoanApplyPageVo">
+        <include refid="findByPageColumns"/>
+        LEFT JOIN user_weixin b on a.user_id = b.id
+        LEFT JOIN product c on a.product_id = c.product_id
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.regMobile != null and pojo.regMobile != ''">
+                    AND INSTR(b.mobile, #{pojo.regMobile}) > 0
+                </if>
+
+                <if test="pojo.etpName != null and pojo.etpName != ''">
+                    AND INSTR(a.etp_name, #{pojo.etpName}) > 0
+                </if>
+
+                <if test="pojo.status != null and pojo.status != ''">
+                    AND a.status = #{pojo.status}
+                </if>
+
+                <if test="pojo.no != null and pojo.no != ''">
+                    AND INSTR(a.no, #{pojo.no}) > 0
+                </if>
+
+                <if test="pojo.createStartDate != null">
+                    AND date_format(str_to_date(a.create_date, '%Y-%m-%d'), '%Y-%m-%d') >= date_format(#{pojo.createStartDate}, '%Y-%m-%d')
+                </if>
+
+                <if test="pojo.createEndDate != null">
+                    AND date_format(str_to_date(a.create_date, '%Y-%m-%d'), '%Y-%m-%d') &lt;= date_format(#{pojo.createEndDate}, '%Y-%m-%d')
+                </if>
+
+                <if test="pojo.minTerm != null ">
+                    AND a.term &gt;= #{pojo.minTerm}
+                </if>
+
+                <if test="pojo.maxTerm != null ">
+                    AND a.term &lt;= #{pojo.maxTerm}
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY a.update_date DESC
+    </select>
+
+    <select id="findTotalAmountByStatus"  resultType="java.lang.Integer">
+        SELECT IFNULL(SUM(amount),0)
+            FROM loan_apply where `status`=#{status}
+    </select>
+
+    <select id="findCountByParam" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM loan_apply
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.createDate != null">
+                    AND create_date LIKE CONCAT('%', date_format(#{pojo.createDate}, '%Y-%m-%d'), '%')
+                </if>
+            </trim>
+        </where>
+    </select>
+
+    <select id="findSumFromNumber" resultType="java.lang.Integer">
+      select sum(d.amount) from (select a.* from loan_apply a
+        left join user_weixin b on a.user_id = b.id
+        left join etp_cer c on a.etp_name = c.etp_name
+        where c.status = '1' and b.ins_staff_num = #{number} and a.status='2'
+        group by a.id) d
+    </select>
+    
+    
+    <select id="findLoanOrderByEtpName" resultMap="LoanEtpVoMap">
+        SELECT a.etp_name,
+          a.amount,a.term,(case when (a.status = 0 ) then '处理中'
+          when (a.status = 1) then '已终止' when (a.status = 2) then '申请成功'
+          else a.status end) as 'status_name',a.status,a.create_date,
+          a.appoint_time,b.flow_id FROM peak_guest.loan_apply a
+          left join flow_process b on a.id = b.loan_id
+          where a.etp_name = #{etpName}
+    </select>
+
+
+    <select id="findList" resultMap="LoanEtpVoMap">
+        SELECT a.id,a.etp_name,
+        a.amount,a.term,(case when (a.status = 0 ) then '处理中'
+        when (a.status = 1 ) then '已终止' when (a.status = 2) then '申请成功'
+        else a.status end) as 'status_name',a.status,DATE_FORMAT(a.create_date, '%Y-%m' ) as create_month,a.create_date,
+        a.appoint_time,b.flow_id FROM peak_guest.loan_apply a
+        left join flow_process b on a.id = b.loan_id
+        left join user_weixin c on a.user_id = c.id
+        where c.ins_staff_num = #{number}  order by a.create_date desc
+    </select>
+
+    <select id="findCountByMonth" resultMap="CountMonthMap">
+    SELECT count(1) as value,DATE_FORMAT(a.create_date, '%Y-%m' ) as create_month FROM peak_guest.loan_apply a
+    left join flow_process b on a.id = b.loan_id
+    left join user_weixin c on a.user_id = c.id
+    where c.ins_staff_num = #{number}  group by create_month order by create_month desc
+    </select>
+
+
+    <select id="findCountByNumber" resultType="java.lang.Integer">
+    select count(0) from loan_apply a left join user_weixin b on a.user_id = b.id
+    where b.ins_staff_num = #{number}
+    </select>
+
+</mapper>

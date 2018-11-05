@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.masspick.peak</groupId>
+    <artifactId>peak-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>com.masspick.peak</groupId>
+        <artifactId>peak-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../peak-parent</relativePath>
+    </parent>
+
+    <distributionManagement>
+        <repository>
+            <id>maven-public</id>
+            <name>Releases</name>
+            <url>add/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-public</id>
+            <name>Snapshots</name>
+            <url>http://repo1.bjdcloud.com:10081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+    <modules>
+        <module>peak-api-data</module>
+        <module>peak-api-dd</module>
+        <module>peak-api-decision</module>
+        <module>peak-api-flow</module>
+        <module>peak-api-interface</module>
+        <module>peak-api-resource</module>
+        <module>peak-api-sys</module>
+        <module>peak-api-guest</module>
+    </modules>
+
+</project>

@@ -1,0 +1,54 @@
+server:
+  port: 8080
+logging:
+  level:
+      com.masspick.peak.resource.mapper: debug
+
+
+spring:
+  application:
+    name: peak-sys-admin
+  datasource:
+    url: jdbc:mysql://${JDBC_URL}:${JDBC_PORT}/peak_resource?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: ${JDBC_USERNAME}
+    password: ${JDBC_PASSWORD}
+    driver-class-name: com.mysql.jdbc.Driver
+    max-active: 20
+    initial-size: 1
+    min-idle: 3
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 'x'
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_MEMBERS}
+  instance:
+    instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+cos:
+  url: https://masspick-1255853614.cos-website.ap-shanghai.myqcloud.com
+  dir: masspick/produc/peak-resource/
+  accessKey: AKIDPfAYmp5OuNgolWvVq35wd9TdcQ2THurd
+  secretKey: kM1Vo6KSVSJ3iGk9RcfXFoDYiiXB7uVu
+  region: ap-shanghai
+  downloadUrl: https://masspick-1255853614.cos.ap-shanghai.myqcloud.com
+  bucket:
+    name: masspick-1255853614
+
+file:
+   dir: /tmp/upload/
+   zipDir: /tmp/zip/
+
+guest:
+  url: http://guesth5.e-masspick.com/login

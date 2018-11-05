@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysInsMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysIns">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="short_name" property="shortName"/>
+        <result column="code" property="code"/>
+        <result column="principal" property="principal"/>
+        <result column="mobile" property="mobile"/>
+        <result column="type_value" property="typeValue"/>
+        <result column="type_name" property="typeName"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `short_name`,
+        `code`,
+        `principal`,
+        `mobile`,
+        `type_value`,
+        `type_name`,
+        `status`,
+        `remark`,
+        `create_date`,
+        `update_date`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_institution (
+            `id`,
+            `name`,
+            `short_name`,
+            `code`,
+            `principal`,
+            `mobile`,
+            `type_value`,
+            `type_name`,
+            `status`,
+            `remark`,
+            `create_date`,
+            `update_date`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.shortName},
+            #{pojo.code},
+            #{pojo.principal},
+            #{pojo.mobile},
+            #{pojo.typeValue},
+            #{pojo.typeName},
+            #{pojo.status},
+            #{pojo.remark},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_institution
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.shortName!=null"> `short_name`,</if>
+            <if test="pojo.code!=null"> `code`,</if>
+            <if test="pojo.principal!=null"> `principal`,</if>
+            <if test="pojo.mobile!=null"> `mobile`,</if>
+            <if test="pojo.typeValue!=null"> `type`,</if>
+            <if test="pojo.typeName!=null"> `type`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.shortName!=null">#{pojo.shortName},</if>
+            <if test="pojo.code!=null">#{pojo.code},</if>
+            <if test="pojo.principal!=null">#{pojo.principal},</if>
+            <if test="pojo.mobile!=null">#{pojo.mobile},</if>
+            <if test="pojo.typeValue!=null">#{pojo.type},</if>
+            <if test="pojo.typeName!=null">#{pojo.type},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.remark!=null">#{pojo.remark},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_institution (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.shortName},
+            #{pojo.code},
+            #{pojo.principal},
+            #{pojo.mobile},
+            #{pojo.typeValue},
+            #{pojo.typeName},
+            #{pojo.status},
+            #{pojo.remark},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_institution
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.shortName != null"> `short_name` = #{pojo.shortName}, </if>
+            <if test="pojo.code != null"> `code` = #{pojo.code}, </if>
+            <if test="pojo.principal != null"> `principal` = #{pojo.principal}, </if>
+            <if test="pojo.mobile != null"> `mobile` = #{pojo.mobile}, </if>
+            <if test="pojo.typeValue != null"> `type_value` = #{pojo.typeValue}, </if>
+            <if test="pojo.typeName != null"> `type_name` = #{pojo.typeName}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByPage" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_institution
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.name != null and pojo.name != ''">
+                    AND INSTR(name,  #{pojo.name}) > 0
+                </if>
+
+                <if test="pojo.code != null and pojo.code != ''">
+                    AND code = BINARY (#{pojo.code})
+                </if>
+
+                <if test="pojo.typeValue != null and pojo.typeValue != ''">
+                    AND type_value = #{pojo.typeValue}
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="findAll" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_institution
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="findAllAble" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_institution
+        WHERE status = 1
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_institution
+        where id = #{id}
+    </select>
+
+
+    <select id="findByCode" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_institution
+        where code = #{code}
+    </select>
+</mapper>
+

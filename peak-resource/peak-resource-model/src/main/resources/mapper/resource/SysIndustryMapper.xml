@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysIndustryMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.model.SysIndustry">
+        <result column="id" property="id"/>
+        <result column="industry_code" property="industryCode"/>
+        <result column="industry_name" property="industryName"/>
+        <result column="parent" property="parent"/>
+        <result column="status" property="status"/>
+        <result column="level" property="level"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `industry_code`,
+        `industry_name`,
+        `parent`,
+        `status`,
+        `level`,
+        `remark`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_industry (
+        `id`,
+        `industry_code`,
+        `industry_name`,
+        `parent`,
+        `status`,
+        `level`,
+        `remark`
+        ) VALUES (
+        #{pojo.id},
+        #{pojo.industryCode},
+        #{pojo.industryName},
+        #{pojo.parent},
+        #{pojo.status},
+        #{pojo.level},
+        #{pojo.remark}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_industry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.industryCode!=null"> `industry_code`,</if>
+            <if test="pojo.industryName!=null"> `industry_name`,</if>
+            <if test="pojo.parent!=null"> `parent`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.level!=null"> `level`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.industryCode!=null">#{pojo.industryCode},</if>
+            <if test="pojo.industryName!=null">#{pojo.industryName},</if>
+            <if test="pojo.parent!=null">#{pojo.parent},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.level!=null">#{pojo.level},</if>
+            <if test="pojo.remark!=null">#{pojo.remark},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_industry (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.industryCode},
+            #{pojo.industryName},
+            #{pojo.parent},
+            #{pojo.status},
+            #{pojo.level},
+            #{pojo.remark}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_industry
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.industryCode != null"> `industry_code` = #{pojo.industryCode}, </if>
+            <if test="pojo.industryName != null"> `industry_name` = #{pojo.industryName}, </if>
+            <if test="pojo.parent != null"> `parent` = #{pojo.parent}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.level != null"> `level` = #{pojo.level}, </if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <update id="deleteById">
+        update sys_industry SET `status` = '-1'
+        where `id`=#{id}
+    </update>
+
+    <select id="selectByQueryParams" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_industry
+
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="dictNameLike != null">
+                    and `industry_code` like  #{dictNameLike}
+                </if>
+                <if test="industryCode != null and industryCode != ''">
+                    and `industry_code` like  #{industryCode}
+                </if>
+                <if test="industryName != null and industryName != '' ">
+                    and `industry_name` like  #{industryName}
+                </if>
+
+            </trim>
+        </where>
+    </select>
+
+
+    <select id="select" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_industry
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="dictNameLike != null">
+                    and `industry_code` like  #{dictNameLike}
+                </if>
+                <if test="industryCode != null and industryCode != ''">
+                    and `industry_code` like  #{industryCode}
+                </if>
+                <if test="industryName != null and industryName != '' ">
+                    and `industry_name` like  #{industryName}
+                </if>
+            </trim>
+        </where>
+    </select>
+
+
+
+    <select id="findById" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_industry
+        where `id`=#{id}
+    </select>
+
+</mapper>

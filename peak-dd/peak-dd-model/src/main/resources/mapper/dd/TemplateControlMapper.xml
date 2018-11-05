@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.dd.mapper.TemplateControlMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.dd.model.TemplateControl">
+        <result column="id" property="id"/>
+        <result column="template_id" property="templateId"/>
+        <result column="control_id" property="controlId"/>
+        <result column="group_name" property="groupName"/>
+        <result column="group_seq" property="groupSeq"/>
+        <result column="control_seq" property="controlSeq"/>
+        <result column="control_show_name" property="controlShowName"/>
+        <result column="require" property="require"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="creator" property="creator"/>
+        <result column="updater" property="updater"/>
+        <result column="group_key" property="groupKey"/>
+        <result column="control_key" property="controlKey"/>
+        <result column="place_info" property="placeInfo"/>
+    </resultMap>
+
+    <!-- <resultMap id="DtoMap" type="com.masspick.peak.dd.model.dto.TemplateControlBO">
+         <id column="id" property="id"/>
+         <result column="template_id" property="templateId"/>
+         <result column="control_id" property="controlId"/>
+         <result column="group_name" property="groupName"/>
+         <result column="group_seq" property="groupSeq"/>
+         <result column="control_seq" property="controlSeq"/>
+         <result column="control_show_name" property="controlShowName"/>
+         <result column="require" property="require"/>
+         <result column="create_time" property="createTime"/>
+         <result column="update_time" property="updateTime"/>
+         <result column="creator" property="creator"/>
+         <result column="updater" property="updater"/>
+         <result column="group_key" property="groupKey"/>
+         <result column="control_key" property="controlKey"/>
+         <association property="dd_control" javaType="com.masspick.peak.dd.model.Control">
+             <id column="control_id" property="id"/>
+             <result column="label" property="label"/>
+             <result column="type" property="type"/>
+             <result column="placeholder" property="placeholder"/>
+             <result column="data_type" property="dataType"/>
+             <result column="data_source_code" property="dataSourceCode"/>
+             <result column="verification" property="verification"/>
+             <result column="data_source_name" property="dataSourceName"/>
+         </association>
+         <result column="place_info" property="placeInfo"/>
+     </resultMap>-->
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `template_id`,
+        `control_id`,
+        `group_name`,
+        `group_seq`,
+        `control_seq`,
+        `control_show_name`,
+        `require`,
+        `create_time`,
+        `update_time`,
+        `creator`,
+        `updater`,
+        `group_key`,
+        `control_key`,
+`place_info`
+</sql>
+
+    <sql id="dto_column">
+        `id`,
+        `template_id`,
+        `control_id`,
+        `group_name`,
+        `group_seq`,
+        `control_seq`,
+        `control_show_name`,
+        `require`,
+        `create_time`,
+        `update_time`,
+        `creator`,
+        `updater`,
+        `group_key`,
+        `label`,
+        `type`,
+        `control_key`,
+        `placeholder`,
+        `data_type`,
+        `data_source_code`,
+        `verification`,
+        `data_source_name`,
+`place_info`
+</sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_template_control (
+            `id`,
+            `template_id`,
+            `control_id`,
+            `group_name`,
+            `group_seq`,
+            `control_seq`,
+            `control_show_name`,
+            `require`,
+            `create_time`,
+            `update_time`,
+            `creator`,
+            `updater`,
+            `group_key`,
+            `control_key`,
+            `place_info`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.templateId},
+            #{pojo.controlId},
+            #{pojo.groupName},
+            #{pojo.groupSeq},
+            #{pojo.controlSeq},
+            #{pojo.controlShowName},
+            #{pojo.require},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.groupKey},
+            #{pojo.controlKey},
+            #{pojo.placeInfo}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_template_control
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.templateId!=null">`template_id`,</if>
+            <if test="pojo.controlId!=null">`control_id`,</if>
+            <if test="pojo.groupName!=null">`group_name`,</if>
+            <if test="pojo.groupSeq!=null">`group_seq`,</if>
+            <if test="pojo.controlSeq!=null">`control_seq`,</if>
+            <if test="pojo.controlShowName!=null">`control_show_name`,</if>
+            <if test="pojo.require!=null">`require`,</if>
+            <if test="pojo.createTime!=null">`create_time`,</if>
+            <if test="pojo.updateTime!=null">`update_time`,</if>
+            <if test="pojo.creator!=null">`creator`,</if>
+            <if test="pojo.updater!=null">`updater`,</if>
+            <if test="pojo.groupKey!=null">`group_key`,</if>
+            <if test="pojo.controlKey!=null">`control_key`,</if>
+            <if test="pojo.placeInfo!=null">`place_info`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.templateId!=null">#{pojo.templateId},</if>
+            <if test="pojo.controlId!=null">#{pojo.controlId},</if>
+            <if test="pojo.groupName!=null">#{pojo.groupName},</if>
+            <if test="pojo.groupSeq!=null">#{pojo.groupSeq},</if>
+            <if test="pojo.controlSeq!=null">#{pojo.controlSeq},</if>
+            <if test="pojo.controlShowName!=null">#{pojo.controlShowName},</if>
+            <if test="pojo.require!=null">#{pojo.require},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+            <if test="pojo.updateTime!=null">#{pojo.updateTime},</if>
+            <if test="pojo.creator!=null">#{pojo.creator},</if>
+            <if test="pojo.updater!=null">#{pojo.updater},</if>
+            <if test="pojo.groupKey!=null">#{pojo.groupKey},</if>
+            <if test="pojo.controlKey!=null">#{pojo.controlKey},</if>
+            <if test="pojo.placeInfo!=null">#{pojo.placeInfo}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO dd_template_control(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.templateId},
+            #{pojo.controlId},
+            #{pojo.groupName},
+            #{pojo.groupSeq},
+            #{pojo.controlSeq},
+            #{pojo.controlShowName},
+            #{pojo.require},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.groupKey},
+            #{pojo.controlKey},
+            #{pojo.placeInfo}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPD
+        UPDATE dd_template_control
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.templateId != null">`template_id` = #{pojo.templateId},</if>
+            <if test="pojo.controlId != null">`control_id` = #{pojo.controlId},</if>
+            <if test="pojo.groupName != null">`group_name` = #{pojo.groupName},</if>
+            <if test="pojo.groupSeq != null">`group_seq` = #{pojo.groupSeq},</if>
+            <if test="pojo.controlSeq != null">`control_seq` = #{pojo.controlSeq},</if>
+            <if test="pojo.controlShowName != null">`control_show_name` = #{pojo.controlShowName},</if>
+            <if test="pojo.require != null">`require` = #{pojo.require},</if>
+            <if test="pojo.createTime != null">`create_time` = #{pojo.createTime},</if>
+            <if test="pojo.updateTime != null">`update_time` = #{pojo.updateTime},</if>
+            <if test="pojo.creator != null">`creator` = #{pojo.creator},</if>
+            <if test="pojo.updater != null">`updater` = #{pojo.updater},</if>
+            <if test="pojo.groupKey != null">`group_key` = #{pojo.groupKey},</if>
+            <if test="pojo.controlKey != null">`control_key` = #{pojo.controlKey},</if>
+            <if test="pojo.placeInfo != null">`place_info` = #{pojo.placeInfo}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <!--auto generated by codehelper on 2018-05-21 17:23:27-->
+    <select id="findByTemplateId" resultType="com.masspick.peak.dd.model.bo.TemplateControlBO">
+        select
+        t.id,t.template_id as templateId,t.control_id as controlId,t.group_name as groupName,
+        t.group_seq as groupSeq,t.group_key as groupKey,t.control_seq as controlSeq,t.control_key as controlKey,
+        t.control_show_name as controlShowName,t.require ,t.place_info as placeInfo,
+        c.label,c.type,c.placeholder,
+        c.data_type as dataType,data_source_code as dataSourceCode,
+        data_source_name as dataSourceName,verification
+        from dd_template_control t LEFT JOIN dd_control c on t.control_id = c.id
+        where t.`template_id`=#{templateId} AND c.state=1 ORDER BY t.group_seq ,t.control_seq
+    </select>
+
+    <select id="template" resultType="com.masspick.peak.dd.model.bo.TemplateControlBO">
+        select
+        t.id,t.template_id as templateId,t.control_id as controlId,t.group_name as groupName,
+        t.group_seq as groupSeq,t.group_key as groupKey,t.control_seq as controlSeq,c.control_key as controlKey,
+        t.control_show_name as controlShowName,t.require ,t.place_info as placeInfo,
+        c.label,c.type,c.placeholder,
+        <if test="taskId != null and taskId != ''">
+            d.value,
+        </if>
+        c.data_type as dataType,data_source_code as dataSourceCode,
+        data_source_name as dataSourceName,verification
+        from dd_template_control t
+        <if test="taskId != null and taskId != ''">
+            LEFT JOIN dd_data d on t.control_id = d.control_id
+            and t.template_id = d.template_id
+            AND t.group_key = d.group_key
+        </if>
+        LEFT JOIN dd_control c on t.control_id = c.id
+        where
+        t.`template_id`=#{templateId} AND c.state=1
+        ORDER BY t.group_seq ,t.control_seq
+    </select>
+
+
+    <select id="templateRelate" resultType="com.masspick.peak.dd.model.bo.TemplateControlBO">
+        SELECT
+	t.id,
+	t.template_id AS templateId,
+	t.control_id AS controlId,
+	t.group_name AS groupName,
+	t.group_seq AS groupSeq,
+	t.group_key AS groupKey,
+	t.control_seq AS controlSeq,
+	c.control_key AS controlKey,
+	t.control_show_name AS controlShowName,
+	t.REQUIRE,
+	t.place_info AS placeInfo,
+	c.label,
+	c.type,
+	c.placeholder,
+	dd.value,
+	c.data_source_code as dataSourceCode,
+	c.data_source_name as dataSourceName
+    FROM
+        dd_template_control t
+    LEFT JOIN (
+        SELECT
+            d.task_id,
+            d.template_id,
+            d.control_id,
+            d.group_key,
+            d.VALUE
+        FROM
+            dd_data d
+        WHERE
+            d.task_id = #{taskId}
+    ) dd ON t.template_id = dd.template_id
+    AND t.control_id = dd.control_id
+    AND t.group_key = dd.group_key
+    LEFT JOIN dd_control c on t.control_id = c.id
+    WHERE t.template_id = #{templateId} and c.state=1 ORDER BY t.group_seq ,t.control_seq
+    </select>
+    <!--auto generated by codehelper on 2018-05-21 18:30:00-->
+    <select id="findGroupKey" resultType="java.util.HashMap">
+        select * from (SELECT DISTINCT
+            group_key,
+            group_name,group_seq
+        FROM
+            dd_template_control
+        WHERE
+            `template_id` = #{templateId})as t order BY t.group_seq
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-22 11:09:42-->
+    <delete id="deleteByTemplateId">
+        delete from dd_template_control
+        where `template_id`=#{templateId}
+    </delete>
+</mapper>
+

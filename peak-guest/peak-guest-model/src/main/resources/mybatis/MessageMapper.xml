@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.MessageMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.Message">
+        <result column="type" property="type"/>
+        <result column="content" property="content"/>
+        <result column="status" property="status"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="user_id" property="userId"/>
+        <result column="etp_name" property="etpName"/>
+        <result column="send_time" property="sendTime"/>
+        <result column="id" property="id"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        type,
+        content,
+        status,
+        del_flag,
+        user_id,
+        etp_name,
+        send_time,
+        id,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO message (
+            type,
+            content,
+            status,
+            del_flag,
+            user_id,
+            etp_name,
+            send_time,
+            id,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.type},
+            #{pojo.content},
+            #{pojo.status},
+            #{pojo.delFlag},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.sendTime},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO message (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.type},
+            #{pojo.content},
+            #{pojo.status},
+            #{pojo.delFlag},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.sendTime},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE message
+        <set>
+            <if test="pojo.type != null"> type = #{pojo.type}, </if>
+            <if test="pojo.content != null"> content = #{pojo.content}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.delFlag != null"> del_flag = #{pojo.delFlag}, </if>
+            <if test="pojo.userId != null"> user_id = #{pojo.userId}, </if>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.sendTime != null"> send_time = #{pojo.sendTime}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findList" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM message
+        Where user_id = #{userId} AND del_flag = '0'
+        ORDER BY update_date DESC
+    </select>
+
+    <update id="readMessage">
+        UPDATE message SET status='1' WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        UPDATE message
+        SET del_flag = '1'
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
+

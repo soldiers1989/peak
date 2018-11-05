@@ -1,0 +1,106 @@
+.tableBase {
+  display: table;
+  border: 1px solid #e2e2e2;
+  width: 100%;
+  table-layout: fixed;
+}
+.tableBase .thead {
+  display: table-header-group;
+}
+.tableBase .tbody {
+  display: table-row-group;
+}
+.tableBase .tr {
+  width: 100%;
+  display: table-row;
+}
+.tableBase.theadBg .tr .th {
+  background: #eef5fe;
+}
+.tableBase .tr .th,
+.tableBase .tr .td {
+  display: table-cell;
+  padding: 8px;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+
+  word-wrap:break-word;
+  
+  border-right: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+}
+.tableBase .tr .th:last-child,
+.tableBase .tr .td:last-child {
+  border-right: 0;
+}
+.tableBase .tbody .tr:last-child .td {
+  border-bottom: 0;
+}
+.tableBase .tr .td {
+  color: #666;
+}
+.tableBase input[type=button],
+.tableBase button {
+  background: none;
+  margin: 0 10px;
+}
+.tableBase .btn_edit::before {
+  content: '';
+  padding: 0px 10px;
+  background: url(../images/btn_edit_icon.png) left center no-repeat;
+  background-size: 12px;
+}
+.tableBase .btn_del::before {
+  content: '';
+  padding: 0px 10px;
+  background: url(../images/btn_del_icon.png) left center no-repeat;
+  background-size: 12px;
+}
+.tableBase .trEdit .ipttext {
+  border: 1px solid #c2c2c2;
+}
+.tableBase .btn_sure {
+  padding-left: 20px;
+}
+.tableBase .tr .td input[type=text] {
+  text-align: center;
+  background: none;
+}
+.tableBase .tr .td input[type=checkbox] {
+  margin-right: 5px;
+}
+
+
+.ddResultTable {
+  text-align: left;
+  width: 980px;
+  margin: auto;
+}
+.ddResultTable .tr .th {
+  border-right: 0;
+}
+.ddResultTable .tr .th,
+.ddResultTable .tr .td {
+  text-align: left;
+  padding: 8px 20px;
+}
+.ddResultTable > .thead > .tr > .th:nth-child(1) {
+	font-size: 16px;
+	line-height: 48px;
+	padding: 0 30px 0 50px;
+	color: #589af8;
+	border-bottom: 1px solid #e2e2e2;
+	background: url(../images/result_title_icon.png) 20px center no-repeat;
+}
+.ddResultTable .tr .td img {
+  display: block;
+  vertical-align: middle;
+  margin: auto;
+  padding: 10px;
+  max-width: 100%;
+  max-height: 100px;
+}
+.ddResultTable .tr .td:nth-child(1) {
+  width: 300px;
+}

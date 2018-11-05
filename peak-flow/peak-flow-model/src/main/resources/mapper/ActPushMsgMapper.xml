@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.masspick.peak.mapper.ActPushMsgMapper">
+
+    <resultMap id="AllColumnMap" type="com.masspick.peak.model.ActPushMsg">
+        <result column="id" property="id"/>
+        <result column="project_number" property="projectNumber"/>
+        <result column="borrow_type" property="borrowType"/>
+        <result column="borrow_account" property="borrowAccount"/>
+        <result column="borrow_rate" property="borrowRate"/>
+        <result column="borrow_period" property="borrowPeriod"/>
+        <result column="period_type" property="periodType"/>
+        <result column="borrow_valid_day" property="borrowValidDay"/>
+        <result column="contract_temple_id" property="contractTempleId"/>
+        <result column="contract_code" property="contractCode"/>
+        <result column="borrow_style" property="borrowStyle"/>
+        <result column="ck_day_brrow" property="ckDayBrrow"/>
+        <result column="contract_add_time" property="contractAddTime"/>
+        <result column="commission_free" property="commissionFree"/>
+        <result column="commission_rate" property="commissionRate"/>
+        <result column="assure_fee" property="assureFee"/>
+        <result column="assure_rate" property="assureRate"/>
+        <result column="borrower_type" property="borrowerType"/>
+        <result column="loan_type" property="loanType"/>
+        <result column="check_ids" property="checkIds"/>
+        <result column="credit_type" property="creditType"/>
+        <result column="commission_style" property="commissionStyle"/>
+        <result column="qy_assets_total" property="qyAssetsTotal"/>
+        <result column="qy_credit_total" property="qyCreditTotal"/>
+        <result column="qy_overdue_times" property="qyOverdueTimes"/>
+        <result column="qy_overdue_account" property="qyOverdueAccount"/>
+        <result column="borrow_flag" property="borrowFlag"/>
+        <result column="is_day" property="isDay"/>
+        <result column="task_id" property="taskId"/>
+        <result column="status" property="status"/>
+        <result column="msg" property="msg"/>
+    </resultMap>
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO act_push_msg (
+        `project_number`,
+        `borrow_type`,
+        `borrow_account`,
+        `borrow_rate`,
+        `borrow_period`,
+        `period_type`,
+        `borrow_valid_day`,
+        `contract_temple_id`,
+        `contract_code`,
+        `borrow_style`,
+        `ck_day_brrow`,
+        `contract_add_time`,
+        `commission_free`,
+        `commission_rate`,
+        `assure_fee`,
+        `assure_rate`,
+        `borrower_type`,
+        `loan_type`,
+        `check_ids`,
+        `credit_type`,
+        `commission_style`,
+        `qy_assets_total`,
+        `qy_credit_total`,
+        `qy_overdue_times`,
+        `qy_overdue_account`,
+        `borrow_flag`,
+        `is_day`,
+        `task_id`,
+        `status`,
+        `msg`
+        ) VALUES (
+        #{pojo.projectNumber},
+        #{pojo.borrowType},
+        #{pojo.borrowAccount},
+        #{pojo.borrowRate},
+        #{pojo.borrowPeriod},
+        #{pojo.periodType},
+        #{pojo.borrowValidDay},
+        #{pojo.contractTempleId},
+        #{pojo.contractCode},
+        #{pojo.borrowStyle},
+        #{pojo.ckDayBrrow},
+        #{pojo.contractAddTime},
+        #{pojo.commissionFree},
+        #{pojo.commissionRate},
+        #{pojo.assureFee},
+        #{pojo.assureRate},
+        #{pojo.borrowerType},
+        #{pojo.loanType},
+        #{pojo.checkIds},
+        #{pojo.creditType},
+        #{pojo.commissionStyle},
+        #{pojo.qyAssetsTotal},
+        #{pojo.qyCreditTotal},
+        #{pojo.qyOverdueTimes},
+        #{pojo.qyOverdueAccount},
+        #{pojo.borrowFlag},
+        #{pojo.isDay},
+        #{pojo.taskId},
+        #{pojo.status},
+        #{pojo.msg}
+        )
+    </insert>
+
+
+</mapper>

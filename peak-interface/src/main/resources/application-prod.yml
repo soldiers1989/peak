@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: peak-interface
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_MEMBERS}
+  instance:
+    instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+ribbon:
+  eager-load:
+    enabled: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  OkToRetryOnAllOperations: false
+  ConnectTimeout: 60000
+  ReadTimeout: 20000
+
+
+hystrix:
+  propagate:
+    request-attribute:
+      enabled: true
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+cos:
+  accessKey: AKIDPfAYmp5OuNgolWvVq35wd9TdcQ2THurd
+  secretKey: kM1Vo6KSVSJ3iGk9RcfXFoDYiiXB7uVu
+  region: ap-shanghai
+
+yjapi:
+  key: c7b2a1b5cda94f2b91161288f6584c0e
+  url: http://i.yjapi.com/ECIMatch/CompanyVerify
+
+epProect:
+  url: http://qloan.izenuo.com/api/epProects
+  key: jhw5j8zdnjk4ujykgdy5jw76u2f

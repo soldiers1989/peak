@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.masspick.peak</groupId>
+	<artifactId>peak</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>peak Build</name>
+	<description>peak Build</description>
+	<modules>
+		<module>peak-parent</module>
+		<module>peak-common</module>
+		<module>peak-api</module>
+		<module>peak-cloud</module>
+		<module>peak-dd</module>
+		<module>peak-resource</module>
+		<module>peak-data</module>
+		<module>peak-interface</module>
+		<!--<module>peak-guest</module>-->
+        <module>peak-flow</module>
+        <module>peak-guest</module>
+		<module>peak-decision</module>
+		<module>peak-sys</module>
+        <!--<module>peak-guest-original</module>-->
+    </modules>
+</project>

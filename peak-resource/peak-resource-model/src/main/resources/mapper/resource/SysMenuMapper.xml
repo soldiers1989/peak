@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysMenuMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.model.SysMenu">
+        <result column="id" property="id"/>
+        <result column="app_key" property="appKey"/>
+        <result column="name" property="name"/>
+        <result column="pid" property="pid"/>
+        <result column="url" property="url"/>
+        <result column="icon" property="icon"/>
+        <result column="sort" property="sort"/>
+        <result column="deep" property="deep"/>
+        <result column="code" property="code"/>
+        <result column="resource" property="resource"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `app_key`,
+        `name`,
+        `pid`,
+        `url`,
+        `icon`,
+        `sort`,
+        `deep`,
+        `code`,
+        `resource`,
+        `create_time`,
+        `update_time`
+    </sql>
+
+
+
+    <sql id="all_column2">
+        a.`id`,
+        `app_key`,
+        `name`,
+        `pid`,
+        `url`,
+        `icon`,
+        `sort`,
+        `deep`,
+        `code`,
+        `resource`,
+        `create_time`,
+        `update_time`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_menu (
+            `id`,
+            `app_key`,
+            `name`,
+            `pid`,
+            `url`,
+            `icon`,
+            `sort`,
+            `deep`,
+            `code`,
+            `resource`,
+            `create_time`,
+            `update_time`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.appKey},
+            #{pojo.name},
+            #{pojo.pid},
+            #{pojo.url},
+            #{pojo.icon},
+            #{pojo.sort},
+            #{pojo.deep},
+            #{pojo.code},
+            #{pojo.resource},
+            #{pojo.createTime},
+            #{pojo.updateTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.appKey!=null"> `app_key`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.pid!=null"> `pid`,</if>
+            <if test="pojo.url!=null"> `url`,</if>
+            <if test="pojo.icon!=null"> `icon`,</if>
+            <if test="pojo.sort!=null"> `sort`,</if>
+            <if test="pojo.deep!=null"> `deep`,</if>
+            <if test="pojo.code!=null"> `code`,</if>
+            <if test="pojo.resource!=null"> `resource`,</if>
+            <if test="pojo.createTime!=null"> `create_time`,</if>
+            <if test="pojo.updateTime!=null"> `update_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.appKey!=null">#{pojo.appKey},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.pid!=null">#{pojo.pid},</if>
+            <if test="pojo.url!=null">#{pojo.url},</if>
+            <if test="pojo.icon!=null">#{pojo.icon},</if>
+            <if test="pojo.sort!=null">#{pojo.sort},</if>
+            <if test="pojo.deep!=null">#{pojo.deep},</if>
+            <if test="pojo.code!=null">#{pojo.code},</if>
+            <if test="pojo.resource!=null">#{pojo.resource},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+            <if test="pojo.updateTime!=null">#{pojo.updateTime},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_menu (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.appKey},
+            #{pojo.name},
+            #{pojo.pid},
+            #{pojo.url},
+            #{pojo.icon},
+            #{pojo.sort},
+            #{pojo.deep},
+            #{pojo.code},
+            #{pojo.resource},
+            #{pojo.createTime},
+            #{pojo.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_menu
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.appKey != null"> `app_key` = #{pojo.appKey}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.pid != null"> `pid` = #{pojo.pid}, </if>
+            <if test="pojo.url != null"> `url` = #{pojo.url}, </if>
+            <if test="pojo.icon != null"> `icon` = #{pojo.icon}, </if>
+            <if test="pojo.sort != null"> `sort` = #{pojo.sort}, </if>
+            <if test="pojo.deep != null"> `deep` = #{pojo.deep}, </if>
+            <if test="pojo.code != null"> `code` = #{pojo.code}, </if>
+            <if test="pojo.resource != null"> `resource` = #{pojo.resource}, </if>
+            <if test="pojo.createTime != null"> `create_time` = #{pojo.createTime}, </if>
+            <if test="pojo.updateTime != null"> `update_time` = #{pojo.updateTime} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="selectMenuIdsByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+
+        SELECT DISTINCT m.resource FROM `sys_user_role` ur
+        INNER JOIN `sys_role` r ON r.`id` = ur.`role_id`
+        INNER JOIN  `sys_role_menu` rm ON rm.`role_id` = ur.`role_id`
+        INNER JOIN `sys_menu` m ON m.`id` = rm.`menuId`
+        AND ur.`user_id` = #{userId}
+        AND r.`status` = 1
+        AND m.`resource` IS NOT NULL
+
+    </select>
+
+
+    <select id="selectListByUserId" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column2"/>
+        from sys_menu a LEFT JOIN sys_role_menu rm ON rm.menu_id = a.id
+        LEFT JOIN sys_role r ON r.id = rm.role_id AND r.status = '1'
+        LEFT JOIN sys_user_role ur ON ur.role_id = r.id
+        LEFT JOIN sys_user u ON u.id = ur.user_id
+        WHERE
+          <trim prefixOverrides="AND">
+              <if test="userId != null and userId != ''">
+                  AND u.id = #{userId}
+              </if>
+              <if test="appkey != null and appKey != ''">
+                  AND a.app_key = #{appkey}
+              </if>
+          </trim>
+
+        ORDER BY a.sort
+    </select>
+
+
+    <select id="selectResourceByUserId" resultType="java.lang.String">
+        SELECT  DISTINCT m.`resource` FROM sys_user_role ur
+        LEFT JOIN sys_role_menu rm ON ur.`role_id` = rm.`role_id`
+        LEFT JOIN sys_menu m ON m.`id` = rm.`menu_id`
+        WHERE ur.`user_id` = #{userId}
+        AND m.`resource` IS NOT NULL
+        AND m.`resource` != ''
+        AND m.deep=3
+    </select>
+
+<!--auto generated by codehelper on 2018-05-01 02:20:44-->
+    <select id="findByPidAndIdInOrderBySort" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_menu
+        where `pid`=#{pid}
+        <if test="idList != null and idList.size() > 0">
+            and `id` in
+            <foreach item="item" index="index" collection="idList"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        order by `sort` asc
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-01 02:20:44-->
+    <select id="findByPidOrderBySort" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_menu
+        where `pid`=#{pid}
+        order by `sort` asc
+    </select>
+
+    <select id="selectByQueryParams" parameterType="Map" resultMap="AllColumnMap">
+        select
+        a.`id`,
+        a.`app_key`,
+        a.`name`,
+        a.`pid`,
+        a.`url`,
+        a.`icon`,
+        a.`sort`,
+        a.`deep`,
+        a.`code`,
+        a.`resource`,
+        a.`create_time`,
+        a.`update_time`
+        from sys_menu a LEFT JOIN sys_app_menu b on a.id = b.menu_id
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="searchLike != null">
+                    AND a.name like #{searchLike})
+                </if>
+
+                <if test="appId != null and appId != ''">
+                    AND b.app_id = #{appId}
+                </if>
+            </trim>
+        </where>
+        ORDER BY a.code
+        ASC
+    </select>
+
+<!--auto generated by codehelper on 2018-05-01 11:24:45-->
+    <select id="findByPidOrderByCode" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_menu
+        where `pid`=#{pid} order by `code` asc
+    </select>
+
+<!--auto generated by codehelper on 2018-05-01 11:26:13-->
+    <select id="findById" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_menu
+        where `id`=#{id}
+    </select>
+
+<!--auto generated by codehelper on 2018-05-01 11:28:17-->
+    <delete id="deleteById">
+        delete from sys_menu
+        where `id`=#{id}
+    </delete>
+
+<!--auto generated by codehelper on 2018-05-01 11:30:54-->
+    <select id="findByResource" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_menu
+        where `resource`=#{resource}
+    </select>
+</mapper>
+

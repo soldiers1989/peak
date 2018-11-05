@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <div th:replace="header"></div>
+    <title>任务详情</title>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+    <div class="menu_box">
+        <div class="con">
+            <ul class="accordion" id="accordion">
+                <shiro:hasPermission name="index">
+                    <li>
+                        <a class="link" href="/index">
+                            <img class="icon" th:src="@{/static/images/menu_icon_03.png}" alt=""/>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="template">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_06.png}" alt=""/>模板管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+
+                        <ul class="submenu">
+                            <shiro:hasPermission name="fieldIndex">
+                                <li>
+                                    <a class="active" href="/field/index">字段管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="templateIndex">
+                                <li>
+                                    <a href="/template/index">模板管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="ddManage">
+                    <li class="open">
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_09.png}" alt=""/>尽调管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+                        <shiro:hasPermission name="ddTask">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/task/index">尽调任务</a>
+                                </li>
+                            </ul>
+                        </shiro:hasPermission>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </div>
+    </div>
+    <div class='main_box'>
+        <p class="crumb">我的位置：
+            <span>尽调管理
+					<i>—</i>尽调任务</span>
+            <i>—</i>任务详情</span>
+        </p>
+        <div class="white_bg list_box mb30">
+            <div class="g_tit mb20">
+                <h5>任务详情</h5>
+            </div>
+            <div class="inline_row clearfix">
+                <div class="inline col_6">
+                    <span class="text">企业名称</span>
+                    <span class="value" th:text="${task.companyName}"></span>
+                </div>
+                <div class="inline col_6">
+                    <span class="text">企业类型</span>
+                    <span class="value" th:text="${task.companyType}"></span>
+                    <!-- <span class="value">新增</span> -->
+                </div>
+            </div>
+            <div class="inline_row clearfix">
+                <div class="inline col_6">
+                    <span class="text">任务编号</span>
+                    <span class="value" th:text="${task.taskNum}"></span>
+                </div>
+                <div class="inline col_6">
+                    <span class="text">产品类型</span>
+                    <span class="value" th:text="${task.productName}"></span>
+                </div>
+            </div>
+            <div class="inline_row clearfix">
+                <div class="inline col_6">
+                    <span class="text">预约时间</span>
+                    <span class="value" th:text="${task.appointmentDateStr}"></span>
+                </div>
+                <div class="inline col_6">
+                    <span class="text">法人代表</span>
+                    <span class="value" th:text="${task.legalRep}"></span>
+                </div>
+            </div>
+            <div class="inline_row clearfix">
+                <div class="inline col_6">
+                    <span class="text">手机号码</span>
+                    <span class="value" th:text="${task.phone}"></span>
+                </div>
+                <div class="inline col_6">
+                    <span class="text">所在区域</span>
+                    <span class="value" th:text="${task.area}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="white_bg list_box position mb30">
+            <div class="g_tit mb20">
+                <h5>人员与模板</h5>
+                <button th:if="${task.state == 3}" class="btn pri_btn" onclick="assign()">指派</button>
+            </div>
+            <div class="inline_row clearfix">
+                <div class="inline col_6">
+                    <span class="text">区域经理</span>
+                    <span class="value" th:text="${task.manager}"></span>
+                </div>
+            </div>
+            <div class="inline_row clearfix">
+                <div class="inline col_6">
+                    <span class="text">尽调员</span>
+                    <span class="value" th:text="${task.executor}" id="executors"></span>
+                </div>
+                <div class="inline col_6">
+                    <span class="text">模板</span>
+                    <span class="value" th:text="${task.templateName}" id="templateName"></span>
+                </div>
+            </div>
+        </div>
+        <div class="inline_btns clearfix">
+            <button th:if="${task.state == 3}" class="btn pri_btn" onclick="save()">保存</button>
+            <a class="btn pri_btn" onclick="javascript:history.back(-1);" href="#">返回</a>
+        </div>
+    </div>
+</div>
+<div class="mask2" id="mask2">
+    <div class="add_field maskWidth600">
+        <div class="g_tit">
+            <h5>指派</h5>
+        </div>
+        <div class="close"></div>
+        <div class="white_bg position">
+            <form action="" class="search_box">
+                <div class="input_row clearfix row">
+                    <div class="g_input">
+                        <div class="label">
+                            <span>尽调员：</span>
+                            <select id="executor">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="g_input">
+                        <div class="label">
+                            <span>模板：</span>
+                            <select id="template">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="search_btns">
+                    <input type="button" onclick="cancel()" class="btn pri_btn" value="取消">
+                    <input type="button" onclick="confirm()" class="btn pri_btn" value="确认">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mask2" id="alert">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span id="confirmData"></span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="alertConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    var templateId = [[${task.templateId}]];
+    var taskId = [[${task.id}]];
+    var executorId = [[${task.executorId}]];
+</script>
+<script>
+    var data = {"id": taskId};
+
+    $(function () {
+        data.executorId = executorId;
+        data.templateId = templateId;
+        //查找模板
+        $.ajax({
+            url: '/template/findAll',
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    var result = data.obj;
+                    $('#template').append("<option value=''>请输入</option>");
+                    for (var i = 0; i < result.length; i++) {
+                        $('#template').append('<option value="' + result[i].id + '">' + result[i].name + '</option>')
+                    }
+                } else {
+                    $("#confirmData").html(data.msg)
+                    $("#alert").toggle();
+                }
+            }
+        });
+
+        //查找用户
+        $.ajax({
+            url: '/task/user',
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    var result = data.obj;
+                    $('#executor').append("<option value=''>请输入</option>");
+                    for (var i = 0; i < result.length; i++) {
+                        $('#executor').append('<option value="' + result[i].id + '">' + result[i].userName + '</option>')
+                    }
+                } else {
+                    $("#confirmData").html(data.msg)
+                    $("#alert").toggle();
+                }
+            }
+        });
+    })
+
+    function alertConfirm() {
+        $("#alert").hide();
+    }
+    function assign() {
+        $('#template option').each(function () {
+            if ($(this).val() == templateId) {
+                $(this).attr("selected", true);
+            }
+        })
+        $('#executor option').each(function () {
+            if ($(this).val() == executorId) {
+                $(this).attr("selected", true);
+            }
+        })
+        $('#mask2').toggle();
+    }
+    function cancel() {
+        $('#mask2').hide();
+    }
+
+    $('#mask2 .close').click(function () {
+        $('#mask2').hide();
+    })
+
+    function confirm() {
+        if ($("#template").val() != '') {
+            $("#templateName").text($("#template").find("option:selected").text());
+            data.templateId = $("#template").val();
+            data.templateName = $("#template").find("option:selected").text();
+        } else {
+            data.templateId = undefined;
+            $("#templateName").text("");
+        }
+        if ($("#executor").val() != '') {
+            $("#executors").text($("#executor").find("option:selected").text());
+            data.executorId = $("#executor").val();
+            data.executor = $("#executor").find("option:selected").text();
+        } else {
+            data.executorId = undefined;
+            $("#executors").text("");
+        }
+        $('#mask2').hide();
+    }
+
+    function save() {
+        console.log(data.executorId);
+        console.log(data.templateId);
+        if (!data.executorId) {
+            $("#confirmData").html("请选择尽调员！！！")
+            $("#alert").toggle();
+            return;
+        } else if (!data.templateId) {
+            $("#confirmData").html("请选择模板！！！")
+            $("#alert").toggle();
+            return;
+        } else {
+            $.ajax({
+                url: '/task/update',
+                type: 'POST',
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    if (data.success) {
+                        window.location.href = "/task/index"
+                    } else {
+                        $("#confirmData").html(data.msg)
+                        $("#alert").toggle();
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+</html>

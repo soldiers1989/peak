@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysDictionaryMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.model.SysDictionary">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="buss_key" property="bussKey"/>
+        <result column="pid" property="pid"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `type`,
+        `buss_key`,
+        `pid`,
+        `status`,
+        `remark`,
+        `create_time`,
+        `update_time`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_dictionary (
+            `id`,
+            `name`,
+            `type`,
+            `buss_key`,
+            `pid`,
+            `status`,
+            `remark`,
+            `create_time`,
+            `update_time`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.type},
+            #{pojo.bussKey},
+            #{pojo.pid},
+            #{pojo.status},
+            #{pojo.remark},
+            #{pojo.createTime},
+            #{pojo.updateTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_dictionary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.type!=null"> `type`,</if>
+            <if test="pojo.bussKey!=null"> `buss_key`,</if>
+            <if test="pojo.pid!=null"> `pid`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+            <if test="pojo.createTime!=null"> `create_time`,</if>
+            <if test="pojo.updateTime!=null"> `update_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.type!=null">#{pojo.type},</if>
+            <if test="pojo.bussKey!=null">#{pojo.bussKey},</if>
+            <if test="pojo.pid!=null">#{pojo.pid},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.remark!=null">#{pojo.remark},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+            <if test="pojo.updateTime!=null">#{pojo.updateTime},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_dictionary (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.type},
+            #{pojo.bussKey},
+            #{pojo.pid},
+            #{pojo.status},
+            #{pojo.remark},
+            #{pojo.createTime},
+            #{pojo.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_dictionary
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.type != null"> `type` = #{pojo.type}, </if>
+            <if test="pojo.bussKey != null"> `buss_key` = #{pojo.bussKey}, </if>
+            <if test="pojo.pid != null"> `pid` = #{pojo.pid}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark}, </if>
+            <if test="pojo.createTime != null"> `create_time` = #{pojo.createTime}, </if>
+            <if test="pojo.updateTime != null"> `update_time` = #{pojo.updateTime} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="selectByQueryParams" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_dictionary
+        where `type` =  #{type} AND `status` = '1'
+    </select>
+
+
+    <select id="select" parameterType="Map" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_dictionary
+        where
+        <trim prefixOverrides="AND">
+            <if test="name != null and name != ''">
+                and `name` =  #{name}
+            </if>
+            <if test="type != null and type != '' ">
+                and `type` =  #{type}
+            </if>
+            <if test="bussKey != null and bussKey != '' ">
+                and `buss_key` =  #{bussKey}
+            </if>
+            AND `status` = '1'
+        </trim>
+
+    </select>
+
+
+
+    <update id="deleteById">
+        update sys_dictionary SET `status` = '-1'
+        where `id`=#{id}
+    </update>
+
+
+    <select id="findById" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_dictionary
+        where `id`=#{id}
+    </select>
+
+</mapper>

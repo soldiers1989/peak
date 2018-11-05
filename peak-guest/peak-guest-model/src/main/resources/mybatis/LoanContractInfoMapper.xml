@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.LoanContractInfoMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.LoanContractInfo">
+        <result column="id" property="id"/>
+        <result column="loan_id" property="loanId"/>
+        <result column="approval_amount" property="approvalAmount"/>
+        <result column="approval_term" property="approvalTerm"/>
+        <result column="loan_rate" property="loanRate"/>
+        <result column="service_rate" property="serviceRate"/>
+        <result column="repay_method" property="repayMethod"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `loan_id`,
+        `approval_amount`,
+        `approval_term`,
+        `loan_rate`,
+        `service_rate`,
+        `repay_method`,
+        `create_date`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO loan_contract_info (
+            `id`,
+            `loan_id`,
+            `approval_amount`,
+            `approval_term`,
+            `loan_rate`,
+            `service_rate`,
+            `repay_method`,
+            `create_date`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.loanId},
+            #{pojo.approvalAmount},
+            #{pojo.approvalTerm},
+            #{pojo.loanRate},
+            #{pojo.serviceRate},
+            #{pojo.repayMethod},
+            #{pojo.createDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO loan_contract_info (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.loanId},
+            #{pojo.approvalAmount},
+            #{pojo.approvalTerm},
+            #{pojo.loanRate},
+            #{pojo.serviceRate},
+            #{pojo.repayMethod},
+            #{pojo.createDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE loan_contract_info
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.loanId != null"> `loan_id` = #{pojo.loanId}, </if>
+            <if test="pojo.approvalAmount != null"> `approval_amount` = #{pojo.approvalAmount}, </if>
+            <if test="pojo.approvalTerm != null"> `approval_term` = #{pojo.approvalTerm}, </if>
+            <if test="pojo.loanRate != null"> `loan_rate` = #{pojo.loanRate}, </if>
+            <if test="pojo.serviceRate != null"> `service_rate` = #{pojo.serviceRate}, </if>
+            <if test="pojo.repay_method != null"> `repay_method` = #{pojo.repayMethod}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByLoanId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM loan_contract_info
+        WHERE loan_id = #{loanId}
+    </select>
+</mapper>
+

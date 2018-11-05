@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.dd.mapper.DueDilDataMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.dd.model.DueDilData">
+        <result column="id" property="id"/>
+        <result column="task_id" property="taskId"/>
+        <result column="template_id" property="templateId"/>
+        <result column="control_id" property="controlId"/>
+        <result column="control_key" property="controlKey"/>
+        <result column="value" property="value"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="creator" property="creator"/>
+        <result column="updater" property="updater"/>
+        <result column="group_name" property="groupName"/>
+        <result column="group_key" property="groupKey"/>
+        <result column="group_seq" property="groupSeq"/>
+        <result column="control_seq" property="controlSeq"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `task_id`,
+        `template_id`,
+        `control_id`,
+        `control_key`,
+        `value`,
+        `create_time`,
+        `update_time`,
+        `creator`,
+        `updater`,
+        `group_name`,
+        `group_key`,
+`group_seq`,
+`control_seq`
+</sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_data (
+            `id`,
+            `task_id`,
+            `template_id`,
+            `control_id`,
+            `control_key`,
+            `value`,
+            `create_time`,
+            `update_time`,
+            `creator`,
+            `updater`,
+            `group_name`,
+            `group_key`,
+            `group_seq`,
+            `control_seq`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.taskId},
+            #{pojo.templateId},
+            #{pojo.controlId},
+            #{pojo.controlKey},
+            #{pojo.value},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.groupName},
+            #{pojo.groupKey},
+            #{pojo.groupSeq},
+            #{pojo.controlSeq}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.taskId!=null">`task_id`,</if>
+            <if test="pojo.templateId!=null">`template_id`,</if>
+            <if test="pojo.controlId!=null">`control_id`,</if>
+            <if test="pojo.controlKey!=null">`control_key`,</if>
+            <if test="pojo.value!=null">`value`,</if>
+            <if test="pojo.createTime!=null">`create_time`,</if>
+            <if test="pojo.updateTime!=null">`update_time`,</if>
+            <if test="pojo.creator!=null">`creator`,</if>
+            <if test="pojo.updater!=null">`updater`,</if>
+            <if test="pojo.groupName!=null">`group_name`,</if>
+            <if test="pojo.groupKey!=null">`group_key`,</if>
+            <if test="pojo.groupSeq!=null">`group_seq`,</if>
+            <if test="pojo.controlSeq!=null">`control_seq`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.taskId!=null">#{pojo.taskId},</if>
+            <if test="pojo.templateId!=null">#{pojo.templateId},</if>
+            <if test="pojo.controlId!=null">#{pojo.controlId},</if>
+            <if test="pojo.controlKey!=null">#{pojo.controlKey},</if>
+            <if test="pojo.value!=null">#{pojo.value},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+            <if test="pojo.updateTime!=null">#{pojo.updateTime},</if>
+            <if test="pojo.creator!=null">#{pojo.creator},</if>
+            <if test="pojo.updater!=null">#{pojo.updater},</if>
+            <if test="pojo.groupName!=null">#{pojo.groupName},</if>
+            <if test="pojo.groupKey!=null">#{pojo.groupKey},</if>
+            <if test="pojo.groupSeq!=null">#{pojo.groupSeq},</if>
+            <if test="pojo.controlSeq!=null">#{pojo.controlSeq}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO dd_data(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.taskId},
+            #{pojo.templateId},
+            #{pojo.controlId},
+            #{pojo.controlKey},
+            #{pojo.value},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.groupName},
+            #{pojo.groupKey},
+            #{pojo.groupSeq},
+            #{pojo.controlSeq}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+
+
+        UPDATE dd_data
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.taskId != null">`task_id` = #{pojo.taskId},</if>
+            <if test="pojo.templateId != null">`template_id` = #{pojo.templateId},</if>
+            <if test="pojo.controlId != null">`control_id` = #{pojo.controlId},</if>
+            <if test="pojo.controlKey != null">`control_key` = #{pojo.controlKey},</if>
+            <if test="pojo.value != null">`value` = #{pojo.value},</if>
+            <if test="pojo.createTime != null">`create_time` = #{pojo.createTime},</if>
+            <if test="pojo.updateTime != null">`update_time` = #{pojo.updateTime},</if>
+            <if test="pojo.creator != null">`creator` = #{pojo.creator},</if>
+            <if test="pojo.updater != null">`updater` = #{pojo.updater},</if>
+            <if test="pojo.groupName != null">`group_name` = #{pojo.groupName},</if>
+            <if test="pojo.groupKey != null">`group_key` = #{pojo.groupKey},</if>
+            <if test="pojo.groupSeq != null">`group_seq` = #{pojo.groupSeq},</if>
+            <if test="pojo.controlSeq != null">`control_seq` = #{pojo.controlSeq}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findTaskBO" resultType="com.masspick.peak.dd.model.bo.DueDilDataBO">
+        select
+        d.id,
+        d.value,
+        d.group_name as groupName,
+        d.group_key as groupKey,
+        d.control_key as controlKey,
+        c.type as type,c.label
+        from dd_data d LEFT JOIN dd_control c ON d.control_id = c.id
+        where d.task_id=#{taskId} ORDER BY d.group_seq ,d.control_seq
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-23 17:36:56-->
+    <delete id="delete">
+        delete from dd_data
+        where `task_id`=#{taskId} and `template_id`=#{templateId}
+    </delete>
+
+
+    <select id="groupByGroupSeq" resultType="java.util.HashMap">
+        select * from (SELECT DISTINCT
+            group_key,
+            group_name,group_seq
+        FROM
+            dd_data
+        WHERE
+            task_id = #{taskId} AND `template_id` = #{templateId})as t order BY t.group_seq
+    </select>
+
+    <select id="taskData" resultType="com.masspick.peak.dd.model.bo.TemplateControlBO">
+        SELECT d.id as id ,d.group_key as groupKey,d.group_name as groupName,d.value as value,
+         d.control_id,as controlId,c.label as controlShowName,c.type as type
+        FROM
+        dd_data d left JOIN  dd_control c on d.control_id = c.id
+        WHERE
+        d.task_id = #{taskId} AND d.template_id = #{templateId} order BY d.group_seq,d.control_seq
+    </select>
+
+<!--auto generated by codehelper on 2018-09-20 17:34:15-->
+    <select id="findByTaskIdAndControlKey" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from dd_data
+        where `task_id`=#{taskId} and `control_key`=#{controlKey}
+    </select>
+</mapper>
+

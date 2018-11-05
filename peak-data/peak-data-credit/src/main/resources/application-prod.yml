@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: peak-data-credit
+  data:
+    mongodb:
+      #uri: mongodb://raw:raw_bigdata963qaz@192.168.0.11:27017/jiangxi_test
+      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_URL}:${MONGO_PORT}/${MONGO_DATABASE}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka1:8761/eureka,http://eureka2:8761/eureka,http://eureka3:8761/eureka
+  instance:
+    instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}

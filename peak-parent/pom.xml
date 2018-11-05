@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.masspick.peak</groupId>
+	<artifactId>peak-parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.3.RELEASE</version>
+		<relativePath/>
+	</parent>
+	<name>peak parent</name>
+	<description>peak parent</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+		<spring-cloud-dependencies.version>Finchley.RELEASE</spring-cloud-dependencies.version>
+		<commons-io.version>2.4</commons-io.version>
+		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<commons-beanutils.version>1.9.1</commons-beanutils.version>
+		<poi.tl.version>1.0.0</poi.tl.version>
+		<jjwt.version>0.7.0</jjwt.version>
+		<spring-cloud.version>2.0.0.RELEASE</spring-cloud.version>
+		<shiro-version>1.2.6</shiro-version>
+		<shiro-thymeleaf>2.0.0</shiro-thymeleaf>
+		<mysql-version>5.1.36</mysql-version>
+
+		<!-- mybatis -->
+		<mybatis-version>3.4.1</mybatis-version>
+		<pageHelper-version>4.1.6</pageHelper-version>
+		<druid.version>1.0.19</druid.version>
+		<mybatis-spring-version>1.3.2</mybatis-spring-version>
+
+		<!-- db connect pool -->
+		<druid.version>1.0.19</druid.version>
+
+		<!-- uuid util TODEL-->
+		<fasterxml.version>3.1.4</fasterxml.version>
+
+		<!-- flow engine -->
+		<flowable.version>6.3.0</flowable.version>
+
+		<!-- google 工具包 TODEL-->
+		<guava.version>19.0</guava.version>
+
+		<!-- json 工具类 TODEL-->
+		<fastjson.version>1.2.11</fastjson.version>
+
+		<!-- tencent cloud-->
+		<qcloudsms.version>1.0.2</qcloudsms.version>
+		<qcloud-java-sdk.version>2.2.2</qcloud-java-sdk.version>
+
+		<!-- hibernate validate-->
+		<validator.version>5.2.4.Final</validator.version>
+
+		<!-- email util -->
+		<commons-email.verions>1.4</commons-email.verions>
+
+		<!-- 加密 TODEL-->
+		<bcprov-jdk16.version>1.46</bcprov-jdk16.version>
+		<!--<spring-webmvc.version>4.3.7.RELEASE</spring-webmvc.version>-->
+		<!--<spring-boot.verison>1.5.10.RELEASE</spring-boot.verison>-->
+		<logback-access.version>1.1.11</logback-access.version>
+		<!--<spring-data-redis.version>1.8.1.RELEASE</spring-data-redis.version>-->
+		<qcloud-cos-api>5.4.4</qcloud-cos-api>
+		<logstash-logback.version>5.1</logstash-logback.version>
+		<mvel.version>2.4.2.Final</mvel.version>
+		<com.google.zxing.version>3.2.0</com.google.zxing.version>
+	</properties>
+	<distributionManagement>
+		<repository>
+			<id>masspick-private-repo</id>
+			<name>Releases</name>
+			<url>add/</url>
+		</repository>
+		<snapshotRepository>
+			<id>masspick-private-repo</id>
+			<name>Snapshot</name>
+			<url>http://repo1.bjdcloud.com:10081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<dependencyManagement>
+		<dependencies>
+			<!-- spring cloud start -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-netflix</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
+				<version>${spring-cloud.version}</version>
+			</dependency>
+
+
+
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>${logstash-logback.version}</version>
+			</dependency>
+
+
+
+			<!-- spring cloud end -->
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.deepoove</groupId>
+				<artifactId>poi-tl</artifactId>
+				<version>${poi.tl.version}</version>
+			</dependency>
+
+			<!-- shiro依赖 -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-ehcache</artifactId>
+				<version>${shiro-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-cas</artifactId>
+				<version>${shiro-version}</version>
+			</dependency>
+
+			<!-- shiro-thymeleaf 依赖 -->
+			<dependency>
+				<groupId>com.github.theborakompanioni</groupId>
+				<artifactId>thymeleaf-extras-shiro</artifactId>
+				<version>${shiro-thymeleaf}</version>
+			</dependency>
+
+			<!-- mysql 版本 -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${jjwt.version}</version>
+			</dependency>
+
+			<!-- 添加mybatis依赖 -->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis-spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pageHelper-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.uuid</groupId>
+				<artifactId>java-uuid-generator</artifactId>
+				<version>${fasterxml.version}</version>
+			</dependency>
+
+
+
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-form-api</artifactId>
+				<version>${flowable.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-form-spring-configurator</artifactId>
+				<version>${flowable.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-form-engine-configurator</artifactId>
+				<version>${flowable.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-spring-boot-starter-basic</artifactId>
+				<version>${flowable.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>mybatis</artifactId>
+						<groupId>org.mybatis</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>activation</artifactId>
+						<groupId>javax.activation</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.qcloud</groupId>
+				<artifactId>qcloud-java-sdk</artifactId>
+				<version>${qcloud-java-sdk.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.qcloudsms</groupId>
+				<artifactId>qcloudsms</artifactId>
+				<version>${qcloudsms.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${validator.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-email</artifactId>
+				<version>${commons-email.verions}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk16</artifactId>
+				<version>${bcprov-jdk16.version}</version>
+			</dependency>
+
+			<!--<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring-webmvc.version}</version>
+			</dependency>-->
+
+			<!--<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot</artifactId>
+				<version>${spring-boot.verison}</version>
+			</dependency>-->
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-access</artifactId>
+				<version>${logback-access.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.qcloud</groupId>
+				<artifactId>cos_api</artifactId>
+				<version>${qcloud-cos-api}</version>
+			</dependency>
+			<!--<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>${spring-data-redis.version}</version>
+			</dependency>-->
+
+			<dependency>
+				<groupId>org.mvel</groupId>
+				<artifactId>mvel2</artifactId>
+				<version>${mvel.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+</project>

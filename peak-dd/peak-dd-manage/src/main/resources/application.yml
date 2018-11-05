@@ -1,0 +1,25 @@
+spring:
+  mvc:
+    favicon:
+      enabled: false
+    static-path-pattern: /static/**
+  profiles:
+    active: ${ENV}
+  thymeleaf:
+      cache: false # Enable template caching.
+      check-template: true # Check that the template exists before rendering it.
+      check-template-location: true # Check that the templates location exists.
+      content-type: text/html # Content-Type value.
+      enabled: true # Enable MVC Thymeleaf view resolution.
+      encoding: UTF-8 # Template encoding.
+      mode: LEGACYHTML5 # Template mode to be applied to templates. See also StandardTemplateModeHandlers.
+      prefix: classpath:/templates/ # Prefix that gets prepended to view names when building a URL.
+      suffix: .html
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*/*.xml

@@ -1,0 +1,22 @@
+version: '3'
+services:
+  reasource-provider:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-resource:${VERSION}
+    ports:
+      - "9004:8080"
+    environment:
+      - EUREKA_MEMBERS=http://eureka1:8761/eureka/,http://eureka2:8761/eureka/,http://eureka3:8761/eureka/
+      - SPRING_PREFER_NETWORK=${SPRING_PREFER_NETWORK}
+      - JDBC_URL=${JDBC_URL}
+      - JDBC_PORT=${JDBC_PORT}
+      - JDBC_USERNAME=${JDBC_USERNAME}
+      - JDBC_PASSWORD=${JDBC_PASSWORD}
+      - ENV=prod
+    networks:
+      springcloud-overlay:
+        aliases:
+          - peakResource
+networks:
+  springcloud-overlay:
+    external:
+      name: springcloud-overlay

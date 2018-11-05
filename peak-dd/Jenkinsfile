@@ -1,0 +1,77 @@
+pipeline {
+    agent { 
+        node { label 'maven' } 
+    }
+    parameters {
+        string(name: 'SPRING_PREFER_NETWORK', defaultValue: '10.0.100',
+            description: 'Which container network spring cloud use?')
+        string(name: 'JDBC_URL', defaultValue: '192.168.0.55',
+            description: 'jdbc host?')
+        string(name: 'JDBC_PORT', defaultValue: '3306',
+            description: 'jdbc port?')
+        string(name: 'JDBC_USERNAME', defaultValue: 'root',
+            description: 'jdbc username?')
+        string(name: 'JDBC_PASSWORD', defaultValue: '',
+            description: 'jdbc password?')
+        string(name: 'REDIS_HOST', defaultValue: '192.168.0.8',
+            description: 'redis host?')
+        string(name: 'REDIS_PASSWORD', defaultValue: '',
+            description: 'redis password?')
+        string(name: 'SHIRO_CAS', defaultValue: 'http://auth.e-masspick.com/cas',
+            description: 'SHIRO_CAS?')
+        string(name: 'SHIRO_SERVICE', defaultValue: 'http://dd.e-masspick.com',
+            description: 'SHIRO_SERVICE?')
+        string(name: 'ZUUL_URL', defaultValue: 'http://zuul:8080',
+            description: 'ZUUL_URL?')
+        string(name: 'SPRING_OVERLAY_SUBNET', defaultValue: '10.0.100.0/24',
+            description: 'Which container network to create?')
+        booleanParam(name: 'DEPLOY', defaultValue: false,
+            description: 'Should update deploy or not?')
+    }
+    stages {
+        stage('Package') {
+            steps {
+               dir('peak-dd'){
+                  sh 'make docker-build'
+               }
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'peak-dd/peak-dd-client/target/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'peak-dd/peak-dd-manage/target/*.jar', fingerprint: true
+                 }
+            }
+        }
+        stage('Upload') {
+            steps {
+                dir('peak-dd'){
+                    sh 'docker login ccr.ccs.tencentyun.com -u 100003569030 -p bigdata2018'
+                    sh 'make docker-push'
+                }
+            }
+        }
+        stage('PreDeploy') {
+            when {
+                expression {
+                    return params.CREATE_NETWORK
+                }
+            }
+            steps {
+                sh "make network SPRING_OVERLAY_SUBNET=${params.SPRING_OVERLAY_SUBNET}"
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    return params.DEPLOY
+                }
+            }
+            steps {
+                dir('peak-dd'){
+                    sh 'make deploy'
+                }
+            }
+        }
+        
+    }
+}

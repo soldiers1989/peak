@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka1:8761/eureka,http://eureka2:8761/eureka,http://eureka3:8761/eureka
+  instance:
+    instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+spring:
+  application:
+      name: peak-jwt
+  datasource:
+    url: jdbc:mysql://${JDBC_URL}:${JDBC_PORT}/resource?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: ${JDBC_USERNAME}
+    password: ${JDBC_PASSWORD}
+    driver-class-name: com.mysql.jdbc.Driver
+    max-active: 20
+    initial-size: 1
+    min-idle: 3
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 'x'
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+  redis:
+    database: 0
+    host: ${REDIS_HOST}
+    password: ${REDIS_PASSWORD}
+    port: 6379
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8 #最大空闲连接数
+        max-wait: -1 #最大等待时间
+        min-idle: 0 #初始化连接数

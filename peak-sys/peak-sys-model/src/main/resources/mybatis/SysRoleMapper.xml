@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysRoleMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysRole">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `status`,
+        `remark`,
+        `create_date`,
+        `update_date`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_role (
+            `id`,
+            `name`,
+            `status`,
+            `remark`,
+            `create_date`,
+            `update_date`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.status},
+            #{pojo.remark},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.remark!=null">#{pojo.remark},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_role (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.status},
+            #{pojo.remark},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_role
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findList" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_role
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.name != null and pojo.name != ''">
+                    AND INSTR(name,  #{pojo.name}) > 0
+                </if>
+
+                <if test="pojo.status != null ">
+                    AND status = #{pojo.status}
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="findAllRole" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_role
+        WHERE  status = #{status}
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_role
+        WHERE  id = #{id}
+    </select>
+
+
+    <select id="findByName" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_role
+        WHERE  name = #{name}
+    </select>
+
+    <select id="findRolesByUserId" resultType="com.masspick.peak.resource.vo.RolesFromUserVo">
+        SELECT
+            a.id as roleId,
+            a.name as name,
+            a.remark as remark,
+            (
+                CASE
+                WHEN b.role_id IS NOT NULL THEN
+                    1
+                WHEN b.role_id IS NULL THEN
+                    0
+                END
+            ) AS disable,
+            status
+        FROM
+            sys_role a
+        LEFT JOIN (
+            SELECT
+                *
+            FROM
+                sys_user_role
+            WHERE
+                user_id = #{userId}
+        ) b ON a.id = b.role_id
+        GROUP BY a.id order BY a.update_date
+    </select>
+
+    <select id="findUserListByRoleId" resultType="com.masspick.peak.resource.entity.SysUser">
+       SELECT
+        `id`,
+        `account`,
+        `password`,
+        `name`,
+        `mobile`,
+        `department_id` as departmentId,
+        `department_name` as departmentName,
+        `job_name` as jobName,
+        `occupation_class` as occupationClass,
+        `status`,
+        `create_date` as createDate,
+        `update_date` as updateDate
+        FROM
+            sys_user
+        WHERE
+            id IN (
+                SELECT
+                    user_id AS id
+                FROM
+                    sys_user_role
+                WHERE
+                    role_id = #{roleId}
+            )
+			And status = '1'
+    </select>
+
+    <select id="findRoleListByUserId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM
+        sys_role
+        WHERE
+        id IN (
+        SELECT
+        role_id AS id
+        FROM
+        sys_user_role
+        WHERE
+        user_id = #{userId}
+        )
+        And status = '1'
+    </select>
+</mapper>
+

@@ -1,0 +1,23 @@
+.jumpto {
+    margin-left: 30px;
+    line-height: 27px;
+}
+.jumpto span {
+    margin: 0 10px;
+}
+.jumpto .btn {
+    padding: 2px 10px;
+    background: none;
+    color: #666;
+    border: 1px solid #666;
+    font-size: 14px;
+    border-radius: 0;
+}
+.jumpto input {
+    height: 27px;
+    width: 50px;
+    text-align: center;
+    display: inline-block;
+    padding: 0;
+    border: 1px solid #666;
+}

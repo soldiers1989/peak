@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysAppMenuMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.model.SysAppMenu">
+        <result column="id" property="id"/>
+        <result column="app_id" property="appId"/>
+        <result column="menu_id" property="menuId"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `app_id`,
+        `menu_id`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_app_menu (
+        `id`,
+        `app_id`,
+        `menu_id`
+        ) VALUES (
+        #{pojo.id},
+        #{pojo.appId},
+        #{pojo.menuId}
+        )
+    </insert>
+
+
+    <update id="update">
+        UPDATE sys_app_menu
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.appId != null"> `app_id` = #{pojo.appId}, </if>
+            <if test="pojo.menuId != null"> `menu_id` = #{pojo.menuId}, </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findById" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_app_menu
+        where `id`=#{id}
+    </select>
+
+
+    <select id="findByMenuId" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_app_menu
+        where `menu_id`=#{menuId}
+    </select>
+
+</mapper>

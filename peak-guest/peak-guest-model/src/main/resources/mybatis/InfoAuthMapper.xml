@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.InfoAuthMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.InfoAuth">
+        <result column="id" property="id"/>
+        <result column="etp_cer_id" property="etpCerId"/>
+        <result column="user_id" property="userId"/>
+        <result column="etp_name" property="etpName"/>
+        <result column="info_auth_num" property="infoAuthNum"/>
+        <result column="auth_url" property="authUrl"/>
+        <result column="body_url" property="bodyUrl"/>
+        <result column="controller_url" property="controllerUrl"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        etp_cer_id,
+        etp_name,
+        user_id,
+        info_auth_num,
+        auth_url,
+        body_url,
+        controller_url,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO info_auth (
+            id,
+            etp_cer_id,
+            etp_name,
+            user_id,
+            info_auth_num,
+            auth_url,
+            body_url,
+            controller_url,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.etpCerId},
+            #{pojo.etpName},
+            #{pojo.userId},
+            #{pojo.infoAuthNum},
+            #{pojo.authUrl},
+            #{pojo.bodyUrl},
+            #{pojo.controllerUrl},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO info_auth (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.etpCerId},
+            #{pojo.etpName},
+            #{pojo.userId},
+            #{pojo.infoAuthNum},
+            #{pojo.authUrl},
+            #{pojo.bodyUrl},
+            #{pojo.controllerUrl},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE info_auth
+        <set>
+            <if test="pojo.authUrl != null"> auth_url = #{pojo.authUrl}, </if>
+            <if test="pojo.bodyUrl != null"> body_url = #{pojo.bodyUrl}, </if>
+            <if test="pojo.controllerUrl != null"> controller_url = #{pojo.controllerUrl}, </if>
+            <if test="pojo.etpCerId != null"> etp_cer_id = #{pojo.etpCerId}, </if>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.userId != null"> user_id = #{pojo.userId}, </if>
+            <if test="pojo.infoAuthNum != null"> info_auth_num = #{pojo.infoAuthNum}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <update id="updateByCerId">
+        UPDATE info_auth
+        <set>
+            <if test="pojo.authUrl != null"> auth_url = #{pojo.authUrl}, </if>
+            <if test="pojo.bodyUrl != null"> body_url = #{pojo.bodyUrl}, </if>
+            <if test="pojo.controllerUrl != null"> controller_url = #{pojo.controllerUrl}, </if>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.userId != null"> user_id = #{pojo.userId}, </if>
+            <if test="pojo.infoAuthNum != null"> info_auth_num = #{pojo.infoAuthNum}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE etp_cer_id = #{pojo.etpCerId}
+    </update>
+
+    <sql id="findByPageColumns">
+        SELECT DISTINCT
+        a.id,
+        a.etp_name as etpName,
+        a.info_auth_num as infoAuthNum,
+        a.update_date as updateDate,
+        a.auth_url as authUrl,
+        a.body_url as bodyUrl,
+        a.controller_url as controllerUrl,
+        b.mobile as regMobile
+        FROM info_auth a
+    </sql>
+
+    <select id="findByEtpCerId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM info_auth
+        WHERE etp_cer_id = #{etpCerId}
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM info_auth
+        WHERE id = #{id}
+    </select>
+
+
+    <select id="findByPage" resultType="com.masspick.peak.guest.vo.manage.InfoAuthVo">
+        <include refid="findByPageColumns"/> LEFT JOIN user_weixin b on a.user_id = b.id
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.regMobile != null and pojo.regMobile != ''">
+                    AND INSTR(b.mobile, #{pojo.regMobile}) > 0
+                </if>
+
+                <if test="pojo.etpName != null and pojo.etpName != ''">
+                    AND INSTR(a.etp_name, #{pojo.etpName}) > 0
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY a.update_date DESC
+    </select>
+</mapper>
+

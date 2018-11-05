@@ -1,0 +1,107 @@
+server:
+  port: 8040
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: peak-zuul
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+    multipart:
+      enabled: true
+      max-request-size: 50MB
+      max-file-size: 50MB
+  redis:
+      database: 0
+      host: 192.168.111.210
+      #password: # Login password of the redis server.
+      port: 6379
+      timeout: 0
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8 #最大空闲连接数
+        max-wait: -1 #最大等待时间
+        min-idle: 0 #初始化连接数
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+logging:
+  level.root: info
+  path: logs/
+  file: ${spring.application.name}.log
+
+zuul:
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+  forceOriginalQueryStringEncoding: true
+  routes:
+    consumer-route:
+      path: /consumer/**
+      sensitiveHeaders:
+      strip-prefix: false
+      service-id: peak-consumer
+    provider-route:
+      path: /provider/**
+      sensitiveHeaders:
+      service-id: peak-provider
+    guest-manage-route:
+      path: /guest-manage/**
+      sensitiveHeaders:
+      service-id: peak-guest-manage
+    guest-client-route:
+      path: /guest-client/**
+      sensitiveHeaders:
+      service-id: peak-guest-client
+    provider-dd-route:
+      path: /peak-dd/**
+      sensitiveHeaders:
+      service-id: peak-dd-client
+    peak-jwt:
+      path: /**
+      sensitiveHeaders:
+      service-id: cloud-jwt
+    peak-reource:
+      path: /peak-resource/**
+      sensitiveHeaders:
+      service-id: peak-sys-admin
+    peak-flow:
+      path: /peak-flow/**
+      sensitiveHeaders:
+      service-id: flow-provider
+hystrix:
+  propagate:
+    request-attribute:
+      enabled: true
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  eager-load:
+    enabled: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  OkToRetryOnAllOperations: false
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+server:
+  port: 7550
+
+spring:
+  application:
+    name: peak-data-credit
+  data:
+    mongodb:
+      uri: mongodb://192.168.111.210:27017/CreditReport
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://root:root@localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}

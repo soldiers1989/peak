@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.UserWeiXinMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.UserWeiXin">
+        <result column="nick_name" property="nickName"/>
+        <result column="open_id" property="openId"/>
+        <result column="ins_staff_num" property="insStaffNum"/>
+        <result column="ins_staff_name" property="insStaffName"/>
+        <result column="ins_name" property="insName"/>
+        <result column="regist_source" property="registSource"/>
+        <result column="sex" property="sex"/>
+        <result column="country" property="country"/>
+        <result column="province" property="province"/>
+        <result column="head_port" property="headPort"/>
+        <result column="city" property="city"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="mobile" property="mobile"/>
+        <result column="id" property="id"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        nick_name,
+        open_id,
+        ins_staff_num,
+        ins_staff_name,
+        ins_name,
+        regist_source,
+        sex,
+        country,
+        province,
+        head_port,
+        city,
+        reg_date,
+        mobile,
+        id,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO user_weixin (
+            nick_name,
+            open_id,
+            ins_staff_num,
+            ins_staff_name,
+            ins_name,
+            regist_source,
+            sex,
+            country,
+            province,
+            head_port,
+            city,
+            reg_date,
+            mobile,
+            id,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.nickName},
+            #{pojo.openId},
+            #{pojo.insStaffNum},
+            #{pojo.insStaffName},
+            #{pojo.insName},
+            #{pojo.registSource},
+            #{pojo.sex},
+            #{pojo.country},
+            #{pojo.province},
+            #{pojo.headPort},
+            #{pojo.city},
+            #{pojo.regDate},
+            #{pojo.mobile},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO user_weixin (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.nickName},
+            #{pojo.openId},
+            #{pojo.insStaffNum},
+            #{pojo.insStaffName},
+            #{pojo.insName},
+            #{pojo.registSource},
+            #{pojo.sex},
+            #{pojo.country},
+            #{pojo.province},
+            #{pojo.headPort},
+            #{pojo.city},
+            #{pojo.regDate},
+            #{pojo.mobile},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE user_weixin
+        <set>
+            <if test="pojo.nickName != null"> nick_name = #{pojo.nickName}, </if>
+            <if test="pojo.openId != null"> open_id = #{pojo.openId}, </if>
+            <if test="pojo.insStaffNum != null"> ins_staff_num = #{pojo.insStaffNum}, </if>
+            <if test="pojo.insStaffName != null"> ins_staff_name = #{pojo.insStaffName}, </if>
+            <if test="pojo.insName != null"> ins_name = #{pojo.insName}, </if>
+            <if test="pojo.registSource != null"> regist_source = #{pojo.registSource}, </if>
+            <if test="pojo.sex != null"> sex = #{pojo.sex}, </if>
+            <if test="pojo.country != null"> country = #{pojo.country}, </if>
+            <if test="pojo.province != null"> province = #{pojo.province}, </if>
+            <if test="pojo.headPort != null"> head_port = #{pojo.headPort}, </if>
+            <if test="pojo.city != null"> city = #{pojo.city}, </if>
+            <if test="pojo.regDate != null"> reg_date = #{pojo.regDate}, </if>
+            <if test="pojo.mobile != null"> mobile = #{pojo.mobile}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <!--auto generated Code-->
+    <update id="updateByOpenId">
+        UPDATE user_weixin
+        <set>
+            <if test="pojo.nickName != null"> nick_name = #{pojo.nickName}, </if>
+            <if test="pojo.openId != null"> open_id = #{pojo.openId}, </if>
+            <if test="pojo.insStaffNum != null"> ins_staff_num = #{pojo.insStaffNum}, </if>
+            <if test="pojo.insStaffName != null"> ins_staff_name = #{pojo.insStaffName}, </if>
+            <if test="pojo.insName != null"> ins_name = #{pojo.insStaffName}, </if>
+            <if test="pojo.registSource != null"> regist_source = #{pojo.registSource}, </if>
+            <if test="pojo.sex != null"> sex = #{pojo.sex}, </if>
+            <if test="pojo.country != null"> country = #{pojo.country}, </if>
+            <if test="pojo.province != null"> province = #{pojo.province}, </if>
+            <if test="pojo.headPort != null"> head_port = #{pojo.headPort}, </if>
+            <if test="pojo.city != null"> city = #{pojo.city}, </if>
+            <if test="pojo.regDate != null"> reg_date = #{pojo.regDate}, </if>
+            <if test="pojo.mobile != null"> mobile = #{pojo.mobile}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE open_id = #{pojo.openId}
+    </update>
+
+    <select id="findByOpenId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  user_weixin
+        WHERE open_id = #{openId}
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  user_weixin
+        WHERE id = #{userId}
+    </select>
+
+    <select id="findByMobile" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  user_weixin
+        WHERE mobile = #{mobile}
+    </select>
+
+
+    <select id="findByPage" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  user_weixin
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.nickName != null and pojo.nickName != ''">
+                    AND INSTR(nick_name, #{pojo.nickName}) > 0
+                </if>
+
+                <if test="pojo.mobile != null and pojo.mobile != ''">
+                    AND INSTR(mobile, #{pojo.mobile}) > 0
+                </if>
+
+                <if test="pojo.openId != null and pojo.openId != ''">
+                    AND INSTR(open_id, #{pojo.openId}) > 0
+                </if>
+
+                <if test="pojo.sex != null and pojo.sex != ''">
+                    AND sex = #{pojo.sex}
+                </if>
+
+                <if test="pojo.registSource != null and pojo.registSource != ''">
+                    AND regist_source = #{pojo.registSource}
+                </if>
+
+                <if test="pojo.insName != null and pojo.insName != ''">
+                    AND ins_name = #{pojo.insName}
+                </if>
+
+                <if test="pojo.regStartDate != null">
+                    AND reg_date >= #{pojo.regStartDate}
+                </if>
+
+                <if test="pojo.regEndDate != null">
+                    AND  reg_date &lt;= #{pojo.regEndDate}
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY update_date DESC
+    </select>
+
+
+    <select id="findInsList" resultType="java.lang.String" >
+        SELECT
+        DISTINCT (ins_name)
+        FROM  user_weixin
+        WHERE ins_name is not null
+    </select>
+
+    <select id="findCountByParam" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM  user_weixin
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.nickName != null and pojo.nickName != ''">
+                    AND INSTR(nick_name, #{pojo.nickName}) > 0
+                </if>
+
+                <if test="pojo.mobile != null and pojo.mobile != ''">
+                    AND INSTR(mobile, #{pojo.mobile}) > 0
+                </if>
+
+                <if test="pojo.openId != null and pojo.openId != ''">
+                    AND INSTR(open_id, #{pojo.openId}) > 0
+                </if>
+
+                <if test="pojo.sex != null and pojo.sex != ''">
+                    AND sex = #{pojo.sex}
+                </if>
+
+                <if test="pojo.regDate != null">
+                    AND reg_date = #{pojo.regDate}
+                </if>
+
+                <if test="pojo.regStartDate != null">
+                    AND reg_date >= #{pojo.regStartDate}
+                </if>
+
+                <if test="pojo.regEndDate != null">
+                    AND  reg_date &lt;= #{pojo.regEndDate}
+                </if>
+            </trim>
+        </where>
+    </select>
+</mapper>
+

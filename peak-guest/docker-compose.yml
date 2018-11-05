@@ -1,0 +1,48 @@
+version: '3'
+services:
+  client:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-guest:${VERSION}
+    ports:
+      - "9100:8080"
+    environment:
+      - EUREKA_MEMBERS=http://eureka1:8761/eureka/,http://eureka2:8761/eureka/,http://eureka3:8761/eureka/
+      - SPRING_PREFER_NETWORK=10.0.0
+      - ENV=prod
+      - JDBC_URL=192.168.0.55
+      - JDBC_PORT=3306
+      - JDBC_USERNAME=root
+      - JDBC_PASSWORD=${JDBC_PASSWORD}
+      - REDIS_HOST=192.168.0.8
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      springcloud-overlay:
+        aliases:
+          - peakGuestClient
+    entrypoint:
+      - java
+      - -Djava.security.egd=file:/dev/./urandom
+      - -jar
+      - /client.jar
+  manage:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-guest:${VERSION}
+    environment:
+      - EUREKA_MEMBERS=http://eureka1:8761/eureka/,http://eureka2:8761/eureka/,http://eureka3:8761/eureka/
+      - ENV=prod
+      - SPRING_PREFER_NETWORK=10.0.0
+      - JDBC_URL=192.168.0.55
+      - JDBC_PORT=3306
+      - JDBC_USERNAME=root
+      - JDBC_PASSWORD=${JDBC_PASSWORD}
+    networks:
+      springcloud-overlay:
+        aliases:
+          - peakGuestManage
+    entrypoint:
+      - java
+      - -Djava.security.egd=file:/dev/./urandom
+      - -jar
+      - /manage.jar
+networks:
+  springcloud-overlay:
+    external:
+      name: springcloud-overlay

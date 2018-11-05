@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+  file: logs/${spring.application.name}.log
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_MEMBERS}
+  instance:
+     instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+
+
+hystrix:
+  command:
+    default:
+       execution:
+            isolation:
+               thread:
+                 timeoutInMilliseconds: 200000
+
+spring:
+  application:
+    name: etp-provider
+  datasource:
+    url: jdbc:postgresql://${JDBC_URL}:${JDBC_PORT}/etp?characterEncoding=utf8&useSSL=true
+    username: ${JDBC_USERNAME}
+    password: ${JDBC_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    max-active: 20
+    initial-size: 1
+    min-idle: 3
+    max-wait: 60000
+
+
+

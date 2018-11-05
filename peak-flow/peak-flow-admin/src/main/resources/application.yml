@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: flow-provider
+  profiles:
+    active: ${ENV}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mybatis/*.xml

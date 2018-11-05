@@ -1,0 +1,54 @@
+version: '3'
+services:
+  eureka1:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-cloud-eureka:${VERSION}
+    networks:
+      springcloud-overlay:
+        aliases:
+          - eureka
+    environment:
+      - OTHER_EUREKA_MEMBERS=http://eureka2:8761/eureka/
+      - EUREKA_MEMBER_NAME=eureka1
+      - SPRING_PREFER_NETWORK=10.0.100
+  eureka2:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-cloud-eureka:${VERSION}
+    networks:
+      springcloud-overlay:
+        aliases:
+          - eureka
+    environment:
+      - OTHER_EUREKA_MEMBERS=http://eureka1:8761/eureka/
+      - EUREKA_MEMBER_NAME=eureka2
+      - SPRING_PREFER_NETWORK=10.0.100
+  #eureka3:
+    #image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-cloud-eureka:${VERSION}
+    #networks:
+    # springcloud-overlay:
+    #    aliases:
+    #     - eureka
+    #environment:
+    #  - OTHER_EUREKA_MEMBERS=http://eureka1:8761/eureka/,http://eureka2:8761/eureka/
+    #  - EUREKA_MEMBER_NAME=eureka3
+    #  - SPRING_PREFER_NETWORK=10.0.100
+  frontend:
+      image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-cloud-fonent:${VERSION}
+      networks:
+        - springcloud-overlay
+      ports:
+        - "8000:80"
+  zuul:
+    image: ccr.ccs.tencentyun.com/bjd_bigdata/peak-cloud-zuul:${VERSION}
+    ports:
+      - "8040:8040"
+    environment:
+      - ENV=prod
+      - EUREKA_MEMBERS=http://eureka1:8761/eureka/,http://eureka2:8761/eureka/
+      - SPRING_PREFER_NETWORK=10.0.100
+    networks:
+      springcloud-overlay:
+        aliases:
+          - zuul
+networks:
+  springcloud-overlay:
+    external:
+      name: springcloud-overlay

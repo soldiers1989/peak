@@ -1,0 +1,23 @@
+spring:
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+  profiles:
+      active: ${ENV}
+
+logging:
+  level:
+    root: INFO
+  file: logs/${spring.application.name}.log
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  config-location: classpath:mybatis-config.xml
+
+
+
+
+
+
+

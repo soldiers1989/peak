@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.EtpCerMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.EtpCer">
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="etp_name" property="etpName"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="info_auth_num" property="infoAuthNum"/>
+        <result column="status" property="status"/>
+        <result column="reason" property="reason"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+    
+    <resultMap id="InstitueMap" type="com.masspick.peak.guest.vo.manage.EtpCerInvitePageVo">
+        <result column="etp_name" property="etpName"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="create_date" property="createDate"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="create_month" property="createMonth"/>
+        <result column="reg_cap" property="regCap"/>
+        <result column="reg_date" property="regDate"/>
+    </resultMap>
+
+    <resultMap id="CountMonthMap" type="com.masspick.peak.guest.vo.manage.CountMapVo">
+        <result column="value" property="value"/>
+        <result column="create_month" property="createMonth"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        user_id,
+        etp_name,
+        legal_name,
+        mobile,
+        info_auth_num,
+        status,
+        reason,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO etp_cer (
+            id,
+            user_id,
+            etp_name,
+            legal_name,
+            mobile,
+            info_auth_num,
+            status,
+            reason,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.legalName},
+            #{pojo.mobile},
+            #{pojo.infoAuthNum},
+            #{pojo.status},
+            #{pojo.reason},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO etp_cer (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.userId},
+            #{pojo.etpName},
+            #{pojo.legalName},
+            #{pojo.mobile},
+            #{pojo.infoAuthNum},
+            #{pojo.status},
+            #{pojo.reason},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE etp_cer
+        <set>
+            <if test="pojo.userId != null"> user_id = #{pojo.userId}, </if>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.legalName != null"> legal_name = #{pojo.legalName}, </if>
+            <if test="pojo.mobile != null"> mobile = #{pojo.mobile}, </if>
+            <if test="pojo.infoAuthNum != null"> info_auth_num = #{pojo.infoAuthNum}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status} ,</if>
+            <if test="pojo.reason != null"> reason = #{pojo.reason} ,</if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate} ,</if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByMobileAndEtpName" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  etp_cer
+        WHERE mobile = #{mobile} and etp_name = #{etpName} and status = '1'
+    </select>
+
+    <select id="findById" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  etp_cer
+        WHERE id = #{id}
+    </select>
+
+    <select id="findEtpCerList"  resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM  etp_cer
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="userId != null and userId != ''">
+                    AND user_id = #{userId}
+                </if>
+                <if test="status != null and status != ''">
+                    AND status= #{status}
+                </if>
+            </trim>
+        </where>
+        order by update_date DESC
+    </select>
+
+
+    <sql id="selectUnion">
+        SELECT DISTINCT
+        a.update_date,
+        a.id as id,
+        a.status as status,
+        a.etp_name as etpName,
+        b.mobile as regMobile,
+        a.legal_name as legalName,
+        c.credit_code as creditCode,
+        d.id_code as idCardNum,
+        a.mobile as mobile,
+        b.nick_name as nickName
+    </sql>
+
+
+    <select id="findByPage" resultType="com.masspick.peak.guest.vo.manage.EtpCerPageVo">
+        <include refid="selectUnion"/>
+        FROM etp_cer a
+        LEFT JOIN user_weixin b on a.user_id = b.id
+        LEFT JOIN bus_license_cer c on a.id = c.cer_id
+        LEFT JOIN id_mobile_cer d on d.cer_id = a.id
+        <where>
+            <trim prefixOverrides="AND">
+
+                <if test="pojo.status != null and pojo.status != ''">
+                    AND a.status = #{pojo.status}
+                </if>
+
+                <if test="pojo.regMobile != null and pojo.regMobile != ''">
+                    AND INSTR(b.mobile, #{pojo.regMobile}) > 0
+                </if>
+
+                <if test="pojo.etpName != null and pojo.etpName != ''">
+                    AND INSTR(a.etp_name, #{pojo.etpName}) > 0
+                </if>
+
+                <if test="pojo.legalName != null and pojo.legalName != ''">
+                    AND INSTR(a.legal_name, #{pojo.legalName}) > 0
+                </if>
+
+                <if test="pojo.creditCode != null and pojo.creditCode != ''">
+                    AND INSTR(c.credit_code, #{pojo.creditCode}) > 0
+                </if>
+
+                <if test="pojo.mobile != null and pojo.mobile != ''">
+                    AND INSTR(a.mobile, #{pojo.mobile}) > 0
+                </if>
+            </trim>
+        </where>
+        ORDER BY a.update_date DESC
+    </select>
+
+
+    <select id="countForNumber" resultType="java.lang.Integer" parameterType="Map">
+
+        select count(1) from etp_cer a left join user_weixin b on a.user_id = b.id
+        <where>
+        <trim prefixOverrides="AND">
+            AND a.status = '1'
+            <if test="number != null and number != '' ">
+                and b.ins_staff_num = #{number}
+            </if>
+
+            <if test="month != null and month != '' ">
+                AND DATE_FORMAT(a.create_date, '%Y%m' ) = DATE_FORMAT(CURDATE() , '%Y%m')
+            </if>
+
+        </trim>
+        </where>
+    </select>
+
+
+    <select id="findList" resultMap="InstitueMap">
+        select  a.etp_name,a.legal_name,a.mobile,a.create_date,
+        DATE_FORMAT(a.create_date, '%Y-%m' ) as create_month,b.reg_cap,b.reg_date from etp_cer a
+        left join bus_license_cer b on a.id = b.cer_id
+        left join user_weixin c on a.user_id = c.id
+        where c.ins_staff_num = #{number} and a.status = '1' order by a.create_date desc
+    </select>
+
+    <select id="findCountByMonth" resultMap="CountMonthMap">
+    select  count(1) as value,
+    DATE_FORMAT(a.create_date, '%Y-%m' ) as create_month from etp_cer a
+    left join bus_license_cer b on a.id = b.cer_id
+    left join user_weixin c on a.user_id = c.id
+    where c.ins_staff_num = #{number} and a.status = '1' group by create_month order by create_month desc
+    </select>
+        
+
+
+
+</mapper>
+

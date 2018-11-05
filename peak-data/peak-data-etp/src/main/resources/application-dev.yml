@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: etp-provider
+  datasource:
+    url: jdbc:postgresql://192.168.111.214:5432/etp?characterEncoding=utf8&useSSL=true
+    username: bigdata
+    password: bigdata2018
+    driver-class-name: org.postgresql.Driver
+    max-active: 20
+    initial-size: 1
+    min-idle: 3
+    max-wait: 60000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+server:
+  port: 6060

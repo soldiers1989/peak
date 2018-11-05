@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.etp.mapper.legal.CourtMapper" >
+    <sql id="all_column">
+        `id`,
+        `title`,
+        `case_cause`,
+        `approval_reslut`,
+        `approval_type`,
+        `province`,
+        `city`,
+        `area`,
+        `case_num`,
+        `catalog`,
+        `clients`,
+        `court_lev`,
+        `court_name`,
+        `data_from`,
+        `defendant`,
+        `detail_link`,
+        `judges`,
+        `law_office_d`,
+        `law_office_p`,
+        `laws`,
+        `lawyer_d`,
+        `path`,
+        `plaintiff`,
+        `source`,
+        `suit_type`,
+        `summary`,
+        `type1`,
+        `type2`,
+        `type3`,
+        `type4`,
+        `type5`,
+        `writ_type`,
+        `approval`,
+        `approval_date`,
+        `approval_date_y`,
+        `approval_date_y_m`,
+        `suit_date`,
+        `publish_date`,
+        `collect_date`,
+        `modify_date`,
+        `flag`,
+        `create_time`,
+        `update_time`,
+        `html`
+    </sql>
+    <resultMap id="BaseResultMap" type="com.masspick.peak.model.legal.Court" >
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="case_cause" property="caseCause" jdbcType="VARCHAR"/>
+        <result column="approval_reslut" property="approvalReslut" jdbcType="VARCHAR"/>
+        <result column="approval_type" property="approvalType" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="case_num" property="caseNum" jdbcType="VARCHAR"/>
+        <result column="catalog" property="catalog" jdbcType="VARCHAR"/>
+        <result column="clients" property="clients" jdbcType="VARCHAR"/>
+        <result column="court_lev" property="courtLev" jdbcType="VARCHAR"/>
+        <result column="court_name" property="courtName" jdbcType="VARCHAR"/>
+        <result column="data_from" property="dataFrom" jdbcType="INTEGER"/>
+        <result column="defendant" property="defendant" jdbcType="VARCHAR"/>
+        <result column="detail_link" property="detailLink" jdbcType="VARCHAR"/>
+        <result column="judges" property="judges" jdbcType="VARCHAR"/>
+        <result column="law_office_d" property="lawOfficeD" jdbcType="VARCHAR"/>
+        <result column="law_office_p" property="lawOfficeP" jdbcType="VARCHAR"/>
+        <result column="laws" property="laws" jdbcType="VARCHAR"/>
+        <result column="lawyer_d" property="lawyerD" jdbcType="VARCHAR"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="plaintiff" property="plaintiff" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="INTEGER"/>
+        <result column="suit_type" property="suitType" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="type1" property="type1" jdbcType="VARCHAR"/>
+        <result column="type2" property="type2" jdbcType="VARCHAR"/>
+        <result column="type3" property="type3" jdbcType="VARCHAR"/>
+        <result column="type4" property="type4" jdbcType="VARCHAR"/>
+        <result column="type5" property="type5" jdbcType="VARCHAR"/>
+        <result column="writ_type" property="writType" jdbcType="VARCHAR"/>
+        <result column="approval" property="approval" jdbcType="VARCHAR"/>
+        <result column="approval_date" property="approvalDate" jdbcType="DATE"/>
+        <result column="approval_date_y" property="approvalDateY" jdbcType="VARCHAR"/>
+        <result column="approval_date_y_m" property="approvalDateYM" jdbcType="VARCHAR"/>
+        <result column="suit_date" property="suitDate" jdbcType="DATE"/>
+        <result column="publish_date" property="publishDate" jdbcType="DATE"/>
+        <result column="collect_date" property="collectDate" jdbcType="DATE"/>
+        <result column="modify_date" property="modifyDate" jdbcType="DATE"/>
+        <result column="flag" property="flag" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+        <result column="etp_id" property="etpId" jdbcType="VARCHAR"/>
+  </resultMap>
+
+    <sql id="all_column_etpId">
+        DISTINCT crd."id",
+        crd."title",
+        crd."case_cause",
+        crd."approval_reslut",
+        crd."approval_type",
+        crd."province",
+        crd."city",
+        crd."area",
+        crd."case_num",
+        crd."catalog",
+        crd."clients",
+        crd."court_lev",
+        crd."court_name",
+        crd."data_from",
+        crd."defendant",
+        crd."detail_link",
+        crd."judges",
+        crd."law_office_d",
+        crd."law_office_p",
+        crd."laws",
+        crd."lawyer_d",
+        crd."path",
+        crd."plaintiff",
+        crd."source",
+        crd."suit_type",
+        crd."summary",
+        crd."type1",
+        crd."type2",
+        crd."type3",
+        crd."type4",
+        crd."type5",
+        crd."writ_type",
+        crd."approval",
+        crd."approval_date",
+        crd."approval_date_y",
+        crd."approval_date_y_m",
+        crd."suit_date",
+        crd."publish_date",
+        crd."collect_date",
+        crd."modify_date",
+        crd."flag",
+        crd."create_time",
+        crd."update_time",
+        etp."name" as etp_id,
+        etp."type" as text
+    </sql>
+
+  <insert id="insert" parameterType="com.masspick.peak.model.legal.Court" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Mon Jun 11 17:25:04 CST 2018.
+    -->
+    insert into public.court_all (id, title, case_cause, 
+      approval_reslut, approval_type, province, 
+      city, area, case_num, 
+      catalog, clients, court_lev, 
+      court_name, data_from, defendant, 
+      detail_link, judges, law_office_d, 
+      law_office_p, laws, lawyer_d, 
+      path, plaintiff, source, 
+      suit_type, summary, type1, 
+      type2, type3, type4, 
+      type5, writ_type, approval, 
+      approval_date, approval_date_y, approval_date_y_m, 
+      suit_date, publish_date, collect_date, 
+      modify_date, flag, create_time, 
+      update_time, html)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{caseCause,jdbcType=VARCHAR}, 
+      #{approvalReslut,jdbcType=VARCHAR}, #{approvalType,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{caseNum,jdbcType=VARCHAR}, 
+      #{catalog,jdbcType=VARCHAR}, #{clients,jdbcType=VARCHAR}, #{courtLev,jdbcType=VARCHAR}, 
+      #{courtName,jdbcType=VARCHAR}, #{dataFrom,jdbcType=INTEGER}, #{defendant,jdbcType=VARCHAR}, 
+      #{detailLink,jdbcType=VARCHAR}, #{judges,jdbcType=VARCHAR}, #{lawOfficeD,jdbcType=VARCHAR}, 
+      #{lawOfficeP,jdbcType=VARCHAR}, #{laws,jdbcType=VARCHAR}, #{lawyerD,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{plaintiff,jdbcType=VARCHAR}, #{source,jdbcType=INTEGER}, 
+      #{suitType,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{type1,jdbcType=VARCHAR}, 
+      #{type2,jdbcType=VARCHAR}, #{type3,jdbcType=VARCHAR}, #{type4,jdbcType=VARCHAR}, 
+      #{type5,jdbcType=VARCHAR}, #{writType,jdbcType=VARCHAR}, #{approval,jdbcType=VARCHAR}, 
+      #{approvalDate,jdbcType=DATE}, #{approvalDateY,jdbcType=VARCHAR}, #{approvalDateYM,jdbcType=VARCHAR}, 
+      #{suitDate,jdbcType=DATE}, #{publishDate,jdbcType=DATE}, #{collectDate,jdbcType=DATE}, 
+      #{modifyDate,jdbcType=DATE}, #{flag,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE}, #{html,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.masspick.peak.model.legal.Court" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Mon Jun 11 17:25:04 CST 2018.
+    -->
+    insert into public.court_all
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="caseCause != null" >
+        case_cause,
+      </if>
+      <if test="approvalReslut != null" >
+        approval_reslut,
+      </if>
+      <if test="approvalType != null" >
+        approval_type,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="catalog != null" >
+        catalog,
+      </if>
+      <if test="clients != null" >
+        clients,
+      </if>
+      <if test="courtLev != null" >
+        court_lev,
+      </if>
+      <if test="courtName != null" >
+        court_name,
+      </if>
+      <if test="dataFrom != null" >
+        data_from,
+      </if>
+      <if test="defendant != null" >
+        defendant,
+      </if>
+      <if test="detailLink != null" >
+        detail_link,
+      </if>
+      <if test="judges != null" >
+        judges,
+      </if>
+      <if test="lawOfficeD != null" >
+        law_office_d,
+      </if>
+      <if test="lawOfficeP != null" >
+        law_office_p,
+      </if>
+      <if test="laws != null" >
+        laws,
+      </if>
+      <if test="lawyerD != null" >
+        lawyer_d,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="plaintiff != null" >
+        plaintiff,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="suitType != null" >
+        suit_type,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="type1 != null" >
+        type1,
+      </if>
+      <if test="type2 != null" >
+        type2,
+      </if>
+      <if test="type3 != null" >
+        type3,
+      </if>
+      <if test="type4 != null" >
+        type4,
+      </if>
+      <if test="type5 != null" >
+        type5,
+      </if>
+      <if test="writType != null" >
+        writ_type,
+      </if>
+      <if test="approval != null" >
+        approval,
+      </if>
+      <if test="approvalDate != null" >
+        approval_date,
+      </if>
+      <if test="approvalDateY != null" >
+        approval_date_y,
+      </if>
+      <if test="approvalDateYM != null" >
+        approval_date_y_m,
+      </if>
+      <if test="suitDate != null" >
+        suit_date,
+      </if>
+      <if test="publishDate != null" >
+        publish_date,
+      </if>
+      <if test="collectDate != null" >
+        collect_date,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="html != null" >
+        html,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="caseCause != null" >
+        #{caseCause,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalReslut != null" >
+        #{approvalReslut,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalType != null" >
+        #{approvalType,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null" >
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="clients != null" >
+        #{clients,jdbcType=VARCHAR},
+      </if>
+      <if test="courtLev != null" >
+        #{courtLev,jdbcType=VARCHAR},
+      </if>
+      <if test="courtName != null" >
+        #{courtName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFrom != null" >
+        #{dataFrom,jdbcType=INTEGER},
+      </if>
+      <if test="defendant != null" >
+        #{defendant,jdbcType=VARCHAR},
+      </if>
+      <if test="detailLink != null" >
+        #{detailLink,jdbcType=VARCHAR},
+      </if>
+      <if test="judges != null" >
+        #{judges,jdbcType=VARCHAR},
+      </if>
+      <if test="lawOfficeD != null" >
+        #{lawOfficeD,jdbcType=VARCHAR},
+      </if>
+      <if test="lawOfficeP != null" >
+        #{lawOfficeP,jdbcType=VARCHAR},
+      </if>
+      <if test="laws != null" >
+        #{laws,jdbcType=VARCHAR},
+      </if>
+      <if test="lawyerD != null" >
+        #{lawyerD,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="plaintiff != null" >
+        #{plaintiff,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="suitType != null" >
+        #{suitType,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="type1 != null" >
+        #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null" >
+        #{type2,jdbcType=VARCHAR},
+      </if>
+      <if test="type3 != null" >
+        #{type3,jdbcType=VARCHAR},
+      </if>
+      <if test="type4 != null" >
+        #{type4,jdbcType=VARCHAR},
+      </if>
+      <if test="type5 != null" >
+        #{type5,jdbcType=VARCHAR},
+      </if>
+      <if test="writType != null" >
+        #{writType,jdbcType=VARCHAR},
+      </if>
+      <if test="approval != null" >
+        #{approval,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null" >
+        #{approvalDate,jdbcType=DATE},
+      </if>
+      <if test="approvalDateY != null" >
+        #{approvalDateY,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDateYM != null" >
+        #{approvalDateYM,jdbcType=VARCHAR},
+      </if>
+      <if test="suitDate != null" >
+        #{suitDate,jdbcType=DATE},
+      </if>
+      <if test="publishDate != null" >
+        #{publishDate,jdbcType=DATE},
+      </if>
+      <if test="collectDate != null" >
+        #{collectDate,jdbcType=DATE},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=DATE},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="html != null" >
+        #{html,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <!--auto generated by codehelper on 2018-01-11 16:59:33-->
+    <select id="findByEtpId" resultMap="BaseResultMap">
+        select
+        <include refid="all_column_etpId"/>
+        from public.crd_court_dp etp LEFT JOIN crd_court crd ON etp.court_id = crd."id"
+        where etp."name" = #{etpId}
+        <if test="type != null and type != ''">
+            AND etp."type" = #{type};
+        </if>
+
+    </select>
+</mapper>

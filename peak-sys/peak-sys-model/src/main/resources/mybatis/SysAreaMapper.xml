@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysAreaMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysArea">
+        <result column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="manger_name" property="mangerName"/>
+        <result column="short_name" property="shortName"/>
+        <result column="manger_short_name" property="mangerShortName"/>
+        <result column="level_type" property="levelType"/>
+        <result column="city_code" property="cityCode"/>
+        <result column="zip_code" property="zipCode"/>
+        <result column="pin_yin" property="pinYin"/>
+        <result column="jian_pin" property="jianPin"/>
+        <result column="first_char" property="firstChar"/>
+        <result column="lng" property="lng"/>
+        <result column="lat" property="lat"/>
+        <result column="remark" property="remark"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `parent_id`,
+        `name`,
+        `manger_name`,
+        `short_name`,
+        `manger_short_name`,
+        `level_type`,
+        `city_code`,
+        `zip_code`,
+        `pin_yin`,
+        `jian_pin`,
+        `first_char`,
+        `lng`,
+        `lat`,
+        `remark`,
+`update_date`,
+`create_date`
+</sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_area (
+            `id`,
+            `parent_id`,
+            `name`,
+            `manger_name`,
+            `short_name`,
+            `manger_short_name`,
+            `level_type`,
+            `city_code`,
+            `zip_code`,
+            `pin_yin`,
+            `jian_pin`,
+            `first_char`,
+            `lng`,
+            `lat`,
+            `remark`,
+            `update_date`,
+            `create_date`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.parentId},
+            #{pojo.name},
+            #{pojo.mangerName},
+            #{pojo.shortName},
+            #{pojo.mangerShortName},
+            #{pojo.levelType},
+            #{pojo.cityCode},
+            #{pojo.zipCode},
+            #{pojo.pinYin},
+            #{pojo.jianPin},
+            #{pojo.firstChar},
+            #{pojo.lng},
+            #{pojo.lat},
+            #{pojo.remark},
+            #{pojo.updateDate},
+            #{pojo.createDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.parentId!=null"> `parent_id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.mangerName!=null"> `manger_name`,</if>
+            <if test="pojo.shortName!=null"> `short_name`,</if>
+            <if test="pojo.mangerShortName!=null"> `manger_short_name`,</if>
+            <if test="pojo.levelType!=null"> `level_type`,</if>
+            <if test="pojo.cityCode!=null"> `city_code`,</if>
+            <if test="pojo.zipCode!=null"> `zip_code`,</if>
+            <if test="pojo.pinYin!=null"> `pin_yin`,</if>
+            <if test="pojo.jianPin!=null"> `jian_pin`,</if>
+            <if test="pojo.firstChar!=null"> `first_char`,</if>
+            <if test="pojo.lng!=null"> `lng`,</if>
+            <if test="pojo.lat!=null"> `lat`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+            <if test="pojo.createDate!=null"> `create_date`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> #{pojo.id},</if>
+            <if test="pojo.parentId!=null"> #{pojo.parentId},</if>
+            <if test="pojo.name!=null"> #{pojo.name},</if>
+            <if test="pojo.mangerName!=null"> #{pojo.mangerName},</if>
+            <if test="pojo.shortName!=null"> #{pojo.shortName},</if>
+            <if test="pojo.mangerShortName!=null"> #{pojo.mangerShortName},</if>
+            <if test="pojo.levelType!=null"> #{pojo.levelType},</if>
+            <if test="pojo.cityCode!=null"> #{pojo.cityCode},</if>
+            <if test="pojo.zipCode!=null"> #{pojo.zipCode},</if>
+            <if test="pojo.pinYin!=null"> #{pojo.pinYin},</if>
+            <if test="pojo.jianPin!=null"> #{pojo.jianPin},</if>
+            <if test="pojo.firstChar!=null"> #{pojo.firstChar},</if>
+            <if test="pojo.lng!=null"> #{pojo.lng},</if>
+            <if test="pojo.lat!=null"> #{pojo.lat},</if>
+            <if test="pojo.remark!=null"> #{pojo.remark},</if>
+            <if test="pojo.updateDate!=null"> #{pojo.updateDate},</if>
+            <if test="pojo.createDate!=null"> #{pojo.createDate}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_area(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.parentId},
+            #{pojo.name},
+            #{pojo.mangerName},
+            #{pojo.shortName},
+            #{pojo.mangerShortName},
+            #{pojo.levelType},
+            #{pojo.cityCode},
+            #{pojo.zipCode},
+            #{pojo.pinYin},
+            #{pojo.jianPin},
+            #{pojo.firstChar},
+            #{pojo.lng},
+            #{pojo.lat},
+            #{pojo.remark},
+            #{pojo.updateDate},
+            #{pojo.createDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+
+        UPDATE sys_area
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id},</if>
+            <if test="pojo.parentId != null"> `parent_id` = #{pojo.parentId},</if>
+            <if test="pojo.name != null"> `name` = #{pojo.name},</if>
+            <if test="pojo.mangerName != null"> `manger_name` = #{pojo.mangerName},</if>
+            <if test="pojo.shortName != null"> `short_name` = #{pojo.shortName},</if>
+            <if test="pojo.mangerShortName != null"> `manger_short_name` = #{pojo.mangerShortName},</if>
+            <if test="pojo.levelType != null"> `level_type` = #{pojo.levelType},</if>
+            <if test="pojo.cityCode != null"> `city_code` = #{pojo.cityCode},</if>
+            <if test="pojo.zipCode != null"> `zip_code` = #{pojo.zipCode},</if>
+            <if test="pojo.pinYin != null"> `pin_yin` = #{pojo.pinYin},</if>
+            <if test="pojo.jianPin != null"> `jian_pin` = #{pojo.jianPin},</if>
+            <if test="pojo.firstChar != null"> `first_char` = #{pojo.firstChar},</if>
+            <if test="pojo.lng != null"> `lng` = #{pojo.lng},</if>
+            <if test="pojo.lat != null"> `lat` = #{pojo.lat},</if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark},</if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate},</if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <!--auto generated by codehelper on 2018-07-30 15:49:48-->
+    <select id="dataGrid" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_area
+        <where>
+            <if test="name !=null and  name != ''">
+                AND `name` like #{name}
+            </if>
+            <if test="id !=null and  id != ''">
+                AND `id`=binary #{id}
+            </if>
+            <if test="cityCode !=null and  cityCode != ''">
+                AND `city_code`=binary #{cityCode}
+            </if>
+            <if test="zipCode !=null and  zipCode != ''">
+                AND `zip_code`=binary #{zipCode}
+            </if>
+        </where>
+    </select>
+
+<!--auto generated by codehelper on 2018-07-31 19:04:50-->
+    <select id="find" resultType="com.masspick.peak.resource.entity.bo.Node">
+        select
+        `id`,
+        `parent_id` as parentId,
+        `name`
+        from sys_area
+    </select>
+
+    <!--auto generated by codehelper on 2018-07-31 19:04:50-->
+    <select id="findByUserId" resultType="com.masspick.peak.resource.entity.bo.Node">
+        SELECT
+            a.id,
+            a.parent_id as pId,
+            a.name,
+            (
+                CASE
+                WHEN ua.area_id IS NOT NULL THEN
+                    true
+                WHEN ua.area_id IS NULL THEN
+                    false
+                END
+            ) AS checked
+        FROM
+            sys_area a
+        LEFT JOIN (
+            SELECT
+                *
+            FROM
+                sys_user_area s
+            WHERE
+                s.user_id = #{userId}
+        ) ua ON a.id = ua.area_id where a.id != '100000' order by id
+    </select>
+
+
+    <!--auto generated by codehelper on 2018-07-31 19:04:50-->
+    <select id="findByUserIdAndParentId" resultType="com.masspick.peak.resource.entity.bo.Node">
+        SELECT
+        a.id,
+        a.parent_id as parentId,
+        a.name,
+        (
+        CASE
+        WHEN ua.area_id IS NOT NULL THEN
+        1
+        WHEN ua.area_id IS NULL THEN
+        0
+        END
+        ) AS disable
+        FROM
+        (select * from sys_area where parent_id = #{parentId} ) a
+        LEFT JOIN (
+        SELECT
+        *
+        FROM
+        sys_user_area s
+        WHERE
+        s.user_id = #{userId}
+        ) ua ON a.id = ua.area_id
+    </select>
+</mapper>
+

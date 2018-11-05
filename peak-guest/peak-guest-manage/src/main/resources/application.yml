@@ -1,0 +1,15 @@
+spring:
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+  profiles:
+      active: ${ENV}
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+
+
+
+
+

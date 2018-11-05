@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <title>首页</title>
+    <div th:replace="header"></div>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+    <div class="menu_box">
+        <div class="con">
+            <ul class="accordion" id="accordion">
+                <shiro:hasPermission name="index">
+                    <li>
+                        <a class="link" href="/index">
+                            <img class="icon" th:src="@{/static/images/menu_icon_03.png}" alt=""/>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="template">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_06.png}" alt=""/>模板管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+
+                        <ul class="submenu">
+                            <shiro:hasPermission name="fieldIndex">
+                                <li>
+                                    <a class="active" href="/field/index">字段管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="templateIndex">
+                                <li>
+                                    <a href="/template/index">模板管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="ddManage">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_09.png}" alt=""/>尽调管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+                        <shiro:hasPermission name="ddTask">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/task/index">尽调任务</a>
+                                </li>
+                            </ul>
+                        </shiro:hasPermission>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </div>
+    </div>
+    <div class='main_box'>
+        <p class="crumb">我的位置：
+            <span>首页</span>
+        </p>
+        <ul class="orderMenuList">
+            <li>
+                <dt>当天新增订单数</dt>
+                <dd><i>+</i><span th:text="${taskCount.dayAddTask}"></span></dd>
+            </li>
+            <li>
+                <dt>当天完成订单数</dt>
+                <dd th:text="${taskCount.dayFinishTask}"></dd>
+            </li>
+            <li>
+                <dt>累积完成订单数</dt>
+                <dd th:text="${taskCount.accTask}"></dd>
+            </li>
+            <li>
+                <dt>总订单数</dt>
+                <dd th:text="${taskCount.accFinishTask}">100</dd>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

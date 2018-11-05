@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.dd.mapper.ControlMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.dd.model.Control">
+        <result column="id" property="id"/>
+        <result column="label" property="label"/>
+        <result column="type" property="type"/>
+        <result column="control_key" property="controlKey"/>
+        <result column="placeholder" property="placeholder"/>
+        <result column="data_type" property="dataType"/>
+        <result column="data_source_code" property="dataSourceCode"/>
+        <result column="verification" property="verification"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="creator" property="creator"/>
+        <result column="updater" property="updater"/>
+        <result column="data_source_name" property="dataSourceName"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `label`,
+        `type`,
+        `control_key`,
+        `placeholder`,
+        `data_type`,
+        `data_source_code`,
+        `verification`,
+        `state`,
+        `create_time`,
+        `update_time`,
+        `creator`,
+        `updater`,
+`data_source_name`
+</sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_control (
+            `id`,
+            `label`,
+            `type`,
+            `control_key`,
+            `placeholder`,
+            `data_type`,
+            `data_source_code`,
+            `verification`,
+            `state`,
+            `create_time`,
+            `update_time`,
+            `creator`,
+            `updater`,
+            `data_source_name`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.label},
+            #{pojo.type},
+            #{pojo.controlKey},
+            #{pojo.placeholder},
+            #{pojo.dataType},
+            #{pojo.dataSourceCode},
+            #{pojo.verification},
+            #{pojo.state},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.dataSourceName}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_control
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.label!=null">`label`,</if>
+            <if test="pojo.type!=null">`type`,</if>
+            <if test="pojo.controlKey!=null">`control_key`,</if>
+            <if test="pojo.placeholder!=null">`placeholder`,</if>
+            <if test="pojo.dataType!=null">`data_type`,</if>
+            <if test="pojo.dataSourceCode!=null">`data_source_code`,</if>
+            <if test="pojo.verification!=null">`verification`,</if>
+            <if test="pojo.state!=null">`state`,</if>
+            <if test="pojo.createTime!=null">`create_time`,</if>
+            <if test="pojo.updateTime!=null">`update_time`,</if>
+            <if test="pojo.creator!=null">`creator`,</if>
+            <if test="pojo.updater!=null">`updater`,</if>
+            <if test="pojo.dataSourceName!=null">`data_source_name`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.label!=null">#{pojo.label},</if>
+            <if test="pojo.type!=null">#{pojo.type},</if>
+            <if test="pojo.controlKey!=null">#{pojo.controlKey},</if>
+            <if test="pojo.placeholder!=null">#{pojo.placeholder},</if>
+            <if test="pojo.dataType!=null">#{pojo.dataType},</if>
+            <if test="pojo.dataSourceCode!=null">#{pojo.dataSourceCode},</if>
+            <if test="pojo.verification!=null">#{pojo.verification},</if>
+            <if test="pojo.state!=null">#{pojo.state},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+            <if test="pojo.updateTime!=null">#{pojo.updateTime},</if>
+            <if test="pojo.creator!=null">#{pojo.creator},</if>
+            <if test="pojo.updater!=null">#{pojo.updater},</if>
+            <if test="pojo.dataSourceName!=null">#{pojo.dataSourceName}</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO dd_control(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.label},
+            #{pojo.type},
+            #{pojo.controlKey},
+            #{pojo.placeholder},
+            #{pojo.dataType},
+            #{pojo.dataSourceCode},
+            #{pojo.verification},
+            #{pojo.state},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.dataSourceName}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+
+        UPDATE dd_control
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.label != null">`label` = #{pojo.label},</if>
+            <if test="pojo.type != null">`type` = #{pojo.type},</if>
+            <if test="pojo.controlKey != null">`control_key` = #{pojo.controlKey},</if>
+            <if test="pojo.placeholder != null">`placeholder` = #{pojo.placeholder},</if>
+            <if test="pojo.dataType != null">`data_type` = #{pojo.dataType},</if>
+            <if test="pojo.dataSourceCode != null">`data_source_code` = #{pojo.dataSourceCode},</if>
+            <if test="pojo.verification != null">`verification` = #{pojo.verification},</if>
+            <if test="pojo.state != null">`state` = #{pojo.state},</if>
+            <if test="pojo.createTime != null">`create_time` = #{pojo.createTime},</if>
+            <if test="pojo.updateTime != null">`update_time` = #{pojo.updateTime},</if>
+            <if test="pojo.creator != null">`creator` = #{pojo.creator},</if>
+            <if test="pojo.updater != null">`updater` = #{pojo.updater},</if>
+            <if test="pojo.dataSourceName != null">`data_source_name` = #{pojo.dataSourceName}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="dataGrid" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from dd_control
+        where `state`=1
+        <if test="label !=null and  label != ''">
+            and binary (`label`like #{label})
+        </if>
+
+        <if test="controlKey !=null and  controlKey != ''">
+            and binary (`control_key`like #{controlKey})
+        </if>
+        ORDER BY `create_time` DESC
+    </select>
+
+
+    <update id="updateState">
+        UPDATE dd_control
+        set state = 0
+        WHERE id = #{id}
+    </update>
+
+
+<!--auto generated by codehelper on 2018-06-04 10:50:19-->
+    <select id="findByLabel" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from dd_control
+        where `label`=#{label} and state = 1
+    </select>
+
+<!--auto generated by codehelper on 2018-06-04 10:50:46-->
+    <select id="findByControlKey" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from dd_control
+        where `control_key`=#{controlKey} and state = 1
+    </select>
+
+<!--auto generated by codehelper on 2018-06-12 19:58:28-->
+    <select id="findByState" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from dd_control
+        where `state`= 1
+    </select>
+</mapper>
+

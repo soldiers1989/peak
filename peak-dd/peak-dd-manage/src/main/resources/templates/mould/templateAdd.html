@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <div th:replace="header"></div>
+    <title>模板管理</title>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+
+    <div class='main_box'>
+        <p class="crumb">我的位置：
+            <span>模板管理
+					<i>—</i>新增模板</span>
+        </p>
+        <div class="white_bg position">
+            <div class="search_box">
+                <div class="input_row clearfix row">
+                    <div class="g_input">
+                        <div class="label">
+                            <span>模板名称：</span>
+                            <input type="text" placeholder="请输入模板名称">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="add_btn">
+                <button class="btn pri_btn">添加段落</button>
+            </div>
+        </div>
+        <div class="white_bg list_box position">
+            <div class="search_box">
+                <div class="input_row clearfix row">
+                    <div class="g_input">
+                        <div class="label">
+                            <span>段落名称：</span>
+                            <input type="text" placeholder="请输入段落名称">
+                        </div>
+                    </div>
+                    <div class="search_btn">
+                        <button type="button" class="btn pri_btn" id="maskAddField" data-toggle="modal"
+                                data-target="#modalTable">添加字段
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="operate_btns">
+                <button class="btn pri_btn fr" id="delete" style="background: #e64340;">删除</button>
+                <button class="btn pri_btn fr">下移</button>
+            </div>
+            <table id="table" class="theadBg" data-toggle="table" data-show-jumpto="true">
+                <thead>
+                <tr>
+                    <th data-field="id">排序</th>
+                    <th data-field="name">字段名称</th>
+                    <th data-field="dataSource">数据源</th>
+                    <th data-field="dataType">类型</th>
+                    <th data-field="showName">展示名称</th>
+                    <th data-field="infor">提示信息</th>
+                    <th data-field="required">是否必填</th>
+                    <th data-field="operate">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">添加字段</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="toolbar">
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <input name="search" class="form-control" type="text" placeholder="请输入关键字搜索">
+                    </div>
+                    <button id="ok" type="submit" class="btn btn-default">搜索</button>
+                </div>
+            </div>
+            <div class="modal-body" style="width: 450px;">
+                <table id="tableField"
+                       data-toggle="table"
+                       data-toolbar="#toolbar"
+                       data-query-params="queryParams"
+                       data-response-handler="responseHandler">
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="mask2" id="mask1">
+    <div class="add_field maskWidth980">
+        <div class="g_tit">
+            <h5>添加字段</h5>
+        </div>
+        <div class="close"></div>
+        <div class="white_bg position">
+            <form action="" class="search_box">
+                <div class="input_row clearfix row">
+                    <div class="g_input" style="padding-left: 10px;">
+                        <div class="label">
+                            <input type="text" placeholder="请输入关键字搜索">
+                        </div>
+                    </div>
+                    <div class="search_btn" style="padding: 0 0 0 30px;">
+                        <button type="submit" class="btn pri_btn">搜索</button>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix" style="height: 260px;">
+                <div class="fl" style="width: 450px; margin: 0 20px; padding-top: 30px;">
+                    <table id="tableAddField" data-toggle="table"></table>
+                </div>
+                <div class="fr" style="width: 450px; margin: 0 20px;">
+                    <div class="selectFieldTitle" style="font-size: 14px; line-height: 30px;">已选</div>
+                    <table id="tableSelectField" data-toggle="table"></table>
+                </div>
+            </div>
+            <div class="search_btns clearfix modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="mask2" id="mask2">
+    <div class="add_field maskWidth600">
+        <div class="g_tit">
+            <h5>系统编辑</h5>
+        </div>
+        <div class="close"></div>
+        <div class="white_bg position">
+            <form action="" class="search_box">
+                <div class="input_row clearfix row">
+                    <div class="g_input">
+                        <div class="label">
+                            <span>字段名称：</span>
+                            <input type="text" placeholder="请输入字段名称">
+                        </div>
+                    </div>
+                    <div class="g_input">
+                        <div class="label">
+                            <span>业务主键：</span>
+                            <input type="text" placeholder="请输入业务主键">
+                        </div>
+                    </div>
+                    <div class="g_input">
+                        <div class="label">
+                            <span>字段类型：</span>
+                            <select>
+                                <option value="0">文本</option>
+                                <option value="1">文本域</option>
+                                <option value="2">下拉单选</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="g_input">
+                        <div class="label">
+                            <span>数据源：</span>
+                            <select>
+                                <option value="0">身份证</option>
+                                <option value="1">身份证</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="search_btns">
+                    <button type="submit" class="btn pri_btn">取消</button>
+                    <button type="submit" class="btn pri_btn" onclick="editfield('e')">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    function AddOperateBtns(value, row, index) {
+        return [
+            '<button id="tableEditor" type="button" class="btn_edit blue">编辑</button><button id="tableDelete" type="button" class="btn_del red">删除</button>'
+        ]
+    };
+    function Addvalid(value, row, index) {
+        return [
+            '<label class="valid"><input type="checkbox"><span style="margin-left: 5px;">必填</span></label>'
+        ]
+    }
+    window.operateEvents = {
+        "click #tableEditor": function (e, value, row, index) {
+            $('#mask2').toggle();
+            $('#mask2 .close').click(function () {
+                $('#mask2').hide();
+            })
+        },
+        "click #tableDelete": function (e, value, row, index) {
+            $(this).parent().parent().remove();
+        },
+        "click .valid": function (e, value, row, index) {
+            console.log(e);
+            console.log(value);
+            console.log(row);
+            console.log(index);
+        },
+    }
+</script>
+<script>
+    $('#table').bootstrapTable({
+        // url: 'data1.json',   // 获取表格数据的url
+        // cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+        // striped: true,  //表格显示条纹，默认为false
+        pagination: true, // 在表格底部显示分页组件，默认false
+        pageList: [5, 10], // 设置页面可以显示的数据条数
+        pageSize: 5, // 页面数据条数
+        pageNumber: 1, // 首页页码
+        paginationPreText: '上一页',    //指定分页条中上一页按钮的图标或文字
+        paginationNextText: '下一页',   //指定分页条中下一页按钮的图标或文字
+        paginationHAlign: '',
+        columns: [
+            {
+                field: 'id', // 返回json数据中的name
+                title: '排序', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '5%'
+            },
+            {
+                field: 'name', // 返回json数据中的name
+                title: '字段名称', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '20%'
+            },
+            {
+                field: 'dataSource', // 返回json数据中的name
+                title: '数据源', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '10%' // 上下居中
+            },
+            {
+                field: 'dataType', // 返回json数据中的name
+                title: '类型', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '10%' // 上下居中
+            },
+            {
+                field: 'showName', // 返回json数据中的name
+                title: '展示名称', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '10%' // 上下居中
+            },
+            {
+                field: 'infor', // 返回json数据中的name
+                title: '提示信息', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%' // 上下居中
+            },
+            {
+                field: 'required', // 返回json数据中的name
+                title: '是否必填', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%', // 上下居中
+                events: operateEvents,
+                formatter: Addvalid    //表格中增加验证信息
+            },
+            {
+                field: 'operate', // 返回json数据中的name
+                title: '操作', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%',
+                events: operateEvents, //给按钮注册事件
+                formatter: AddOperateBtns  //表格中增加按钮
+            }
+        ],
+        data: [
+            {
+                id: 1,
+                name: '字段名称',
+                dataSource: '银行分布贷款录入',
+                dataType: '身份证',
+                showName: '证件号码',
+                infor: '证件号码'
+            },
+            {
+                id: 2,
+                name: '字段名称',
+                dataSource: '银行分布贷款录入',
+                dataType: '身份证',
+                showName: '证件号码',
+                infor: '证件号码'
+            },
+            {
+                id: 3,
+                name: '字段名称',
+                dataSource: '银行分布贷款录入',
+                dataType: '身份证',
+                showName: '证件号码',
+                infor: '证件号码'
+            },
+            {
+                id: 4,
+                name: '字段名称',
+                dataSource: '银行分布贷款录入',
+                dataType: '身份证',
+                showName: '证件号码',
+                infor: '证件号码'
+            },
+            {
+                id: 5,
+                name: '字段名称',
+                dataSource: '银行分布贷款录入',
+                dataType: '身份证',
+                showName: '证件号码',
+                infor: '证件号码'
+            },
+            {
+                id: 6,
+                name: '字段名称',
+                dataSource: '银行分布贷款录入',
+                dataType: '身份证',
+                showName: '证件号码',
+                infor: '证件号码'
+            }
+        ],
+
+        onLoadSuccess: function () {  //加载成功时执行
+            console.info("加载成功");
+        },
+        onLoadError: function () {  //加载失败时执行
+            console.info("加载数据失败");
+        }
+    });
+</script>
+<script>
+    var $table = $('#tableField'), $ok = $('#ok');
+    $(function () {
+        $ok.click(function () {
+            $table.bootstrapTable('refresh');
+        });
+    });
+    $(function () {
+        $('#modalTable').on('shown.bs.modal', function () {
+            $table.bootstrapTable('resetView');
+        });
+    });
+    function queryParams() {
+        var params = {};
+        $('#toolbar').find('input[name]').each(function () {
+            params[$(this).attr('name')] = $(this).val();
+        });
+        return params;
+    }
+    function responseHandler(res) {
+        return res.rows;
+    }
+</script>
+
+
+</html>

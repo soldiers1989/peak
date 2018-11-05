@@ -1,0 +1,22 @@
+spring:
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+  profiles:
+      active: ${ENV}
+
+
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/dd/*.xml
+
+security:
+  jwt:
+    secret: k09BQnaF
+    max-expiration: 604800 #7Days
+    min-expiration: 1800 #30fe
+
+
+
+

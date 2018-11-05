@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="processEngineConfiguration"
+          class="org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration" >
+        <property name="history" value="full" />
+    </bean>-->
+
+    <bean id="processEngineConfiguration" class="org.flowable.spring.SpringProcessEngineConfiguration">
+        <property name="deploymentMode" value="single-resource"/>
+        <!--<property name="history" value="full" />-->
+        <property name="deploymentResources" value="classpath:processes/companyCard.bpmn20.xml" />
+        <property name="history" value="full" />
+    </bean>
+
+</beans>

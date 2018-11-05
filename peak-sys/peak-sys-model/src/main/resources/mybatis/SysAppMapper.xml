@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.resource.mapper.SysAppMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.resource.entity.SysApp">
+        <result column="id" property="id"/>
+        <result column="app_id" property="appId"/>
+        <result column="app_key" property="appKey"/>
+        <result column="app_name" property="appName"/>
+        <result column="app_address" property="appAddress"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `app_id`,
+        `app_key`,
+        `app_name`,
+        `app_address`,
+        `status`,
+        `create_date`,
+        `update_date`,
+        `remark`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_app (
+            `id`,
+            `app_id`,
+            `app_key`,
+            `app_name`,
+            `app_address`,
+            `status`,
+            `create_date`,
+            `update_date`,
+            `remark`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.appId},
+            #{pojo.appKey},
+            #{pojo.appName},
+            #{pojo.appAddress},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.remark}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO sys_app
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.appId!=null"> `app_id`,</if>
+            <if test="pojo.appKey!=null"> `app_key`,</if>
+            <if test="pojo.appName!=null"> `app_name`,</if>
+            <if test="pojo.appAddress!=null"> `app_address`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.createDate!=null"> `create_date`,</if>
+            <if test="pojo.updateDate!=null"> `update_date`,</if>
+            <if test="pojo.remark!=null"> `remark`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.appId!=null">#{pojo.appId},</if>
+            <if test="pojo.appKey!=null">#{pojo.appKey},</if>
+            <if test="pojo.appName!=null">#{pojo.appName},</if>
+            <if test="pojo.appAddress!=null">#{pojo.appAddress},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.createDate!=null">#{pojo.createDate},</if>
+            <if test="pojo.updateDate!=null">#{pojo.updateDate},</if>
+            <if test="pojo.remark!=null">#{pojo.remark},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO sys_app (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.appId},
+            #{pojo.appKey},
+            #{pojo.appName},
+            #{pojo.appAddress},
+            #{pojo.status},
+            #{pojo.createDate},
+            #{pojo.updateDate},
+            #{pojo.remark}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE sys_app
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.appId != null"> `app_id` = #{pojo.appId}, </if>
+            <if test="pojo.appKey != null"> `app_key` = #{pojo.appKey}, </if>
+            <if test="pojo.appName != null"> `app_name` = #{pojo.appName}, </if>
+            <if test="pojo.appAddress != null"> `app_address` = #{pojo.appAddress}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.createDate != null"> `create_date` = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> `update_date` = #{pojo.updateDate}, </if>
+            <if test="pojo.remark != null"> `remark` = #{pojo.remark} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findList" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_app
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="pojo.appName != null and pojo.appName != ''">
+                    AND app_name like CONCAT('%', #{pojo.appName}, '%')
+                </if>
+
+                <if test="pojo.appId != null and pojo.appId != ''">
+                    AND app_id = binary #{pojo.appId}
+                </if>
+
+                <if test="pojo.status != null ">
+                    AND status = #{pojo.status}
+                </if>
+
+            </trim>
+        </where>
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="findOne" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_app
+        where id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="AllColumnMap" >
+        SELECT
+        <include refid="all_column"/>
+        FROM  sys_app WHERE status = 1
+        ORDER BY app_name='资源平台' desc , update_date DESC;
+    </select>
+
+<!--auto generated by codehelper on 2018-08-17 16:26:20-->
+    <select id="findByAppId" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_app
+        where `app_id`= #{appId}
+    </select>
+
+<!--auto generated by codehelper on 2018-09-25 11:11:27-->
+    <select id="findByAppIdin" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_app
+        where `app_id` in
+        <foreach item="item" index="index" collection="appIdList"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY update_date
+    </select>
+
+    <select id="findAllExceptSelf" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from sys_app
+        where `app_id` != #{appId}
+    </select>
+</mapper>
+

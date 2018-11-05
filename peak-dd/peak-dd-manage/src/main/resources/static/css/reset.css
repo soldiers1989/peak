@@ -1,0 +1,51 @@
+/* 重置样式 */
+body,html{ width:100%; height:100%;}
+body{ min-width: 1200px; font:14px "PingFang SC Medium", "微软雅黑","黑体-简",Helvetica,sans-serif; color:#333; background:#fafafa;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table,iframe{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;} 
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+table{border-collapse:separate;border-spacing:0;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+label,input,textarea,select,button{font-family:"微软雅黑","黑体-简",Helvetica,sans-serif,"PingFang SC Medium"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img,textarea{line-height:normal;border: none; outline: none;}
+button{cursor: pointer;}
+img{ vertical-align: top;}
+.clearfix:after{content: "";display: block;height: 0;clear: both;}
+a{text-decoration: none;}
+a:hover {
+    text-decoration: none;
+}
+*{ box-sizing:border-box;}
+
+/* 栅格 */
+.col_6{width: 50%;}
+
+/* 按钮样式 */
+.pri_btn{padding: 0 30px; height: 38px;line-height: 38px;font-size: 14px;color: #fff;background-color: #589af8;border-radius: 3px;}
+a.pri_btn:hover {color: #fff;}
+/* 字体颜色 */
+.red{color: #e64340;}
+.blue{color: #589af8;}
+
+/* 背景颜色 */
+.white_bg{background-color: #fff;}
+
+/* 列表box */
+.list_box{padding: 0 20px 20px;}
+.list_box .search_box {
+    margin-bottom: 0;
+    margin-left: -15px;
+}
+
+/* 列表tit */
+.g_tit{border-bottom: 1px solid #e2e2e2;}
+.g_tit>h5{font-size: 18px;height: 58px;line-height: 58px;}
+
+/* 定位 */
+.fl{float: left;}
+.fr{float: right;}
+.mt10{margin-top: 10px;}.mr10{margin-right: 10px;}.ml10{margin-left: 10px;}
+.mb20{margin-bottom: 20px;}
+.mb30{margin-bottom: 30px;}
+.ml40{margin-left: 40px;}

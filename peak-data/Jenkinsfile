@@ -1,0 +1,76 @@
+pipeline {
+    agent { 
+        node { label 'maven' } 
+    }
+    parameters {
+        string(name: 'SPRING_PREFER_NETWORK', defaultValue: '10.0.100',
+            description: 'Which container network spring cloud use?')
+        string(name: 'JDBC_URL', defaultValue: '192.168.0.55',
+            description: 'jdbc host?')
+        string(name: 'JDBC_PORT', defaultValue: '3306',
+            description: 'jdbc port?')
+        string(name: 'JDBC_USERNAME', defaultValue: 'root',
+            description: 'jdbc username?')
+        string(name: 'JDBC_PASSWORD', defaultValue: '',
+            description: 'jdbc password?')
+        string(name: 'MONGO_USERNAME', defaultValue: 'raw',
+            description: 'MONGO_USERNAME?')
+        string(name: 'MONGO_PASSWORD', defaultValue: 'raw_bigdata963qaz',
+            description: 'MONGO_PASSWORD?')
+        string(name: 'MONGO_URL', defaultValue: '192.168.0.6',
+            description: 'MONGO_URL?')
+        string(name: 'MONGO_PORT', defaultValue: '27017',
+            description: 'MONGO_PORT?')
+        string(name: 'MONGO_DATABASE', defaultValue: 'CreditReport',
+            description: 'MONGO_DATABASE?')
+        string(name: 'SPRING_OVERLAY_SUBNET', defaultValue: '10.0.100.0/24',
+            description: 'Which container network to create?')
+        booleanParam(name: 'DEPLOY', defaultValue: false,
+            description: 'Should update deploy or not?')
+    }
+    stages {
+        stage('Package') {
+            steps {
+               dir('peak-data'){
+                  sh 'make docker-build'
+               }
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'peak-data/peak-data-credit/target/*.jar', fingerprint: true
+                 }
+            }
+        }
+        stage('Upload') {
+            steps {
+                dir('peak-data'){
+                    sh 'docker login ccr.ccs.tencentyun.com -u 100003569030 -p bigdata2018'
+                    sh 'make docker-push'
+                }
+            }
+        }
+        stage('PreDeploy') {
+            when {
+                expression {
+                    return params.CREATE_NETWORK
+                }
+            }
+            steps {
+                sh "make network SPRING_OVERLAY_SUBNET=${params.SPRING_OVERLAY_SUBNET}"
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    return params.DEPLOY
+                }
+            }
+            steps {
+                dir('peak-data'){
+                    sh 'make deploy'
+                }
+            }
+        }
+        
+    }
+}

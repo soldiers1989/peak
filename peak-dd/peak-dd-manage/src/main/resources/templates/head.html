@@ -1,0 +1,30 @@
+<div class="head_box">
+    <div class="head_con">
+        <div class="logo fl">
+            <img th:src="@{/static/images/logo_03.png}"/>
+            <span>天钩尽职调查平台</span>
+        </div>
+        <div class="head_right">
+            <ul class="navLeft">
+                <li th:each="sysApp, iterStat : ${session.sysApps}">
+                    <a th:href="${sysApp.appAddress}" th:text="${sysApp.appName}"></a>
+                </li>
+            </ul>
+            <div class="log_out fr ml40">
+                <button type='button' onclick='logOut()'><img class="mr10 mt10" th:src="@{/static/images/logOut_05.png}"/>注销系统</button>
+            </div>
+            <div class="user_opera fr ml40">
+                <img class="mr10" th:src="@{/static/images/head_icon_03.png}" alt=""/>
+                <span  th:text="${session.user.name}"></span>
+                <img class="ml10" th:src="@{/static/images/head_arrow_06.png}" alt=""/>
+            </div>
+            <div class="menu_switch fr ml40"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function logOut() {
+        window.location.href = "/logout";
+    }
+</script>

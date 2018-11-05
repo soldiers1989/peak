@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.BodyCerMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.BodyCer">
+        <result column="cer_id" property="cerId"/>
+        <result column="media_url" property="mediaUrl"/>
+        <result column="validate" property="validate"/>
+        <result column="status" property="status"/>
+        <result column="id" property="id"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        cer_id,
+        media_url,
+        validate,
+        status,
+        id,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO body_cer (
+            cer_id,
+            media_url,
+            validate,
+            status,
+            id,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.cerId},
+            #{pojo.mediaUrl},
+            #{pojo.validate},
+            #{pojo.status},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO body_cer (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.cerId},
+            #{pojo.mediaUrl},
+            #{pojo.validate},
+            #{pojo.status},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE body_cer
+        <set>
+            <if test="pojo.cerId != null"> cer_id = #{pojo.cerId}, </if>
+            <if test="pojo.mediaUrl != null"> media_url = #{pojo.mediaUrl}, </if>
+            <if test="pojo.validate != null"> validate = #{pojo.validate}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findByCerId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM body_cer
+        WHERE cer_id = #{cerId}
+    </select>
+</mapper>
+

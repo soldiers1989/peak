@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <div th:replace="header"></div>
+    <title>任务详情</title>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+    <div class="menu_box">
+        <div class="con">
+            <ul class="accordion" id="accordion">
+                <shiro:hasPermission name="index">
+                    <li>
+                        <a class="link" href="/index">
+                            <img class="icon" th:src="@{/static/images/menu_icon_03.png}" alt=""/>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="template">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_06.png}" alt=""/>模板管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+
+                        <ul class="submenu">
+                            <shiro:hasPermission name="fieldIndex">
+                                <li>
+                                    <a class="active" href="/field/index">字段管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="templateIndex">
+                                <li>
+                                    <a href="/template/index">模板管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="ddManage">
+                    <li class="open">
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_09.png}" alt=""/>尽调管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+                        <shiro:hasPermission name="ddTask">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/task/index">尽调任务</a>
+                                </li>
+                            </ul>
+                        </shiro:hasPermission>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </div>
+    </div>
+    <div class='main_box'>
+        <p class="crumb">我的位置：
+            <span>尽调管理
+          <i>—</i>尽调任务</span>
+            <i>—</i>尽调结果</span>
+        </p>
+        <div class="white_bg result_box" th:if="${group.size() !=0 }">
+            <div class="g_tit mb30">
+                <h5>尽调结果</h5>
+            </div>
+            <div th:each="key,iterStat : ${group}" class="tableBase tableBox ddResultTable">
+                <div class="thead">
+                    <div class="tr">
+                        <div class="th" th:text="${key.group_name}"></div>
+                        <div class="th"></div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    <div class="tr" th:each="control,iterStat : ${data}" th:if="${control.groupKey == key.group_key}">
+                        <div class="td" th:text="${control.label}"></div>
+                        <div class="td">
+                            <img th:if="${control.type == 'image'}" th:src="${control.value}" alt=""/>
+                            <div th:if="${control.type != 'image'}" th:text="${control.value}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="white_bg result_box" th:if="${task.reason }">
+            <div class="g_tit mb30">
+                <h5>终止原因</h5>
+            </div>
+            <div class="tableBase tableBox ddResultTable">
+                <div class="tbody">
+                    <div class="tr">
+                        <div class="td">终止原因</div>
+                        <div class="td" th:text="${task.reason}"></div>
+                    </div>
+                    <div th:if="${task.desc}" class="tr">
+                        <div class="td">原因描述</div>
+                        <div class="td" th:text="${task.desc}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="inline_btns clearfix">
+            <button class="btn pri_btn" onclick="javascript:history.back(-1);">返回</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <div th:replace="header"></div>
+    <title>字段管理</title>
+</head>
+
+<body>
+<div th:replace="head"></div>
+<div class="box">
+    <div class="menu_box">
+        <div class="con">
+            <ul class="accordion" id="accordion">
+                <shiro:hasPermission name="index">
+                    <li>
+                        <a class="link" href="/index">
+                            <img class="icon" th:src="@{/static/images/menu_icon_03.png}" alt=""/>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="template">
+                    <li  class="open">
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_06.png}" alt=""/>模板管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+
+                        <ul class="submenu">
+                            <shiro:hasPermission name="fieldIndex">
+                                <li>
+                                    <a class="active" href="/field/index">字段管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="templateIndex">
+                                <li>
+                                    <a href="/template/index">模板管理</a>
+                                </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="ddManage">
+                    <li>
+                        <div class="link">
+                            <img class="icon" th:src="@{/static/images/menu_icon_09.png}" alt=""/>尽调管理
+                            <img th:src="@{/static/images/menu_xsj_03.png}" alt="" class="xsj"/>
+                        </div>
+                        <shiro:hasPermission name="ddTask">
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/task/index">尽调任务</a>
+                                </li>
+                            </ul>
+                        </shiro:hasPermission>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </div>
+    </div>
+    <div class='main_box'>
+        <p class="crumb">我的位置：
+            <span>模板管理
+					<i>—</i>字段管理</span>
+        </p>
+        <div class="white_bg position">
+            <shiro:hasPermission name="fieldSearch">
+                <div class="search_box">
+                    <div class="input_row clearfix row">
+                        <div class="g_input">
+                            <div class="label">
+                                <span>字段名称：</span>
+                                <input type="text" id="label" placeholder="请输入字段名称">
+                            </div>
+                        </div>
+                        <div class="g_input">
+                            <div class="label">
+                                <span>业务主键：</span>
+                                <input type="text" id="controlKey" placeholder="请输入业务主键">
+                            </div>
+                        </div>
+                        <div class="search_btn">
+                            <button class="btn pri_btn" onclick="searchFilter()">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </shiro:hasPermission>
+            <div class="add_btn">
+                <shiro:hasPermission name="fieldAdd">
+                    <button onclick="addField()" class="btn pri_btn">新增字段</button>
+                </shiro:hasPermission>
+            </div>
+        </div>
+        <div class="white_bg list_box position">
+            <div class="g_tit mb20">
+                <h5>查询结果</h5>
+            </div>
+            <table class="theadBg" id="table" data-toggle="table" data-show-jumpto="true">
+                <thead>
+                <tr>
+                    <th data-field="number">序号</th>
+                    <th data-field="label">字段名称</th>
+                    <th data-field="controlKey">业务主键</th>
+                    <th data-field="type">字段类型</th>
+                    <th data-field="placeholder">提示</th>
+                    <th data-field="dataSourceName">数据源</th>
+                    <!--<th data-field="dataType">类型</th>-->
+                    <th data-field="operate">操作</th>
+                    <!--<shiro:hasAnyRoles name="管理员"></shiro:hasAnyRoles>-->
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="mask2" id="mask2">
+    <div class="add_field maskWidth600">
+        <div class="g_tit">
+            <h5>字段编辑</h5>
+        </div>
+        <div class="close" onclick="cancel()"></div>
+        <div class="white_bg position">
+            <form action="" class="search_box demoValid">
+                <div class="input_row clearfix row">
+                    <div class="g_input" id="name">
+                        <div class="label">
+                            <span><i class="red">*</i>字段名称：</span>
+                            <input type="hidden" id="fieldId">
+                            <input type="text" id="nameText" placeholder="请输入字段名称">
+                        </div>
+                    </div>
+                    <div class="g_input" id="key">
+                        <div class="label">
+                            <span><i class="red">*</i>业务主键：</span>
+                            <input type="text" id="keyText" placeholder="请输入业务主键">
+                        </div>
+                    </div>
+                    <div class="g_input" id="type">
+                        <div class="label">
+                            <span><i class="red">*</i>字段类型：</span>
+                            <select id="typeSelect" onchange="changeText()">
+                                <option value="">请输入</option>
+                                <option value="input">文本</option>
+                                <option value="number">数字</option>
+                                <option value="phone">电话</option>
+                                <option value="bankCard">银行卡</option>
+                                <option value="website">网址</option>
+                                <option value="mail">邮箱</option>
+                                <option value="idCard">身份证</option>
+                                <option value="select">下拉选项</option>
+                                <option value="multSelect">多项选项</option>
+                                <option value="date">时间</option>
+                                <option value="textarea">文本域</option>
+                                <option value="image">图片</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="g_input" id="info" style="display: none">
+                        <div class="label">
+                            <span>提示信息：</span>
+                            <input type="text" id="infoText" placeholder="请输入提示信息">
+                        </div>
+                    </div>
+                    <div class="g_input" id="dataSource" style="display: none;">
+                        <div class="label">
+                            <span><i class="red">*</i>数据源：</span>
+                            <select id="dataSourceText">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="search_btns">
+                    <input type="button" class="btn pri_btn" onclick="cancel()" value="取消">
+                    <input type="button" class="btn pri_btn" onclick="save()" value="确认">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mask2" id="confirmMask">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span>确认删除吗！！！</span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="deleteCancel()" class="btn pri_btn">取消</button>
+            <button onclick="deleteConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+
+<div class="mask2" id="alert">
+    <div class="confirmMain">
+        <div class="confirmHead">
+            <span>提示</span>
+        </div>
+        <div class="confirmBody">
+            <span id="confirmData"></span>
+        </div>
+        <div class="confirmFoot">
+            <button onclick="alertConfirm()" class="btn pri_btn">确认</button>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    var permission = [[${session.permission}]];
+</script>
+<script th:inline="javascript">
+    var rowId;
+    var fieldMap = {
+        "input": "文本",
+        "number": "数字",
+        "phone": "电话",
+        "bankCard": "银行卡",
+        "website": "网址"
+        ,
+        "mail": "邮箱",
+        "idCard": "身份证",
+        "select": "下拉选项",
+        "multSelect": "多项选项",
+        "date": "时间",
+        "textarea": "文本域",
+        "image": "图片"
+    };
+    var result;
+    $(function () {
+        $.ajax({
+            url: '/dic',
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    result = data.obj;
+                    $('#dataSourceText').append("<option value=''>请输入</option>");
+                    for (var i = 0; i < result.length; i++) {
+                        $('#dataSourceText').append('<option value="' + result[i].code + '">' + result[i].name + '</option>')
+                    }
+                } else {
+                    $("#confirmData").html(data.msg)
+                    $("#alert").toggle();
+                }
+            }
+        });
+    })
+
+    function alertConfirm() {
+        $("#alert").hide();
+    }
+    function deleteCancel() {
+        $("#confirmMask").hide();
+    }
+
+    function deleteConfirm() {
+        $.ajax({
+            url: '/field/delete?id=' + rowId,
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    $("#confirmMask").hide();
+                    $('#table').bootstrapTable('refresh');
+                } else {
+                    $("#confirmData").html(data.msg)
+                    $("#alert").toggle();
+                }
+            }
+        })
+    }
+    function AddOperateBtns(value, row, index) {
+        var html = "";
+        for (var i = 0; i < permission.length; i++) {
+            if (permission[i] == "fieldEdit") {
+                html += '<button id="tableEditor" type="button" class="btn_edit blue">编辑</button>';
+            }
+        }
+        for (var i = 0; i < permission.length; i++) {
+            if (permission[i] == "fieldDelete") {
+                html += '<button id="tableDelete" type="button" class="btn_del red" >删除</button>';
+            }
+        }
+        return html;
+    };
+    window.operateEvents = {
+        "click #tableEditor": function (e, value, row, index) {
+            console.log(row)
+            //id
+            $('#fieldId').val(row.id);
+
+            //name
+            $('#nameText').val(row.label);
+
+            //key
+            $('#keyText').val(row.controlKey);
+
+            //提示信息
+            $('#infoText').val(row.placeholder);
+
+            //字段类型
+            $('#typeSelect').empty();
+            $('#typeSelect').append("<option value=''>请输入</option>");
+            for (var type in fieldMap) {
+                if (type == row.type) {
+                    $('#typeSelect').append('<option value="' + type + '" selected>' + fieldMap[type] + '</option>')
+                } else {
+                    $('#typeSelect').append('<option value="' + type + '">' + fieldMap[type] + '</option>')
+                }
+            }
+
+            if (row.dataSourceCode) {
+                $('#dataSource').css("display", "block");
+                $('#dataSourceText').empty();
+                $('#dataSourceText').append("<option value=''>请输入</option>");
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].code == row.dataSourceCode) {
+                        $('#dataSourceText').append('<option value="' + result[i].code + '" selected>' + result[i].name + '</option>')
+                    } else {
+                        $('#dataSourceText').append('<option value="' + result[i].code + '">' + result[i].name + '</option>')
+                    }
+                }
+            } else {
+                $('#dataSource').css("display", "none");
+            }
+
+            $('#mask2').toggle();
+            $('#mask2 .close').click(function () {
+                $('#mask2').hide();
+            })
+        },
+        "click #tableDelete": function (e, value, row, index) {
+            rowId = row.id;
+            $("#confirmMask").toggle();
+        }
+    }
+
+    $('#table').bootstrapTable({
+        url: '/field/dataGrid',   // 获取表格数据的url
+        // cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+        // striped: true,  //表格显示条纹，默认为false
+        pagination: true, // 在表格底部显示分页组件，默认false
+        pageList: [0, 10], // 设置页面可以显示的数据条数
+        pageSize: 10, // 页面数据条数
+        pageNumber: 1, // 首页页码
+        queryParams: queryParams,
+        paginationPreText: '上一页',    //指定分页条中上一页按钮的图标或文字
+        paginationNextText: '下一页',   //指定分页条中下一页按钮的图标或文字
+        paginationHAlign: '',
+        columns: [
+            {
+                field: 'number',
+                title: '序号',
+                align: "center",
+                width: '5%',
+                formatter: function (value, row, index) {
+                    return index + 1;
+                }
+            },
+            {
+                field: 'label', // 返回json数据中的name
+                title: '字段名称', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '20%'
+            },
+            {
+                field: 'controlKey', // 返回json数据中的name
+                title: '业务主键', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '20%' // 上下居中
+            },
+            {
+                field: 'type', // 返回json数据中的name
+                title: '字段类型', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '10%',// 上下居中
+                formatter: function (value, row, index) {
+                    return fieldMap[row.type];
+                }
+            },
+            {
+                field: 'placeholder', // 返回json数据中的name
+                title: '提示', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '15%', // 上下居中
+                formatter: function (value, row, index) {
+                    if (row.placeholder == "") {
+                        return "-";
+                    } else {
+                        return row.placeholder
+                    }
+                }
+            },
+            {
+                field: 'dataSourceName', // 返回json数据中的name
+                title: '数据源', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '10%',// 上下居中
+                formatter: function (value, row, index) {
+                    if (row.dataSourceName == "") {
+                        return "-";
+                    } else {
+                        return row.dataSourceName
+                    }
+                }
+            },
+            {
+                field: 'operate', // 返回json数据中的name
+                title: '操作', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle', // 上下居中
+                width: '20%', // 上下居中
+                events: operateEvents, //给按钮注册事件
+                formatter: AddOperateBtns,  //表格中增加按
+                hidden: true
+            }
+        ],
+
+        onLoadSuccess: function () {  //加载成功时执行
+            console.info("加载成功");
+        },
+        onLoadError: function () {  //加载失败时执行
+            console.info("加载数据失败");
+        }
+    });
+
+    function queryParams(params) {
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            // limit: params.limit,   //页面大小
+            rows: this.pageSize,
+            page: this.pageNumber,
+            label: $('#label').val(),
+            controlKey: $('#controlKey').val()
+        };
+        return temp;
+    }
+
+    function searchFilter() {
+        $('#table').bootstrapTable('refresh');
+    }
+
+    function addField() {
+        $('#fieldId').val('');
+        $('#nameText').val('');
+        $('#keyText').val('');
+        $('#infoText').val('');
+        $('#dataSource').css("display", "none");
+        $('#info').css("display", "none");
+        $('#typeSelect').empty();
+        $('#typeSelect').append("<option value=''>请输入</option>");
+        for (var type in fieldMap) {
+            $('#typeSelect').append('<option value="' + type + '">' + fieldMap[type] + '</option>')
+        }
+
+        $('#dataSourceText').empty();
+        $('#dataSourceText').append("<option value=''>请输入</option>");
+        for (var i = 0; i < result.length; i++) {
+            $('#dataSourceText').append('<option value="' + result[i].code + '">' + result[i].name + '</option>')
+        }
+        $('#mask2').toggle();
+        $('#mask2 .close').click(function () {
+            $('#mask2').hide();
+        })
+    }
+
+    function changeText() {
+        var value = $('#typeSelect option:selected').val();
+        if ("select" == value || "multSelect" == value) {
+            $('#dataSourceText').empty();
+            $('#dataSourceText').append("<option value=''>请输入</option>");
+            for (var i = 0; i < result.length; i++) {
+                $('#dataSourceText').append('<option value="' + result[i].code + '">' + result[i].name + '</option>')
+            }
+            $('#dataSource').css("display", "block");
+        } else {
+            $('#dataSource').css("display", "none");
+        }
+
+        if ("select" != value && "multSelect" != value && "image" != value) {
+            $('#info').css("display", "block");
+        } else {
+            $('#info').css("display", "none");
+        }
+    }
+
+    function cancel() {
+        $('#fieldId').val('');
+        $('#nameText').val('');
+        $('#keyText').val('');
+        $('#infoText').val('');
+        $('#typeSelect option').each(function () {
+            $(this).attr("selected", false);
+        });
+        $('#dataSourceText option').each(function () {
+            $(this).attr("selected", false);
+        });
+        $('#dataSource').css("display", "none");
+        $('#mask2').hide();
+    }
+
+    function save() {
+        var flag = false;
+        if ($.trim($('#nameText').val()) == '') {
+            $("#confirmData").html("请输入字段名称！！！")
+            $("#alert").toggle();
+            flag = true;
+            return;
+        }
+        if ($.trim($('#keyText').val()) == '') {
+            $("#confirmData").html("请输入业务主键！！！")
+            $("#alert").toggle();
+            flag = true;
+            return;
+        }
+        if ($.trim($('#typeSelect').val()) == '') {
+            $("#confirmData").html("请输入字段类型！！！")
+            $("#alert").toggle();
+            flag = true;
+            return;
+        } else {
+            if ($.trim($('#typeSelect').val()) == 'select' || $.trim($('#typeSelect').val()) == 'multSelect') {
+                if ($.trim($('#dataSourceText').val()) == '') {
+                    $("#confirmData").html("请输入数据源！！！")
+                    $("#alert").toggle();
+                    flag = true;
+                    return;
+                }
+            }
+        }
+
+        if (!flag) {
+            var dataSourceCode = "";
+            var dataSourceName = "";
+            if ($('#dataSource').css("display") != "none") {
+                dataSourceCode = $('#dataSourceText').val();
+                dataSourceName = $('#dataSourceText').find("option:selected").text();
+            }
+            var data = JSON.stringify({
+                "id": $('#fieldId').val(),
+                "label": $('#nameText').val(),
+                "controlKey": $('#keyText').val(),
+                "placeholder": $('#infoText').val(),
+                "type": $('#typeSelect').val(),
+                "dataSourceCode": dataSourceCode,
+                "dataSourceName": dataSourceName
+            });
+            $.ajax({
+                url: '/field/save',
+                type: 'POST',
+                dataType: "json",
+                contentType: "application/json",
+                data: data,
+                success: function (data) {
+                    if (data.success) {
+                        $('#dataSource').css("display", "none");
+                        $('#mask2').hide();
+                        $("#controlKey").val("");
+                        $("#label").val("");
+                        $('#table').bootstrapTable('refresh');
+                    } else {
+                        $("#confirmData").html(data.msg)
+                        $("#alert").toggle();
+                    }
+                }
+            })
+        }
+
+    }
+</script>
+
+</html>

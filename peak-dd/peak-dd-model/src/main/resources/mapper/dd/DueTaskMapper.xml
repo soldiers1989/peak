@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.dd.mapper.DueTaskMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.dd.model.DueTask">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="company_name" property="companyName"/>
+        <result column="company_type" property="companyType"/>
+        <result column="company_id" property="companyId"/>
+        <result column="template_id" property="templateId"/>
+        <result column="state" property="state"/>
+        <result column="task_num" property="taskNum"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="area" property="area"/>
+        <result column="manager" property="manager"/>
+        <result column="executor" property="executor"/>
+        <result column="receive_date" property="receiveDate"/>
+        <result column="finish_date" property="finishDate"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="creator" property="creator"/>
+        <result column="updater" property="updater"/>
+        <result column="appointment_date" property="appointmentDate"/>
+        <result column="executor_id" property="executorId"/>
+        <result column="address" property="address"/>
+        <result column="legal_rep" property="legalRep"/>
+        <result column="phone" property="phone"/>
+        <result column="reason" property="reason"/>
+        <result column="desc" property="desc"/>
+        <result column="refuse_date" property="refuseDate"/>
+        <result column="out_id" property="outId"/>
+        <result column="process_instance_id" property="processInstanceId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_name" property="productName"/>
+        <result column="manager_name" property="managerName"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `company_name`,
+        `company_type`,
+        `company_id`,
+        `template_id`,
+        `state`,
+        `task_num`,
+        `province`,
+        `city`,
+        `area`,
+        `manager`,
+        `executor`,
+        `receive_date`,
+        `finish_date`,
+        `create_time`,
+        `update_time`,
+        `creator`,
+        `updater`,
+        `appointment_date`,
+        `executor_id`,
+        `address`,
+        `legal_rep`,
+        `phone`,
+        `reason`,
+        `desc`,
+        `refuse_date`,
+        `out_id`,
+        `process_instance_id`,
+        `product_id`,
+        `product_name`,
+        `manager_name`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_task (
+            `id`,
+            `name`,
+            `company_name`,
+            `company_type`,
+            `company_id`,
+            `template_id`,
+            `state`,
+            `task_num`,
+            `province`,
+            `city`,
+            `area`,
+            `manager`,
+            `executor`,
+            `receive_date`,
+            `finish_date`,
+            `create_time`,
+            `update_time`,
+            `creator`,
+            `updater`,
+            `appointment_date`,
+            `executor_id`,
+            `address`,
+            `legal_rep`,
+            `phone`,
+            `reason`,
+            `desc`,
+            `refuse_date`,
+            `out_id`,
+            `process_instance_id`,
+            `product_id`,
+            `product_name`,
+            `manager_name`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.companyName},
+            #{pojo.companyType},
+            #{pojo.companyId},
+            #{pojo.templateId},
+            #{pojo.state},
+            #{pojo.taskNum},
+            #{pojo.province},
+            #{pojo.city},
+            #{pojo.area},
+            #{pojo.manager},
+            #{pojo.executor},
+            #{pojo.receiveDate},
+            #{pojo.finishDate},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.appointmentDate},
+            #{pojo.executorId},
+            #{pojo.address},
+            #{pojo.legalRep},
+            #{pojo.phone},
+            #{pojo.reason},
+            #{pojo.desc},
+            #{pojo.refuseDate},
+            #{pojo.outId},
+            #{pojo.processInstanceId},
+            #{pojo.productId},
+            #{pojo.productName},
+            #{pojo.managerName}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO dd_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.companyName!=null">`company_name`,</if>
+            <if test="pojo.companyType!=null">`company_type`,</if>
+            <if test="pojo.companyId!=null">`company_id`,</if>
+            <if test="pojo.templateId!=null">`template_id`,</if>
+            <if test="pojo.state!=null">`state`,</if>
+            <if test="pojo.taskNum!=null">`task_num`,</if>
+            <if test="pojo.province!=null">`province`,</if>
+            <if test="pojo.city!=null">`city`,</if>
+            <if test="pojo.area!=null">`area`,</if>
+            <if test="pojo.manager!=null">`manager`,</if>
+            <if test="pojo.executor!=null">`executor`,</if>
+            <if test="pojo.receiveDate!=null">`receive_date`,</if>
+            <if test="pojo.finishDate!=null">`finish_date`,</if>
+            <if test="pojo.createTime!=null">`create_time`,</if>
+            <if test="pojo.updateTime!=null">`update_time`,</if>
+            <if test="pojo.creator!=null">`creator`,</if>
+            <if test="pojo.updater!=null">`updater`,</if>
+            <if test="pojo.appointmentDate!=null">`appointment_date`,</if>
+            <if test="pojo.executorId!=null">`executor_id`,</if>
+            <if test="pojo.address!=null">`address`,</if>
+            <if test="pojo.legalRep!=null">`legal_rep`,</if>
+            <if test="pojo.phone!=null">`phone`,</if>
+            <if test="pojo.reason!=null">`reason`,</if>
+            <if test="pojo.desc!=null">`desc`,</if>
+            <if test="pojo.refuseDate!=null">`refuse_date`,</if>
+            <if test="pojo.outId!=null">`out_id`,</if>
+            <if test="pojo.processInstanceId!=null">`process_instance_id`,</if>
+            <if test="pojo.productId!=null">`product_id`,</if>
+            <if test="pojo.productName!=null">`product_name`,</if>
+            <if test="pojo.managerName!=null">`manager_name`</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.companyName!=null">#{pojo.companyName},</if>
+            <if test="pojo.companyType!=null">#{pojo.companyType},</if>
+            <if test="pojo.companyId!=null">#{pojo.companyId},</if>
+            <if test="pojo.templateId!=null">#{pojo.templateId},</if>
+            <if test="pojo.state!=null">#{pojo.state},</if>
+            <if test="pojo.taskNum!=null">#{pojo.taskNum},</if>
+            <if test="pojo.province!=null">#{pojo.province},</if>
+            <if test="pojo.city!=null">#{pojo.city},</if>
+            <if test="pojo.area!=null">#{pojo.area},</if>
+            <if test="pojo.manager!=null">#{pojo.manager},</if>
+            <if test="pojo.executor!=null">#{pojo.executor},</if>
+            <if test="pojo.receiveDate!=null">#{pojo.receiveDate},</if>
+            <if test="pojo.finishDate!=null">#{pojo.finishDate},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+            <if test="pojo.updateTime!=null">#{pojo.updateTime},</if>
+            <if test="pojo.creator!=null">#{pojo.creator},</if>
+            <if test="pojo.updater!=null">#{pojo.updater},</if>
+            <if test="pojo.appointmentDate!=null">#{pojo.appointmentDate},</if>
+            <if test="pojo.executorId!=null">#{pojo.executorId},</if>
+            <if test="pojo.address!=null">#{pojo.address},</if>
+            <if test="pojo.legalRep!=null">#{pojo.legalRep},</if>
+            <if test="pojo.phone!=null">#{pojo.phone},</if>
+            <if test="pojo.reason!=null">#{pojo.reason},</if>
+            <if test="pojo.desc!=null">#{pojo.desc},</if>
+            <if test="pojo.refuseDate!=null">#{pojo.refuseDate},</if>
+            <if test="pojo.outId!=null">#{pojo.outId},</if>
+            <if test="pojo.processInstanceId!=null">#{pojo.processInstanceId},</if>
+            <if test="pojo.productId!=null">#{pojo.productId},</if>
+            <if test="pojo.productName!=null">#{pojo.productName},</if>
+            <if test="pojo.managerName!=null">`manager_name`</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO dd_task(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.companyName},
+            #{pojo.companyType},
+            #{pojo.companyId},
+            #{pojo.templateId},
+            #{pojo.state},
+            #{pojo.taskNum},
+            #{pojo.province},
+            #{pojo.city},
+            #{pojo.area},
+            #{pojo.manager},
+            #{pojo.executor},
+            #{pojo.receiveDate},
+            #{pojo.finishDate},
+            #{pojo.createTime},
+            #{pojo.updateTime},
+            #{pojo.creator},
+            #{pojo.updater},
+            #{pojo.appointmentDate},
+            #{pojo.executorId},
+            #{pojo.address},
+            #{pojo.legalRep},
+            #{pojo.phone},
+            #{pojo.reason},
+            #{pojo.desc},
+            #{pojo.refuseDate},
+            #{pojo.outId},
+            #{pojo.processInstanceId},
+            #{pojo.productId},
+            #{pojo.productName},
+            #{pojo.managerName}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+
+
+        UPDATE dd_task
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name},</if>
+            <if test="pojo.companyName != null">`company_name` = #{pojo.companyName},</if>
+            <if test="pojo.companyType != null">`company_type` = #{pojo.companyType},</if>
+            <if test="pojo.companyId != null">`company_id` = #{pojo.companyId},</if>
+            <if test="pojo.templateId != null">`template_id` = #{pojo.templateId},</if>
+            <if test="pojo.state != null">`state` = #{pojo.state},</if>
+            <if test="pojo.taskNum != null">`task_num` = #{pojo.taskNum},</if>
+            <if test="pojo.province != null">`province` = #{pojo.province},</if>
+            <if test="pojo.city != null">`city` = #{pojo.city},</if>
+            <if test="pojo.area != null">`area` = #{pojo.area},</if>
+            <if test="pojo.manager != null">`manager` = #{pojo.manager},</if>
+            <if test="pojo.executor != null">`executor` = #{pojo.executor},</if>
+            <if test="pojo.receiveDate != null">`receive_date` = #{pojo.receiveDate},</if>
+            <if test="pojo.finishDate != null">`finish_date` = #{pojo.finishDate},</if>
+            <if test="pojo.createTime != null">`create_time` = #{pojo.createTime},</if>
+            <if test="pojo.updateTime != null">`update_time` = #{pojo.updateTime},</if>
+            <if test="pojo.creator != null">`creator` = #{pojo.creator},</if>
+            <if test="pojo.updater != null">`updater` = #{pojo.updater},</if>
+            <if test="pojo.appointmentDate != null">`appointment_date` = #{pojo.appointmentDate},</if>
+            <if test="pojo.executorId != null">`executor_id` = #{pojo.executorId},</if>
+            <if test="pojo.address != null">`address` = #{pojo.address},</if>
+            <if test="pojo.legalRep != null">`legal_rep` = #{pojo.legalRep},</if>
+            <if test="pojo.phone != null">`phone` = #{pojo.phone},</if>
+            <if test="pojo.reason != null">`reason` = #{pojo.reason},</if>
+            <if test="pojo.desc != null">`desc` = #{pojo.desc},</if>
+            <if test="pojo.refuseDate != null">`refuse_date` = #{pojo.refuseDate},</if>
+            <if test="pojo.outId != null">`out_id` = #{pojo.outId},</if>
+            <if test="pojo.processInstanceId != null">`process_instance_id` = #{pojo.processInstanceId},</if>
+            <if test="pojo.productId != null">`product_id` = #{pojo.productId},</if>
+            <if test="pojo.productName != null">`product_name` = #{pojo.productName},</if>
+            <if test="pojo.managerName != null">`manager_name` = #{pojo.managerName}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+
+    <select id="dataGrid" resultType="com.masspick.peak.dd.model.bo.DueTaskBO">
+        select
+        d.id,
+        d.name,
+        d.company_name as companyName,
+        d.company_type as companyType,
+        d.company_id as companyId,
+        d.template_id as templateId,
+        d.state,
+        d.task_num as taskNum,
+        d.province,
+        d.city,
+        d.area,
+        d.manager,
+        d.executor,
+        d.receive_date as receiveDate,
+        d.finish_date as finishDate,
+        d.create_time as createTime,
+        d.update_time as updateTime,
+        d.creator,
+        d.updater,
+        d.appointment_date as appointmentDate,
+        d.executor_id as executorId,
+        case when CONCAT_WS('-',d.province,d.city,d.area)!='' then CONCAT_WS('-',d.province,d.city,d.area)
+        else d.address
+        end as address,
+        d.legal_rep as legalRep,
+        d.phone,
+        t.name as templateName,
+        d.out_id as outId,
+        d.process_instance_id as processInstanceId,
+        d.product_id as productId,
+        d.product_name as productName
+        from dd_task d LEFT JOIN dd_template t on d.template_id = t.id
+        <where>
+            <if test="state !=null">
+                d.`state` = #{state}
+            </if>
+            <if test="taskNum !=null and  taskNum != ''">
+                and binary(d.`task_num`like #{taskNum})
+            </if>
+        </where>
+        ORDER BY d.`create_time` DESC
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-18 14:12:05-->
+    <select id="findById" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from dd_task
+        where `id`=#{id}
+    </select>
+
+    <select id="findByTaskBO" resultType="com.masspick.peak.dd.model.bo.DueTaskBO">
+        select
+        d.id,
+        d.name,
+        d.company_name as companyName,
+        d.company_type as companyType,
+        d.company_id as companyId,
+        d.template_id as templateId,
+        d.state,
+        d.task_num as taskNum,
+        d.province,
+        d.city,
+        d.area,
+        d.manager,
+        d.executor,
+        d.receive_date as receiveDate,
+        d.finish_date as finishDate,
+        d.create_time as createTime,
+        d.update_time as updateTime,
+        d.creator,
+        d.updater,
+        d.appointment_date as appointmentDate,
+        d.executor_id as executorId,
+        d.address,
+        d.legal_rep as legalRep,
+        d.phone,
+        d.product_id as prodcutId,
+        d.product_name as productName,
+        t.name as templateName
+        from dd_task d LEFT JOIN dd_template t on d.template_id = t.id
+        where d.`id`=#{id}
+    </select>
+
+    <update id="updateState">
+        UPDATE dd_task set state = #{state} where id = #{id}
+    </update>
+
+    <!--auto generated by codehelper on 2018-05-23 15:05:16-->
+    <select id="findByExecutorId" resultMap="AllColumnMap">
+        select
+        `id`,
+        `name`,
+        `company_name` as companyName,
+        `company_type` as companyType,
+        `company_id` as companyId,
+        `template_id` as templateId,
+        `state`,
+        `task_num` as taskNum,
+        `province`,
+        `city`,
+        `area`,
+        `executor`,
+        `receive_date` as receiveDate,
+        `finish_date` as finishDate,
+        `create_time` as createTime,
+        `update_time` as updateTime,
+        `creator`,
+        `updater`,
+        `appointment_date` as appointmentDate,
+        `executor_id` as executorId,
+        `address`,
+        `legal_rep` as legalRep,
+        `phone`,
+        `reason`,
+        `desc`,
+        `refuse_date` as refuseDate,
+        `out_id` as outId,
+        `process_instance_id` as processInstanceId,
+        `product_id` as productId,
+        `product_name` productName,
+        `manager_name` as manager
+        from dd_task
+        where `executor_id`=#{executorId}
+        <choose>
+            <when test="flag">and state in (1,3)</when>
+            <when test="!flag">and state in (0,2,4)</when>
+        </choose>
+        ORDER BY create_time desc
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-29 10:10:44-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from dd_task
+    </select>
+
+    <select id="countByState" resultType="java.lang.Integer">
+        select count(1)
+        from dd_task
+        where `state`= 0
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-29 10:39:52-->
+    <select id="countByCreateTime" resultType="java.lang.Integer">
+        select count(1)
+        from dd_task
+        where `create_time`>#{createTime}
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-29 14:28:56-->
+    <select id="countByCreateTimeAndState" resultType="java.lang.Integer">
+        select count(1)
+        from dd_task
+        where `create_time`>#{createTime} and `state`= 0
+    </select>
+
+    <!--auto generated by codehelper on 2018-06-27 15:47:49-->
+    <select id="findByProcessId" resultMap="AllColumnMap">
+        select
+        <include refid="all_column"/>
+        from dd_task
+        where `process_instance_id`=#{processId}
+    </select>
+
+    <!--auto generated by codehelper on 2018-05-29 14:23:28-->
+
+
+</mapper>
+

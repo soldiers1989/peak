@@ -1,0 +1,30 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka-service-cluster
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - ${SPRING_PREFER_NETWORK}
+eureka:
+  datacenter: e-masspick
+  environment: cluster
+  instance:
+    # 主机名
+    hostname: ${EUREKA_MEMBER_NAME}
+    # 心跳间隔
+    lease-renewal-interval-in-seconds: 5
+    # 失败间隔时间
+    lease-expiration-duration-in-seconds: 30
+  client:
+    preferSameZone: true
+    # 内网DNS注册
+    shouldUseDns: true
+    # 自身注册到eureka
+    registerWithEureka: true
+    # 是否从eureka服务获取注册信息
+    fetchRegistry: false
+    # 集群其他服务所在地址
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka,${OTHER_EUREKA_MEMBERS}

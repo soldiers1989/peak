@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.BusLicenseCerMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.BusLicenseCer">
+        <result column="etp_name" property="etpName"/>
+        <result column="credit_code" property="creditCode"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="bus_url" property="busUrl"/>
+        <result column="status" property="status"/>
+        <result column="type" property="type"/>
+        <result column="address" property="address"/>
+        <result column="reg_cap" property="regCap"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="bus_term" property="busTerm"/>
+        <result column="bus_scope" property="busScope"/>
+        <result column="cer_id" property="cerId"/>
+        <result column="id" property="id"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        etp_name,
+        credit_code,
+        legal_name,
+        bus_url,
+        status,
+        type,
+        address,
+        reg_cap,
+        reg_date,
+        bus_term,
+        bus_scope,
+        cer_id,
+        id,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO bus_license_cer (
+            etp_name,
+            credit_code,
+            legal_name,
+            bus_url,
+            status,
+            type,
+            address,
+            reg_cap,
+            reg_date,
+            bus_term,
+            bus_scope,
+            cer_id,
+            id,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.etpName},
+            #{pojo.creditCode},
+            #{pojo.legalName},
+            #{pojo.busUrl},
+            #{pojo.status},
+            #{pojo.type},
+            #{pojo.address},
+            #{pojo.regCap},
+            #{pojo.regDate},
+            #{pojo.busTerm},
+            #{pojo.busScope},
+            #{pojo.cerId},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO bus_license_cer (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.etpName},
+            #{pojo.creditCode},
+            #{pojo.legalName},
+            #{pojo.busUrl},
+            #{pojo.status},
+            #{pojo.type},
+            #{pojo.address},
+            #{pojo.regCap},
+            #{pojo.regDate},
+            #{pojo.busTerm},
+            #{pojo.busScope},
+            #{pojo.cerId},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE bus_license_cer
+        <set>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.creditCode != null"> credit_code = #{pojo.creditCode}, </if>
+            <if test="pojo.legalName != null"> legal_name = #{pojo.legalName}, </if>
+            <if test="pojo.busUrl != null"> bus_url = #{pojo.busUrl}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.type != null"> type = #{pojo.type}, </if>
+            <if test="pojo.address != null"> address = #{pojo.address}, </if>
+            <if test="pojo.regCap != null"> reg_cap = #{pojo.regCap}, </if>
+            <if test="pojo.regDate != null"> reg_date = #{pojo.regDate}, </if>
+            <if test="pojo.busTerm != null"> bus_term = #{pojo.busTerm}, </if>
+            <if test="pojo.busScope != null"> bus_scope = #{pojo.busScope}, </if>
+            <if test="pojo.cerId != null"> cer_id = #{pojo.cerId}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <!--auto generated Code-->
+    <update id="updateByCerId">
+        UPDATE bus_license_cer
+        <set>
+            <if test="pojo.etpName != null"> etp_name = #{pojo.etpName}, </if>
+            <if test="pojo.creditCode != null"> credit_code = #{pojo.creditCode}, </if>
+            <if test="pojo.legalName != null"> legal_name = #{pojo.legalName}, </if>
+            <if test="pojo.busUrl != null"> bus_url = #{pojo.busUrl}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.type != null"> type = #{pojo.type}, </if>
+            <if test="pojo.address != null"> address = #{pojo.address}, </if>
+            <if test="pojo.regCap != null"> reg_cap = #{pojo.regCap}, </if>
+            <if test="pojo.regDate != null"> reg_date = #{pojo.regDate}, </if>
+            <if test="pojo.busTerm != null"> bus_term = #{pojo.busTerm}, </if>
+            <if test="pojo.busScope != null"> bus_scope = #{pojo.busScope}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE cer_id = #{pojo.cerId}
+    </update>
+
+    <select id="findByCerId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM bus_license_cer
+        WHERE cer_id = #{cerId}
+    </select>
+</mapper>
+

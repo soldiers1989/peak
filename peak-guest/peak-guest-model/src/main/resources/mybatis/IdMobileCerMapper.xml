@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.IdMobileCerMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.IdMobileCer">
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="nation" property="nation"/>
+        <result column="birth" property="birth"/>
+        <result column="address" property="address"/>
+        <result column="id_code" property="idCode"/>
+        <result column="issuing_agency" property="issuingAgency"/>
+        <result column="validity_period" property="validityPeriod"/>
+        <result column="cer_id" property="cerId"/>
+        <result column="id_url" property="idUrl"/>
+        <result column="id_back_url" property="idBackUrl"/>
+        <result column="mobile" property="mobile"/>
+        <result column="status" property="status"/>
+        <result column="id" property="id"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        name,
+        sex,
+        nation,
+        birth,
+        address,
+        id_code,
+        issuing_agency,
+        validity_period,
+        cer_id,
+        id_url,
+        id_back_url,
+        mobile,
+        status,
+        id,
+        create_date,
+        update_date
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO id_mobile_cer (
+            name,
+            sex,
+            nation,
+            birth,
+            address,
+            id_code,
+            issuing_agency,
+            validity_period,
+            cer_id,
+            id_url,
+            id_back_url,
+            mobile,
+            status,
+            id,
+            create_date,
+            update_date
+        ) VALUES (
+            #{pojo.name},
+            #{pojo.sex},
+            #{pojo.nation},
+            #{pojo.birth},
+            #{pojo.address},
+            #{pojo.idCode},
+            #{pojo.issuingAgency},
+            #{pojo.validityPeriod},
+            #{pojo.cerId},
+            #{pojo.idUrl},
+            #{pojo.idBackUrl},
+            #{pojo.mobile},
+            #{pojo.status},
+            #{pojo.id},
+            #{pojo.createDate},
+            #{pojo.updateDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE id_mobile_cer
+        <set>
+            <if test="pojo.name != null"> name = #{pojo.name}, </if>
+            <if test="pojo.sex != null"> sex = #{pojo.sex}, </if>
+            <if test="pojo.nation != null"> nation = #{pojo.nation}, </if>
+            <if test="pojo.birth != null"> birth = #{pojo.birth}, </if>
+            <if test="pojo.address != null"> address = #{pojo.address}, </if>
+            <if test="pojo.idCode != null"> id_code = #{pojo.idCode}, </if>
+            <if test="pojo.issuingAgency != null"> issuing_agency = #{pojo.issuingAgency}, </if>
+            <if test="pojo.validityPeriod != null"> validity_period = #{pojo.validityPeriod}, </if>
+            <if test="pojo.cerId != null"> cer_id = #{pojo.cerId}, </if>
+            <if test="pojo.idUrl != null"> id_url = #{pojo.idUrl}, </if>
+            <if test="pojo.idBackUrl != null"> id_back_url = #{pojo.idBackUrl}, </if>
+            <if test="pojo.mobile != null"> mobile = #{pojo.mobile}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <!--auto generated Code-->
+    <update id="updateByCerId">
+        UPDATE id_mobile_cer
+        <set>
+            <if test="pojo.name != null"> name = #{pojo.name}, </if>
+            <if test="pojo.sex != null"> sex = #{pojo.sex}, </if>
+            <if test="pojo.nation != null"> nation = #{pojo.nation}, </if>
+            <if test="pojo.birth != null"> birth = #{pojo.birth}, </if>
+            <if test="pojo.address != null"> address = #{pojo.address}, </if>
+            <if test="pojo.idCode != null"> id_code = #{pojo.idCode}, </if>
+            <if test="pojo.issuingAgency != null"> issuing_agency = #{pojo.issuingAgency}, </if>
+            <if test="pojo.validityPeriod != null"> validity_period = #{pojo.validityPeriod}, </if>
+            <if test="pojo.idUrl != null"> id_url = #{pojo.idUrl}, </if>
+            <if test="pojo.idBackUrl != null"> id_back_url = #{pojo.idBackUrl}, </if>
+            <if test="pojo.mobile != null"> mobile = #{pojo.mobile}, </if>
+            <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.createDate != null"> create_date = #{pojo.createDate}, </if>
+            <if test="pojo.updateDate != null"> update_date = #{pojo.updateDate} </if>
+        </set>
+        WHERE cer_id = #{pojo.cerId}
+    </update>
+
+    <select id="findByCerId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM id_mobile_cer
+        WHERE cer_id = #{cerId}
+    </select>
+</mapper>
+

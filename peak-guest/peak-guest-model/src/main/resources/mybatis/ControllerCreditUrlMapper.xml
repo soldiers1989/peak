@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masspick.peak.guest.mapper.ControllerCreditUrlMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.masspick.peak.guest.model.ControllerCreditUrl">
+        <result column="id" property="id"/>
+        <result column="loan_id" property="loanId"/>
+        <result column="credit_url" property="creditUrl"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        loan_id,
+        credit_url
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO controller_credit_url (
+            id,
+            loan_id,
+            credit_url
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.loanId},
+            #{pojo.creditUrl}
+        )
+    </insert>
+
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO controller_credit_url (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.loanId},
+            #{pojo.creditUrl}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE controller_credit_url
+        <set>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.loanId != null"> loan_id = #{pojo.loanId}, </if>
+            <if test="pojo.creditUrl != null"> credit_url = #{pojo.creditUrl}, </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="findCreditUrls" resultType="java.lang.String">
+        SELECT
+        credit_url
+        FROM controller_credit_url
+        WHERE loan_id = #{loanId}
+    </select>
+</mapper>
+

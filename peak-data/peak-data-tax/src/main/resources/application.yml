@@ -1,0 +1,19 @@
+spring:
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+  profiles:
+      active: dev
+  application:
+    name: peak-data-tax
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/tax/*.xml
+
+server:
+  port: 7540
+logging:
+    level:
+      root: INFO
+    file: logs/${spring.application.name}.log

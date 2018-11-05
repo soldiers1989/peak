@@ -1,0 +1,21 @@
+pipeline {
+    agent { 
+        node { label 'maven' } 
+    }
+    stages {
+        stage('Deploy') {
+            steps {
+               dir('peak-common'){
+                  sh 'mvn deploy'
+               }
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'peak-common/peak-common-log/target/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'peak-common/peak-common-redis/target/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'peak-common/peak-common-util/target/*.jar', fingerprint: true
+                 }
+            }
+        }
+    }
+}

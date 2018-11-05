@@ -1,0 +1,23 @@
+pipeline {
+    agent { 
+        node { label 'maven' } 
+    }
+    stages {
+        stage('Deploy') {
+            steps {
+               dir('peak-api'){
+                  sh 'mvn deploy'
+               }
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'peak-api/peak-api-data/target/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'peak-api/peak-api-dd/target/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'peak-api/peak-api-flow/target/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'peak-api/peak-api-interface/target/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'peak-api/peak-api-resource/target/*.jar', fingerprint: true
+                 }
+            }
+        }
+    }
+}
